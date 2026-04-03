@@ -10,7 +10,7 @@
   <style>
     /* ============================
        CSS CUSTOM PROPERTIES
-    ============================ */ 
+    ============================ */
     :root {
       --bg: #f9f6f1;
       --bg-2: #f2ece3;
@@ -84,37 +84,15 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(181, 131, 131, 0.95);
-      backdrop-filter: blur(6px);
+      background: rgba(108, 42, 42, 0.92);
+      backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      border-bottom: none;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.04);
-      box-shadow: 
-  0 8px 30px rgba(0,0,0,0.04),  /* existing depth */
-  0 0 0 1px rgba(139, 110, 80, 0.18),  /* soft outline */
-  0 0 20px rgba(139, 110, 80, 0.12);   /* watercolor bleed */
+      border-bottom: 1px solid rgba(80, 25, 25, 0.25);
+      box-shadow:
+        0 8px 30px rgba(0,0,0,0.12),
+        0 0 0 1px rgba(60, 20, 20, 0.18),
+        0 0 28px rgba(80, 20, 20, 0.18);
     }
-
-    nav::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-
-  border-radius: 0;
-
-  background: radial-gradient(
-      120% 60% at 50% 0%,
-      rgba(139,110,80,0.08),
-      transparent 70%
-    ),
-    radial-gradient(
-      120% 60% at 50% 100%,
-      rgba(139,110,80,0.08),
-      transparent 70%
-    );
-
-  pointer-events: none;
-}
 
     /* Decorative fade drip below navbar */
     nav::after {
@@ -126,9 +104,9 @@
       height: 60px;
       background: linear-gradient(
         to bottom,
-        rgba(203, 178, 149, 0.45),
-        rgba(203, 178, 149, 0.18),
-        rgba(203, 178, 149, 0)
+        rgba(108, 42, 42, 0.28),
+        rgba(108, 42, 42, 0.10),
+        rgba(108, 42, 42, 0)
       );
       pointer-events: none;
       z-index: -1;
@@ -142,7 +120,7 @@
       bottom: -18px;
       font-size: 0.8rem;
       letter-spacing: 1.1rem;
-      color: rgba(120, 102, 74, 0.32);
+      color: rgba(200, 150, 150, 0.38);
       pointer-events: none;
     }
 
@@ -164,14 +142,53 @@
       font-size: 0.8rem;
       letter-spacing: 0.24em;
       text-transform: uppercase;
-      color: #f5efe8;
+      color: rgba(255, 235, 220, 0.82);
       font-weight: 300;
-      transition: color 0.3s;
+      transition: color 0.35s ease, text-shadow 0.35s ease;
       white-space: nowrap;
+      position: relative;
+      padding: 0.45rem 1rem;
     }
+
+    /* Watercolor paint smear behind each nav link on hover */
+    .nav-left a::before,
+    .nav-right a::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 4px;
+
+      /* starts invisible */
+      background: radial-gradient(
+        ellipse 100% 100% at 50% 50%,
+        rgba(255, 200, 160, 0.22) 0%,
+        rgba(220, 150, 120, 0.14) 45%,
+        rgba(180, 100, 80, 0.06) 70%,
+        transparent 100%
+      );
+
+      opacity: 0;
+      transform: scaleX(0.6) scaleY(0.5);
+      filter: blur(6px);
+      transition:
+        opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+        filter 0.45s ease;
+      pointer-events: none;
+    }
+
+    .nav-left a:hover::before,
+    .nav-right a:hover::before {
+      opacity: 1;
+      transform: scaleX(1.1) scaleY(1.15);
+      filter: blur(3px);
+    }
+
     .nav-left a:hover,
     .nav-right a:hover {
-       color: #ffffff; }
+      color: #ffffff;
+      text-shadow: 0 0 18px rgba(255, 210, 180, 0.55);
+    }
 
     .nav-center {
       position: absolute;
@@ -196,6 +213,21 @@
       width: 100vw; height: 100vh;
       pointer-events: none;
       z-index: 99999;
+    }
+
+    /* ============================
+       GLITTER RAIN (navbar only)
+    ============================ */
+    #glitter-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 150px;
+      pointer-events: none;
+      z-index: 1001;
+    }
+    @media (max-width: 900px) {
+      #glitter-canvas { height: 100px; }
     }
 
     /* ============================
@@ -247,20 +279,18 @@
 
     /* Gradient veil so left side is legible */
     .hero-text-panel::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-
-  background: linear-gradient(
-    to right,
-    rgba(249,246,241,0.18) 0%,   /* 0.75 → ~0.18 */
-    rgba(249,246,241,0.1) 30%,   /* 0.4 → ~0.1 */
-    rgba(249,246,241,0.025) 55%, /* 0.1 → ~0.025 */
-    rgba(249,246,241,0) 80%
-  );
-
-  pointer-events: none;
-}
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(249,246,241,0.75) 0%,
+        rgba(249,246,241,0.4) 30%,
+        rgba(249,246,241,0.1) 55%,
+        rgba(249,246,241,0) 80%
+      );
+      pointer-events: none;
+    }
 
     /* Cover image fills the panel */
     .hero-text-bg {
@@ -269,8 +299,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.88;
-      
+      opacity: 0.75;
     }
 
     /* Text stack sits above the image */
@@ -291,11 +320,14 @@
     }
     .hero-by {
       font-family: 'Jost', sans-serif;
-      font-size: 0.95rem;
-      letter-spacing: 0.42em;
+      font-size: 1.05rem;
+      letter-spacing: 0.52em;
       text-transform: uppercase;
-      color: #6b5f52;
+      color: #8b6a50;
       margin-left: 4.8rem;
+      font-weight: 300;
+      opacity: 1;
+      text-shadow: 0 1px 8px rgba(249, 246, 241, 0.6);
     }
     .hero-name {
       font-family: 'Cormorant Garamond', serif;
@@ -405,48 +437,49 @@
        opaque while edges fade over ~15% of each dimension.
     ───────────────────────────────────────────────────────── */
     .section-img {
-  width: 100%;
-  height: 100%;
-  min-height: 480px;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      width: 100%;
+      height: 100%;
+      min-height: 480px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* lighter fade on left/right, stronger fade on top/bottom */
-  -webkit-mask-image:
-    linear-gradient(
-      to right,
-      transparent 0%,
-      black 8%,
-      black 92%,
-      transparent 100%
-    ),
-    linear-gradient(
-      to bottom,
-      transparent 0%,
-      black 18%,
-      black 82%,
-      transparent 100%
-    );
-  -webkit-mask-composite: destination-in;
+      /* Horizontal gradient mask */
+      -webkit-mask-image:
+        linear-gradient(
+          to right,
+          transparent 0%,
+          black 14%,
+          black 86%,
+          transparent 100%
+        ),
+        /* Vertical gradient mask */
+        linear-gradient(
+          to bottom,
+          transparent 0%,
+          black 12%,
+          black 88%,
+          transparent 100%
+        );
+      -webkit-mask-composite: destination-in; /* intersect both gradients */
 
-  mask-image:
-    linear-gradient(
-      to right,
-      transparent 0%,
-      black 8%,
-      black 92%,
-      transparent 100%
-    ),
-    linear-gradient(
-      to bottom,
-      transparent 0%,
-      black 18%,
-      black 82%,
-      transparent 100%
-    );
-  mask-composite: intersect;
-}
+      mask-image:
+        linear-gradient(
+          to right,
+          transparent 0%,
+          black 14%,
+          black 86%,
+          transparent 100%
+        ),
+        linear-gradient(
+          to bottom,
+          transparent 0%,
+          black 12%,
+          black 88%,
+          transparent 100%
+        );
+      mask-composite: intersect;
+    }
 
     /* Hover zoom still works */
     .collection-split:hover .split-image .section-img { transform: scale(1.04); }
@@ -1000,6 +1033,8 @@
 
   <!-- Paint canvas -->
   <canvas id="paint-canvas"></canvas>
+  <!-- Glitter rain confined to navbar -->
+  <canvas id="glitter-canvas"></canvas>
 
   <!-- ============================
        NAVBAR
@@ -1011,7 +1046,9 @@
     </div>
 
     <div class="nav-center">
-      <img src="profilepic3.png" alt="Ko Esthetique Logo" class="nav-logo-img">
+      <a href="#home" id="logoHomeLink" aria-label="Go to top">
+        <img src="profilepic3.png" alt="Ko Esthetique Logo" class="nav-logo-img">
+      </a>
     </div>
 
     <div class="nav-right">
@@ -1342,11 +1379,11 @@
         <p class="section-body reveal reveal-delay-2" style="margin: 1rem 0 2.5rem;">Reach out for custom orders, collaborations, or simply to say hello. We'd love to hear from you.</p>
 
         <div class="contact-links">
-          <a href="mailto:komaloswal@gmail.com" class="contact-link reveal reveal-delay-2">
+          <a href="/cdn-cgi/l/email-protection#cba0a4a6aaa7a4b8bcaaa78baca6aaa2a7e5a8a4a6" class="contact-link reveal reveal-delay-2">
             <div class="contact-link-icon">✉</div>
             <div class="contact-link-text">
               <div class="contact-link-label">Email</div>
-              <div class="contact-link-val">komaloswal@gmail.com</div>
+              <div class="contact-link-val"><span class="__cf_email__" data-cfemail="244f4b4945484b57534548644349454d480a474b49">[email&#160;protected]</span></div>
             </div>
           </a>
           <a href="tel:+919872856625" class="contact-link reveal reveal-delay-3">
@@ -1404,7 +1441,7 @@
       <li><a href="#collections">Collections</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#custom">Custom Orders</a></li>
-      <li><a href="mailto:komaloswal@gmail.com">Contact</a></li>
+      <li><a href="/cdn-cgi/l/email-protection#93f8fcfef2fffce0e4f2ffd3f4fef2faffbdf0fcfe">Contact</a></li>
     </ul>
     <div class="footer-copy">© 2025 Ko Esthetique. All rights reserved.</div>
   </footer>
@@ -1413,6 +1450,12 @@
        JAVASCRIPT
   ============================ -->
   <script>
+    // ── Scroll to top on page load ─────────────────────────────
+    // Ensures the page always starts at the very top (home hero),
+    // not partway down at #collections or wherever browser cached
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+
     // ── Custom cursor ──────────────────────────────────────────
     const cursor = document.getElementById('cursor');
     const ring   = document.getElementById('cursorRing');
@@ -1429,6 +1472,18 @@
       ring.style.top  = ry + 'px';
       requestAnimationFrame(animateRing);
     })();
+
+    // ── Logo → scroll to top + paint burst ────────────────────
+    const logoLink = document.getElementById('logoHomeLink');
+    if (logoLink) {
+      logoLink.addEventListener('click', e => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        const rect = logoLink.getBoundingClientRect();
+        spawnPaintBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+        if (!animating) { animating = true; paintLoop(); }
+      });
+    }
 
     // ── Reveal on scroll ──────────────────────────────────────
     const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
@@ -1461,7 +1516,7 @@
       e.target.reset();
     }
 
-    // ── PAINT BURST ───────────────────────────────────────────
+    // ── PAINT BURST (logo click) ───────────────────────────────
     const canvas = document.getElementById('paint-canvas');
     const ctx    = canvas.getContext('2d');
     canvas.width  = window.innerWidth;
@@ -1482,7 +1537,7 @@
       };
     }
 
-    const palette = ['#c8a97e','#e8d9c5','#d4c4b0','#b8a898','#f0e8dc','#ddd0bf','#e4d8c8'];
+    const burstPalette = ['#c8a97e','#e8d9c5','#d4c4b0','#b8a898','#f0e8dc','#ddd0bf','#e4d8c8'];
 
     function spawnPaintBurst(x, y) {
       const count = 80 + Math.floor(Math.random() * 60);
@@ -1490,7 +1545,7 @@
         const angle = Math.random() * Math.PI * 2;
         const speed = 4 + Math.random() * 14;
         const size  = 6 + Math.random() * 22;
-        const rgb   = hexToRgb(palette[Math.floor(Math.random() * palette.length)]);
+        const rgb   = hexToRgb(burstPalette[Math.floor(Math.random() * burstPalette.length)]);
         particles.push({
           x, y,
           vx: Math.cos(angle) * speed,
@@ -1575,16 +1630,130 @@
       requestAnimationFrame(paintLoop);
     }
 
-    /* Trigger paint burst on logo click */
-    const logoImg = document.querySelector('.nav-logo-img');
-    if (logoImg) {
-      logoImg.style.cursor = 'pointer';
-      logoImg.addEventListener('click', e => {
-        const rect = logoImg.getBoundingClientRect();
-        spawnPaintBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
-        if (!animating) { animating = true; paintLoop(); }
-      });
+    // ── GLITTER RAIN (navbar zone only) ───────────────────────
+    // Each glitter flake falls from the top of the nav, fades out
+    // before reaching the bottom edge — so it feels contained
+    // inside the maroon bar like shimmer embedded in the fabric.
+    const gc   = document.getElementById('glitter-canvas');
+    const gctx = gc.getContext('2d');
+
+    function resizeGlitter() {
+      const nav = document.getElementById('navbar');
+      gc.width  = window.innerWidth;
+      gc.height = nav ? nav.offsetHeight : 150;
     }
+    resizeGlitter();
+    window.addEventListener('resize', resizeGlitter);
+
+    // Glitter color palette — warm golds, blush pinks, soft whites
+    const glitterColors = [
+      { r: 255, g: 215, b: 120 },  // gold
+      { r: 255, g: 235, b: 180 },  // light gold
+      { r: 255, g: 190, b: 160 },  // blush
+      { r: 240, g: 220, b: 255 },  // lavender white
+      { r: 255, g: 255, b: 240 },  // cream white
+      { r: 200, g: 169, b: 126 },  // brand accent
+      { r: 255, g: 240, b: 200 },  // warm ivory
+    ];
+
+    // Pool of flakes — pre-create a full set so rain is always present
+    const FLAKE_COUNT = 55;
+    const flakes = [];
+
+    function randomFlake(flake) {
+      const c = glitterColors[Math.floor(Math.random() * glitterColors.length)];
+      flake.x     = Math.random() * gc.width;
+      flake.y     = -Math.random() * gc.height;  // start above, staggered
+      flake.size  = 0.8 + Math.random() * 2.2;
+      flake.speed = 0.35 + Math.random() * 0.7;
+      flake.drift = (Math.random() - 0.5) * 0.25;
+      flake.r = c.r; flake.g = c.g; flake.b = c.b;
+      flake.phase = Math.random() * Math.PI * 2;   // shimmer phase
+      flake.phaseSpeed = 0.04 + Math.random() * 0.06;
+      flake.shape = Math.random() > 0.5 ? 'star' : 'circle';
+    }
+
+    for (let i = 0; i < FLAKE_COUNT; i++) {
+      const f = {};
+      randomFlake(f);
+      f.y = Math.random() * gc.height;  // scatter initial y across full nav
+      flakes.push(f);
+    }
+
+    function glitterLoop() {
+      gctx.clearRect(0, 0, gc.width, gc.height);
+
+      flakes.forEach(f => {
+        // Shimmer: alpha pulses between 0.15 and 0.9
+        f.phase += f.phaseSpeed;
+        const shimmer = 0.15 + 0.75 * Math.abs(Math.sin(f.phase));
+
+        // Vertical fade: fully visible in middle, invisible near edges
+        const edgeFade = Math.min(
+          smoothstep(0, 0.15, f.y / gc.height),
+          smoothstep(1, 0.78, f.y / gc.height)
+        );
+
+        const alpha = shimmer * edgeFade;
+
+        gctx.save();
+        gctx.globalAlpha = Math.max(0, alpha);
+        gctx.translate(f.x, f.y);
+
+        if (f.shape === 'star') {
+          // 4-point star sparkle
+          gctx.fillStyle = `rgb(${f.r},${f.g},${f.b})`;
+          gctx.strokeStyle = `rgb(${f.r},${f.g},${f.b})`;
+          gctx.lineWidth = 0.4;
+          const s = f.size;
+          gctx.beginPath();
+          gctx.moveTo(0, -s * 2.2);
+          gctx.lineTo(0,  s * 2.2);
+          gctx.moveTo(-s * 2.2, 0);
+          gctx.lineTo( s * 2.2, 0);
+          gctx.moveTo(-s * 1.2, -s * 1.2);
+          gctx.lineTo( s * 1.2,  s * 1.2);
+          gctx.moveTo( s * 1.2, -s * 1.2);
+          gctx.lineTo(-s * 1.2,  s * 1.2);
+          gctx.stroke();
+          // centre dot
+          gctx.beginPath();
+          gctx.arc(0, 0, s * 0.5, 0, Math.PI * 2);
+          gctx.fill();
+        } else {
+          // Soft circle with glow
+          const grad = gctx.createRadialGradient(0, 0, 0, 0, 0, f.size * 2);
+          grad.addColorStop(0,   `rgba(${f.r},${f.g},${f.b},1)`);
+          grad.addColorStop(0.5, `rgba(${f.r},${f.g},${f.b},0.5)`);
+          grad.addColorStop(1,   `rgba(${f.r},${f.g},${f.b},0)`);
+          gctx.fillStyle = grad;
+          gctx.beginPath();
+          gctx.arc(0, 0, f.size * 2, 0, Math.PI * 2);
+          gctx.fill();
+        }
+
+        gctx.restore();
+
+        // Move flake
+        f.y += f.speed;
+        f.x += f.drift;
+
+        // Reset when it falls past the nav bottom
+        if (f.y > gc.height + 4) {
+          randomFlake(f);
+        }
+      });
+
+      requestAnimationFrame(glitterLoop);
+    }
+
+    // Smooth-step helper for edge fade
+    function smoothstep(edge0, edge1, x) {
+      const t = Math.max(0, Math.min(1, (x - edge0) / (edge1 - edge0)));
+      return t * t * (3 - 2 * t);
+    }
+
+    glitterLoop();
   </script>
 
 </body>
