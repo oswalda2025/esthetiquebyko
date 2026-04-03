@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ko Esthetique — Wearable Art</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&family=Jost:wght@100;200;300;400&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================
+       CSS CUSTOM PROPERTIES
+    ============================ */
+    :root {
+      --bg: #f9f6f1;
+      --bg-2: #f2ece3;
+      --ink: #1a1612;
+      --ink-light: #6b5f52;
+      --accent: #c8a97e;
+      --accent-soft: #e8d9c5;
+      --white: #ffffff;
+      --nav-bg: rgba(249, 246, 241, 0.85);
+      --card-bg: #f2ece3;
+      --border: rgba(26,22,18,0.08);
+      --shadow: 0 4px 40px rgba(26,22,18,0.06);
+      --transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    [data-theme="dark"] {
+      --bg: #100e0c;
+      --bg-2: #1a1512;
+      --ink: #f0e8dc;
+      --ink-light: #a89880;
+      --accent: #c8a97e;
+      --accent-soft: #2a2018;
+      --white: #1a1512;
+      --nav-bg: rgba(16, 14, 12, 0.88);
+      --card-bg: #1a1512;
+      --border: rgba(240,232,220,0.08);
+      --shadow: 0 4px 40px rgba(0,0,0,0.3);
+    }
+
+    /* ============================
+       RESET & BASE
+    ============================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      overflow-x: hidden;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { text-decoration: none; color: inherit; }
+    input, textarea, button { font-family: inherit; }
+
+    /* ============================
+       CUSTOM CURSOR
+    ============================ */
+    .cursor {
+      position: fixed; z-index: 9999;
+      width: 10px; height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s, height 0.3s, opacity 0.3s;
+      mix-blend-mode: multiply;
+    }
+    .cursor-ring {
+      position: fixed; z-index: 9998;
+      width: 36px; height: 36px;
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: transform 0.12s ease, width 0.3s, height 0.3s;
+      opacity: 0.5;
+    }
+    body:has(a:hover) .cursor, body:has(button:hover) .cursor { width: 18px; height: 18px; }
+    @media (hover: none) { .cursor, .cursor-ring { display: none; } }
+
+    /* ============================
+       NAVBAR
+    ============================ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      height: 72px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: transparent;
+      transition: background 0.5s ease, backdrop-filter 0.5s ease, box-shadow 0.5s ease;
+    }
+    nav.scrolled {
+      background: var(--nav-bg);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 200;
+      font-size: 1.4rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .nav-links {
+      display: flex; align-items: center; gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      transition: color 0.3s;
+      font-weight: 300;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+
+    /* ============================
+       PAINT BURST DARK MODE BTN
+    ============================ */
+    .theme-btn {
+      position: relative;
+      width: 42px; height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: var(--card-bg);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      overflow: visible;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .theme-btn:hover { border-color: var(--accent); }
+    .theme-btn-icon {
+      font-size: 1rem;
+      line-height: 1;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      user-select: none;
+    }
+    .theme-btn:hover .theme-btn-icon { transform: rotate(20deg) scale(1.15); }
+
+    /* Paint splash canvas */
+    #paint-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 99999;
+    }
+
+    /* ============================
+       HERO
+    ============================ */
+    .hero {
+      position: relative;
+      height: 100svh;
+      min-height: 600px;
+      display: flex; align-items: flex-end;
+      overflow: hidden;
+    }
+    .hero-img {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #d4c4b0 0%, #b8a898 40%, #9c8878 100%);
+    }
+    [data-theme="dark"] .hero-img {
+      background: linear-gradient(135deg, #2a2018 0%, #1a1410 40%, #0e0c0a 100%);
+    }
+    .hero-img::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(26,22,18,0.55) 0%, rgba(26,22,18,0.1) 50%, transparent 100%);
+    }
+    /* Placeholder figure shapes */
+    .hero-img::before {
+      content: '';
+      position: absolute;
+      right: 15%; bottom: 0;
+      width: 30%; height: 85%;
+      background: linear-gradient(to bottom, rgba(200,169,126,0.2), rgba(200,169,126,0.05));
+      border-radius: 60% 40% 0 0;
+      filter: blur(2px);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: clamp(2rem, 6vw, 5rem);
+      max-width: 700px;
+    }
+    .hero-eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 200;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      line-height: 1.0;
+      color: #f9f6f1;
+      margin-bottom: 2rem;
+    }
+    .hero-title em { font-style: italic; font-weight: 200; }
+    .hero-sub {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(249,246,241,0.6);
+      font-weight: 200;
+      margin-bottom: 3rem;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      padding: 1rem 2.5rem;
+      border: 1px solid rgba(249,246,241,0.4);
+      color: #f9f6f1;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      font-weight: 300;
+      transition: background 0.4s, border-color 0.4s, color 0.4s;
+      cursor: pointer;
+      background: transparent;
+    }
+    .btn-primary:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #f9f6f1;
+    }
+    .btn-primary .arrow { transition: transform 0.3s; }
+    .btn-primary:hover .arrow { transform: translateX(5px); }
+    .hero-scroll-hint {
+      position: absolute; bottom: 2.5rem; right: clamp(1.5rem, 5vw, 4rem);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      color: rgba(249,246,241,0.45);
+      font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
+      font-weight: 200; z-index: 2;
+    }
+    .scroll-line {
+      width: 1px; height: 48px;
+      background: linear-gradient(to bottom, rgba(249,246,241,0.4), transparent);
+      animation: scrollPulse 2s ease infinite;
+    }
+    @keyframes scrollPulse { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+    /* ============================
+       SECTION COMMONS
+    ============================ */
+    section { overflow: hidden; }
+    .section-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 300;
+      margin-bottom: 1.2rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 200;
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      line-height: 1.1;
+      color: var(--ink);
+    }
+    .section-title em { font-style: italic; }
+    .section-body {
+      font-size: 0.8rem;
+      line-height: 2;
+      color: var(--ink-light);
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      max-width: 380px;
+    }
+
+    /* ============================
+       MARQUEE STRIP
+    ============================ */
+    .marquee-strip {
+      background: var(--ink);
+      color: var(--bg);
+      padding: 1.1rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .marquee-track {
+      display: inline-flex; gap: 0;
+      animation: marqueeScroll 28s linear infinite;
+    }
+    .marquee-item {
+      display: inline-flex; align-items: center; gap: 2rem;
+      padding: 0 2rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      font-weight: 200;
+    }
+    .marquee-dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    @keyframes marqueeScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ============================
+       COLLECTION SPLITS (alternating)
+    ============================ */
+    .collection-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 85vh;
+    }
+    .collection-split.reverse { direction: rtl; }
+    .collection-split.reverse > * { direction: ltr; }
+    .split-image {
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-2);
+    }
+    .split-image .img-placeholder {
+      width: 100%; height: 100%;
+      min-height: 480px;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .collection-split:hover .split-image .img-placeholder { transform: scale(1.04); }
+    .split-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(3rem, 7vw, 7rem);
+    }
+    .split-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      font-weight: 200;
+      color: var(--border);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+    .split-content .section-title { margin-bottom: 1.2rem; }
+    .split-content .section-body { margin-bottom: 2.5rem; }
+    .tag-row { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .tag {
+      padding: 0.4rem 1rem;
+      border: 1px solid var(--border);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 300;
+      color: var(--ink-light);
+      border-radius: 100px;
+    }
+
+    /* Placeholder image styles */
+    .img-placeholder {
+      position: relative;
+      overflow: hidden;
+    }
+    .img-placeholder::before {
+      content: attr(data-label);
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 200;
+      letter-spacing: 0.2em;
+      color: rgba(200,169,126,0.5);
+      text-transform: uppercase;
+    }
+
+    /* Each category gets its own warm palette */
+    .ph-saree { background: linear-gradient(145deg, #e8d5c0, #c4a882); }
+    .ph-suit { background: linear-gradient(145deg, #d4cbbf, #a89880); }
+    .ph-shoes { background: linear-gradient(145deg, #ddd0bf, #b8a090); }
+    .ph-purse { background: linear-gradient(145deg, #e0d0b8, #c0a878); }
+    .ph-jacket { background: linear-gradient(145deg, #cfc4b5, #9e8e7e); }
+    .ph-tshirt { background: linear-gradient(145deg, #e4d8c8, #baa888); }
+    .ph-hero { background: linear-gradient(145deg, #c8b89a, #a89070); }
+    [data-theme="dark"] .ph-saree { background: linear-gradient(145deg, #2a1e14, #3a2a1c); }
+    [data-theme="dark"] .ph-suit { background: linear-gradient(145deg, #201c18, #302820); }
+    [data-theme="dark"] .ph-shoes { background: linear-gradient(145deg, #241c14, #342418); }
+    [data-theme="dark"] .ph-purse { background: linear-gradient(145deg, #281e12, #382a18); }
+    [data-theme="dark"] .ph-jacket { background: linear-gradient(145deg, #1c1814, #28201a); }
+    [data-theme="dark"] .ph-tshirt { background: linear-gradient(145deg, #2c2018, #3c2c1c); }
+
+    /* ============================
+       FULL-WIDTH IMAGE ROW
+    ============================ */
+    .three-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2px;
+    }
+    .three-col-item {
+      position: relative;
+      overflow: hidden;
+      height: 65vh;
+      min-height: 380px;
+    }
+    .three-col-item .img-placeholder {
+      height: 100%;
+      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .three-col-item:hover .img-placeholder { transform: scale(1.05); }
+    .three-col-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 2rem 1.5rem 1.5rem;
+      background: linear-gradient(to top, rgba(16,14,12,0.6), transparent);
+      color: #f9f6f1;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 200;
+      transform: translateY(8px);
+      opacity: 0;
+      transition: opacity 0.4s, transform 0.4s;
+    }
+    .three-col-item:hover .three-col-caption { opacity: 1; transform: translateY(0); }
+
+    /* ============================
+       ABOUT
+    ============================ */
+    .about {
+      padding: clamp(5rem, 10vw, 10rem) clamp(1.5rem, 5vw, 4rem);
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: clamp(3rem, 6vw, 7rem);
+      align-items: center;
+    }
+    .about-visual {
+      position: relative;
+      height: 600px;
+    }
+    .about-img-main {
+      position: absolute; top: 0; left: 0;
+      width: 78%; height: 82%;
+      overflow: hidden;
+    }
+    .about-img-accent {
+      position: absolute; bottom: 0; right: 0;
+      width: 45%; height: 45%;
+      overflow: hidden;
+      border: 8px solid var(--bg);
+    }
+    .about-stat {
+      margin-top: 2.5rem;
+      display: flex; gap: 3rem;
+    }
+    .stat-item {}
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 200;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      font-weight: 300;
+      margin-top: 0.3rem;
+    }
+    .about-text {}
+    .about-text .section-title { margin-bottom: 1.5rem; }
+    .about-text .section-body { margin-bottom: 1.5rem; max-width: 480px; }
+    .signature {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-style: italic;
+      font-weight: 200;
+      color: var(--accent);
+      margin-top: 2.5rem;
+    }
+
+    /* ============================
+       WIDE IMAGE BANNER
+    ============================ */
+    .banner-wide {
+      height: 60vh;
+      min-height: 300px;
+      position: relative;
+      overflow: hidden;
+    }
+    .banner-wide .img-placeholder {
+      height: 100%;
+      transform-origin: center center;
+    }
+    .banner-overlay {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(26,22,18,0.25);
+    }
+    .banner-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 4vw, 3.5rem);
+      font-weight: 200;
+      font-style: italic;
+      color: #f9f6f1;
+      text-align: center;
+      letter-spacing: 0.03em;
+      max-width: 800px;
+      padding: 0 2rem;
+    }
+
+    /* ============================
+       PROCESS / HOW IT WORKS
+    ============================ */
+    .process {
+      padding: clamp(5rem, 10vw, 10rem) clamp(1.5rem, 5vw, 4rem);
+      background: var(--bg-2);
+    }
+    .process-header {
+      text-align: center;
+      margin-bottom: clamp(3rem, 6vw, 6rem);
+    }
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .process-grid::before {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: calc(16.6% + 1rem);
+      right: calc(16.6% + 1rem);
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), var(--border), transparent);
+    }
+    .process-card {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+    }
+    .process-num {
+      width: 56px; height: 56px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 2rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 200;
+      color: var(--accent);
+      background: var(--bg);
+      position: relative;
+      z-index: 1;
+    }
+    .process-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: var(--ink);
+      margin-bottom: 0.8rem;
+    }
+    .process-card p {
+      font-size: 0.75rem;
+      line-height: 1.9;
+      color: var(--ink-light);
+      font-weight: 300;
+    }
+    .process-cta {
+      text-align: center;
+      margin-top: 4rem;
+    }
+    .btn-dark {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      padding: 1.1rem 3rem;
+      background: var(--ink);
+      color: var(--bg);
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      font-weight: 300;
+      transition: background 0.4s, color 0.4s;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+    .btn-dark:hover {
+      background: var(--accent);
+      color: #f9f6f1;
+    }
+
+    /* ============================
+       GALLERY MOSAIC
+    ============================ */
+    .mosaic {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 1fr;
+      grid-template-rows: repeat(2, 42vh);
+      gap: 3px;
+    }
+    .mosaic-item {
+      overflow: hidden;
+      position: relative;
+    }
+    .mosaic-item:first-child { grid-row: span 2; }
+    .mosaic-item .img-placeholder {
+      height: 100%;
+      min-height: 240px;
+      transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+    .mosaic-item:hover .img-placeholder { transform: scale(1.06); }
+
+    /* ============================
+       CONTACT
+    ============================ */
+    .contact {
+      padding: clamp(5rem, 10vw, 10rem) clamp(1.5rem, 5vw, 4rem);
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: clamp(3rem, 8vw, 8rem);
+      align-items: start;
+    }
+    .contact-info .section-title { margin-bottom: 1rem; }
+    .contact-info .section-body { margin-bottom: 3rem; max-width: 360px; }
+    .contact-links { display: flex; flex-direction: column; gap: 0; }
+    .contact-link {
+      display: flex; align-items: center; gap: 1.5rem;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: padding-left 0.3s;
+      cursor: pointer;
+    }
+    .contact-link:first-child { border-top: 1px solid var(--border); }
+    .contact-link:hover { padding-left: 0.5rem; }
+    .contact-link-icon {
+      width: 38px; height: 38px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.9rem;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .contact-link:hover .contact-link-icon {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .contact-link-text {}
+    .contact-link-label {
+      font-size: 0.6rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--ink-light);
+      font-weight: 300; margin-bottom: 0.2rem;
+    }
+    .contact-link-val {
+      font-size: 0.9rem; font-weight: 300;
+      color: var(--ink); letter-spacing: 0.03em;
+    }
+
+    /* Form */
+    .contact-form { display: flex; flex-direction: column; gap: 0; }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .form-group {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+    .form-group label {
+      position: absolute; top: 1rem; left: 0;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      font-weight: 300;
+      transition: transform 0.3s, font-size 0.3s, color 0.3s;
+      pointer-events: none;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0 0.6rem;
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.3s;
+      letter-spacing: 0.05em;
+      resize: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-bottom-color: var(--accent); }
+    .form-group input:focus + label,
+    .form-group input:not(:placeholder-shown) + label,
+    .form-group textarea:focus + label,
+    .form-group textarea:not(:placeholder-shown) + label {
+      transform: translateY(-1.6rem) scale(0.85);
+      color: var(--accent);
+      transform-origin: left;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: transparent; }
+    .form-group textarea { min-height: 120px; }
+    .form-submit {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      padding: 1.1rem 2.5rem;
+      background: var(--ink);
+      color: var(--bg);
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      font-weight: 300;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: background 0.4s, color 0.4s, transform 0.2s;
+      align-self: flex-start;
+      margin-top: 1rem;
+    }
+    .form-submit:hover { background: var(--accent); color: #f9f6f1; }
+    .form-submit:active { transform: scale(0.97); }
+
+    /* ============================
+       INSTAGRAM STRIP
+    ============================ */
+    .insta-strip {
+      padding: clamp(4rem, 8vw, 8rem) clamp(1.5rem, 5vw, 4rem);
+      background: var(--bg-2);
+    }
+    .insta-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 2.5rem;
+    }
+    .insta-handle {
+      display: flex; align-items: center; gap: 0.8rem;
+      font-size: 0.7rem; letter-spacing: 0.2em;
+      text-transform: uppercase; font-weight: 300;
+      color: var(--ink-light);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .insta-handle:hover { color: var(--ink); }
+    .insta-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 3px;
+    }
+    .insta-cell {
+      aspect-ratio: 1;
+      overflow: hidden;
+      position: relative;
+    }
+    .insta-cell .img-placeholder {
+      height: 100%;
+      transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+    }
+    .insta-cell:hover .img-placeholder { transform: scale(1.08); }
+    .insta-overlay {
+      position: absolute; inset: 0;
+      background: rgba(200,169,126,0.0);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.3s;
+    }
+    .insta-cell:hover .insta-overlay { background: rgba(200,169,126,0.15); }
+
+    /* ============================
+       FOOTER
+    ============================ */
+    footer {
+      padding: 3rem clamp(1.5rem, 5vw, 4rem);
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap; gap: 1.5rem;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 200;
+      font-size: 1.1rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+    }
+    .footer-copy {
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      color: var(--ink-light);
+      font-weight: 300;
+    }
+    .footer-links {
+      display: flex; gap: 2rem; list-style: none;
+    }
+    .footer-links a {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      font-weight: 300;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--ink); }
+
+    /* ============================
+       SCROLL ANIMATIONS
+    ============================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(50px);
+      transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.35s; }
+    .reveal-delay-4 { transition-delay: 0.5s; }
+
+    /* ============================
+       PARALLAX HOST
+    ============================ */
+    .parallax-host { overflow: hidden; }
+    .parallax-inner { will-change: transform; }
+
+    /* ============================
+       MOBILE
+    ============================ */
+    @media (max-width: 900px) {
+      .collection-split { grid-template-columns: 1fr; min-height: auto; }
+      .collection-split.reverse { direction: ltr; }
+      .split-image .img-placeholder { min-height: 320px; }
+      .split-content { padding: clamp(2rem, 5vw, 3.5rem); }
+      .three-col { grid-template-columns: 1fr 1fr; }
+      .three-col-item:last-child { display: none; }
+      .about { grid-template-columns: 1fr; }
+      .about-visual { height: 380px; margin-bottom: 1rem; }
+      .process-grid { grid-template-columns: 1fr; gap: 0; }
+      .process-grid::before { display: none; }
+      .mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 38vw); }
+      .mosaic-item:first-child { grid-row: span 1; }
+      .contact { grid-template-columns: 1fr; }
+      .insta-grid { grid-template-columns: repeat(3, 1fr); }
+      .insta-cell:nth-child(n+4) { display: none; }
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+      footer { flex-direction: column; text-align: center; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      .three-col { grid-template-columns: 1fr; }
+      .three-col-item:nth-child(n+2) { display: none; }
+      .mosaic { grid-template-columns: 1fr; grid-template-rows: auto; }
+      .mosaic-item .img-placeholder { min-height: 60vw; }
+      .insta-grid { grid-template-columns: repeat(2, 1fr); }
+      .insta-cell:nth-child(n+3) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Paint canvas -->
+  <canvas id="paint-canvas"></canvas>
+
+  <!-- ============================
+       NAVBAR
+  ============================ -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">Ko Esthetique</a>
+    <ul class="nav-links">
+      <li><a href="#collections">Collections</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#custom">Custom Orders</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-btn" id="themeBtn" title="Toggle theme" aria-label="Toggle dark/light mode">
+        <span class="theme-btn-icon" id="themeIcon">🎨</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============================
+       HERO
+  ============================ -->
+  <section class="hero" id="home">
+    <div class="hero-img ph-hero img-placeholder" data-label=""></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Ko Esthetique — Est. by Passion</p>
+      <h1 class="hero-title">Wearable Art,<br /><em>Hand-Painted</em><br />with Elegance</h1>
+      <p class="hero-sub">Each piece, a singular creation</p>
+      <a href="#collections" class="btn-primary">
+        Explore the Collection
+        <span class="arrow">→</span>
+      </a>
+    </div>
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ============================
+       MARQUEE STRIP
+  ============================ -->
+  <div class="marquee-strip">
+    <div class="marquee-track" aria-hidden="true">
+      <!-- repeated twice for seamless loop -->
+      <span class="marquee-item"><span class="marquee-dot"></span>Hand-Painted Sarees</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Custom Suits</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Artisan Purses</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Painted Shoes</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Statement Jackets</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Wearable Art</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Premium American Paints</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Unique by Design</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Hand-Painted Sarees</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Custom Suits</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Artisan Purses</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Painted Shoes</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Statement Jackets</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Wearable Art</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Premium American Paints</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Unique by Design</span>
+    </div>
+  </div>
+
+  <!-- ============================
+       COLLECTIONS
+  ============================ -->
+  <div id="collections">
+
+    <!-- SAREES -->
+    <div class="collection-split">
+      <div class="split-image parallax-host">
+        <div class="img-placeholder ph-saree parallax-inner" data-label="Saree Collection"></div>
+      </div>
+      <div class="split-content">
+        <div class="split-num reveal">01</div>
+        <p class="section-label reveal reveal-delay-1">The Saree Edit</p>
+        <h2 class="section-title reveal reveal-delay-2">Draped in<br /><em>Painted Poetry</em></h2>
+        <p class="section-body reveal reveal-delay-3">Each saree is a canvas — hand-painted with flowing motifs in vibrant, fade-resistant American paints. No two are ever alike.</p>
+        <div class="tag-row reveal reveal-delay-4">
+          <span class="tag">Hand-Painted</span>
+          <span class="tag">Unique</span>
+          <span class="tag">Premium Fabric</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUITS -->
+    <div class="collection-split reverse">
+      <div class="split-image parallax-host">
+        <div class="img-placeholder ph-suit parallax-inner" data-label="Suit Collection"></div>
+      </div>
+      <div class="split-content">
+        <div class="split-num reveal">02</div>
+        <p class="section-label reveal reveal-delay-1">Tailored Art</p>
+        <h2 class="section-title reveal reveal-delay-2">Suits That<br /><em>Tell a Story</em></h2>
+        <p class="section-body reveal reveal-delay-3">Traditional silhouettes transformed into one-of-a-kind art pieces. Paint meets precision tailoring in every hand-crafted suit.</p>
+        <div class="tag-row reveal reveal-delay-4">
+          <span class="tag">Bespoke</span>
+          <span class="tag">Artisanal</span>
+          <span class="tag">Custom</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- THREE-COL GALLERY BREAK -->
+    <div class="three-col">
+      <div class="three-col-item">
+        <div class="img-placeholder ph-jacket" data-label="Jacket Detail"></div>
+        <div class="three-col-caption">Painted Jackets</div>
+      </div>
+      <div class="three-col-item">
+        <div class="img-placeholder ph-purse" data-label="Purse Detail"></div>
+        <div class="three-col-caption">Artisan Purses</div>
+      </div>
+      <div class="three-col-item">
+        <div class="img-placeholder ph-tshirt" data-label="T-Shirt Detail"></div>
+        <div class="three-col-caption">Painted Tees</div>
+      </div>
+    </div>
+
+    <!-- SHOES -->
+    <div class="collection-split">
+      <div class="split-image parallax-host">
+        <div class="img-placeholder ph-shoes parallax-inner" data-label="Shoes Collection"></div>
+      </div>
+      <div class="split-content">
+        <div class="split-num reveal">03</div>
+        <p class="section-label reveal reveal-delay-1">From the Ground Up</p>
+        <h2 class="section-title reveal reveal-delay-2">Shoes as<br /><em>Sculpture</em></h2>
+        <p class="section-body reveal reveal-delay-3">Every step is a statement. Hand-painted shoes that turn the ordinary into the extraordinary — using high-quality, long-lasting American paints.</p>
+        <div class="tag-row reveal reveal-delay-4">
+          <span class="tag">Wearable Art</span>
+          <span class="tag">Durable Paints</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PURSES -->
+    <div class="collection-split reverse">
+      <div class="split-image parallax-host">
+        <div class="img-placeholder ph-purse parallax-inner" data-label="Purse Collection"></div>
+      </div>
+      <div class="split-content">
+        <div class="split-num reveal">04</div>
+        <p class="section-label reveal reveal-delay-1">Carry Art</p>
+        <h2 class="section-title reveal reveal-delay-2">Purses <em>Painted</em><br />to Perfection</h2>
+        <p class="section-body reveal reveal-delay-3">Elevate your everyday with a hand-painted purse that doubles as a gallery piece. Functional beauty, entirely unique.</p>
+        <div class="tag-row reveal reveal-delay-4">
+          <span class="tag">One-of-a-Kind</span>
+          <span class="tag">Handmade</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- JACKETS -->
+    <div class="collection-split">
+      <div class="split-image parallax-host">
+        <div class="img-placeholder ph-jacket parallax-inner" data-label="Jacket Collection"></div>
+      </div>
+      <div class="split-content">
+        <div class="split-num reveal">05</div>
+        <p class="section-label reveal reveal-delay-1">Outerwear Redefined</p>
+        <h2 class="section-title reveal reveal-delay-2">Jackets That<br /><em>Wear You</em></h2>
+        <p class="section-body reveal reveal-delay-3">Bold brushstrokes on denim, leather, and canvas. Each jacket is a personal manifesto — painted by hand, worn with pride.</p>
+        <div class="tag-row reveal reveal-delay-4">
+          <span class="tag">Statement Piece</span>
+          <span class="tag">Custom Design</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- T-SHIRTS -->
+    <div class="collection-split reverse">
+      <div class="split-image parallax-host">
+        <div class="img-placeholder ph-tshirt parallax-inner" data-label="T-Shirt Collection"></div>
+      </div>
+      <div class="split-content">
+        <div class="split-num reveal">06</div>
+        <p class="section-label reveal reveal-delay-1">Everyday Artistry</p>
+        <h2 class="section-title reveal reveal-delay-2"><em>Art</em> You Can<br />Live In</h2>
+        <p class="section-body reveal reveal-delay-3">Even the simplest garment becomes extraordinary when touched by paint and intention. Hand-painted tees for those who wear their personality.</p>
+        <div class="tag-row reveal reveal-delay-4">
+          <span class="tag">Casual Luxury</span>
+          <span class="tag">Handcrafted</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /#collections -->
+
+  <!-- ============================
+       BANNER QUOTE
+  ============================ -->
+  <div class="banner-wide parallax-host">
+    <div class="img-placeholder ph-hero parallax-inner" data-label=""></div>
+    <div class="banner-overlay">
+      <p class="banner-quote reveal">"Every brushstroke is an act of devotion — to the art, and to you."</p>
+    </div>
+  </div>
+
+  <!-- ============================
+       ABOUT
+  ============================ -->
+  <section id="about">
+    <div class="about">
+      <div class="about-visual reveal-left">
+        <div class="about-img-main">
+          <div class="img-placeholder ph-saree" style="height:100%; min-height:400px;" data-label="The Artist at Work"></div>
+        </div>
+        <div class="about-img-accent">
+          <div class="img-placeholder ph-suit" style="height:100%; min-height:200px;" data-label="Detail"></div>
+        </div>
+        <div class="about-stat">
+          <div class="stat-item">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Handmade</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">∞</div>
+            <div class="stat-label">Unique Pieces</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">US</div>
+            <div class="stat-label">Premium Paints</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-text">
+        <p class="section-label reveal">Our Story</p>
+        <h2 class="section-title reveal reveal-delay-1">Where<br /><em>Craft Meets</em><br />Couture</h2>
+        <p class="section-body reveal reveal-delay-2">Ko Esthetique was born from a love of fashion and fine art — and the belief that the two should never be kept apart. Every piece we create is hand-painted from scratch, making each one a singular work of art.</p>
+        <p class="section-body reveal reveal-delay-3" style="margin-top:1rem;">We use only the finest American paints — chosen for their vibrancy, permanence, and the way they hold a brushstroke with the confidence of a master's hand.</p>
+        <p class="section-body reveal reveal-delay-4" style="margin-top:1rem;">From silk sarees and elegant suits to shoes, purses, jackets, and t-shirts — if you can wear it, we can paint it.</p>
+        <div class="signature reveal reveal-delay-4">Ko Esthetique</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       MOSAIC GALLERY
+  ============================ -->
+  <div class="mosaic">
+    <div class="mosaic-item">
+      <div class="img-placeholder ph-saree" style="height:100%;" data-label="Saree I"></div>
+    </div>
+    <div class="mosaic-item">
+      <div class="img-placeholder ph-shoes" style="height:100%;" data-label="Shoes I"></div>
+    </div>
+    <div class="mosaic-item">
+      <div class="img-placeholder ph-purse" style="height:100%;" data-label="Purse I"></div>
+    </div>
+    <div class="mosaic-item">
+      <div class="img-placeholder ph-jacket" style="height:100%;" data-label="Jacket I"></div>
+    </div>
+    <div class="mosaic-item">
+      <div class="img-placeholder ph-tshirt" style="height:100%;" data-label="Tee I"></div>
+    </div>
+  </div>
+
+  <!-- ============================
+       PROCESS / CUSTOM ORDERS
+  ============================ -->
+  <section id="custom" class="process">
+    <div class="process-header">
+      <p class="section-label reveal">Custom Orders</p>
+      <h2 class="section-title reveal reveal-delay-1">Your Vision,<br /><em>Our Brushstroke</em></h2>
+    </div>
+    <div class="process-grid">
+      <div class="process-card reveal">
+        <div class="process-num">I</div>
+        <h3>Share Your Idea</h3>
+        <p>Tell us what you envision — a color palette, a mood, a pattern, or a story. We listen before we paint.</p>
+      </div>
+      <div class="process-card reveal reveal-delay-2">
+        <div class="process-num">II</div>
+        <h3>Customize Your Design</h3>
+        <p>We collaborate with you to refine every detail — from the garment to the palette to the final composition.</p>
+      </div>
+      <div class="process-card reveal reveal-delay-3">
+        <div class="process-num">III</div>
+        <h3>Receive Your Piece</h3>
+        <p>Your hand-painted creation arrives — one of a kind, made with intention, and crafted just for you.</p>
+      </div>
+    </div>
+    <div class="process-cta">
+      <a href="#contact" class="btn-dark reveal reveal-delay-4">
+        Begin Your Custom Order
+        <span>→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================
+       INSTAGRAM STRIP
+  ============================ -->
+  <section class="insta-strip">
+    <div class="insta-header">
+      <div>
+        <p class="section-label">Follow the Studio</p>
+        <h3 style="font-family:'Cormorant Garamond',serif; font-weight:200; font-size:1.8rem;">Behind the <em>Brushstroke</em></h3>
+      </div>
+      <a href="https://instagram.com/ko_esthetique" target="_blank" rel="noopener" class="insta-handle">
+        <span>📷</span>@ko_esthetique
+      </a>
+    </div>
+    <div class="insta-grid">
+      <div class="insta-cell">
+        <div class="img-placeholder ph-saree" style="height:100%;" data-label=""></div>
+        <div class="insta-overlay"></div>
+      </div>
+      <div class="insta-cell">
+        <div class="img-placeholder ph-jacket" style="height:100%;" data-label=""></div>
+        <div class="insta-overlay"></div>
+      </div>
+      <div class="insta-cell">
+        <div class="img-placeholder ph-purse" style="height:100%;" data-label=""></div>
+        <div class="insta-overlay"></div>
+      </div>
+      <div class="insta-cell">
+        <div class="img-placeholder ph-shoes" style="height:100%;" data-label=""></div>
+        <div class="insta-overlay"></div>
+      </div>
+      <div class="insta-cell">
+        <div class="img-placeholder ph-tshirt" style="height:100%;" data-label=""></div>
+        <div class="insta-overlay"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       CONTACT
+  ============================ -->
+  <section id="contact">
+    <div class="contact">
+      <div class="contact-info">
+        <p class="section-label reveal">Get in Touch</p>
+        <h2 class="section-title reveal reveal-delay-1">Let's Create<br /><em>Something</em><br />Together</h2>
+        <p class="section-body reveal reveal-delay-2" style="margin: 1rem 0 2.5rem;">Reach out for custom orders, collaborations, or simply to say hello. We'd love to hear from you.</p>
+
+        <div class="contact-links">
+          <a href="mailto:komaloswal@gmail.com" class="contact-link reveal reveal-delay-2">
+            <div class="contact-link-icon">✉</div>
+            <div class="contact-link-text">
+              <div class="contact-link-label">Email</div>
+              <div class="contact-link-val">komaloswal@gmail.com</div>
+            </div>
+          </a>
+          <a href="tel:+919872856625" class="contact-link reveal reveal-delay-3">
+            <div class="contact-link-icon">☏</div>
+            <div class="contact-link-text">
+              <div class="contact-link-label">Phone / WhatsApp</div>
+              <div class="contact-link-val">+91 98728 56625</div>
+            </div>
+          </a>
+          <a href="https://instagram.com/ko_esthetique" target="_blank" rel="noopener" class="contact-link reveal reveal-delay-4">
+            <div class="contact-link-icon">◈</div>
+            <div class="contact-link-text">
+              <div class="contact-link-label">Instagram</div>
+              <div class="contact-link-val">@ko_esthetique</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <form class="contact-form" id="contactForm" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <input type="text" id="fname" placeholder="Name" required />
+            <label for="fname">Name</label>
+          </div>
+          <div class="form-group">
+            <input type="email" id="femail" placeholder="Email" required />
+            <label for="femail">Email</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" id="fsubject" placeholder="Subject" />
+          <label for="fsubject">Subject / Item of Interest</label>
+        </div>
+        <div class="form-group">
+          <textarea id="fmessage" rows="5" placeholder="Message" required></textarea>
+          <label for="fmessage">Tell us your vision</label>
+        </div>
+        <button type="submit" class="form-submit">
+          Send Message <span>→</span>
+        </button>
+        <div id="formSuccess" style="display:none; margin-top:1rem; font-size:0.75rem; letter-spacing:0.1em; color:var(--accent); font-weight:300;">
+          ✓ Thank you — we'll be in touch soon.
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============================
+       FOOTER
+  ============================ -->
+  <footer>
+    <div class="footer-logo">Ko Esthetique</div>
+    <ul class="footer-links">
+      <li><a href="#collections">Collections</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#custom">Custom Orders</a></li>
+      <li><a href="mailto:komaloswal@gmail.com">Contact</a></li>
+    </ul>
+    <div class="footer-copy">© 2025 Ko Esthetique. All rights reserved.</div>
+  </footer>
+
+  <!-- ============================
+       JAVASCRIPT
+  ============================ -->
+  <script>
+    // ── Custom cursor ──────────────────────────────────────────
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top = my + 'px';
+    });
+    function animateRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px';
+      ring.style.top = ry + 'px';
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    // ── Navbar scroll ──────────────────────────────────────────
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // ── Reveal on scroll ──────────────────────────────────────
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    revealEls.forEach(el => observer.observe(el));
+
+    // ── Parallax ──────────────────────────────────────────────
+    const parallaxPairs = document.querySelectorAll('.parallax-host');
+    function applyParallax() {
+      parallaxPairs.forEach(host => {
+        const inner = host.querySelector('.parallax-inner');
+        if (!inner) return;
+        const rect = host.getBoundingClientRect();
+        const viewH = window.innerHeight;
+        const pct = (viewH - rect.top) / (viewH + rect.height);
+        const shift = (pct - 0.5) * 60;
+        inner.style.transform = `translateY(${shift}px)`;
+        inner.style.height = 'calc(100% + 60px)';
+        inner.style.marginTop = '-30px';
+      });
+    }
+    window.addEventListener('scroll', applyParallax, { passive: true });
+    applyParallax();
+
+    // ── Contact form ──────────────────────────────────────────
+    function handleSubmit(e) {
+      e.preventDefault();
+      document.getElementById('formSuccess').style.display = 'block';
+      e.target.reset();
+    }
+
+    // ── PAINT BURST DARK MODE ─────────────────────────────────
+    const canvas = document.getElementById('paint-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    let particles = [];
+    let animating = false;
+
+    function hexToRgb(hex) {
+      const r = parseInt(hex.slice(1,3),16);
+      const g = parseInt(hex.slice(3,5),16);
+      const b = parseInt(hex.slice(5,7),16);
+      return {r,g,b};
+    }
+
+    const lightColors = ['#c8a97e','#e8d9c5','#d4c4b0','#b8a898','#f0e8dc','#ddd0bf','#e4d8c8'];
+    const darkColors  = ['#c8a97e','#3a2a1c','#2a1e14','#4a3828','#6a4830','#d4a870','#8a6840'];
+
+    function spawnPaintBurst(x, y, toDark) {
+      const palette = toDark ? darkColors : lightColors;
+      const count = 80 + Math.floor(Math.random() * 60);
+      for (let i = 0; i < count; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 4 + Math.random() * 14;
+        const size  = 6 + Math.random() * 22;
+        const color = palette[Math.floor(Math.random() * palette.length)];
+        const rgb   = hexToRgb(color);
+        particles.push({
+          x, y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed - Math.random() * 4,
+          size,
+          r: rgb.r, g: rgb.g, b: rgb.b,
+          alpha: 0.85 + Math.random() * 0.15,
+          decay: 0.012 + Math.random() * 0.018,
+          wobble: Math.random() * 0.3,
+          wobbleSpeed: 0.05 + Math.random() * 0.08,
+          wobbleT: Math.random() * Math.PI * 2,
+          glitter: Math.random() > 0.6,
+          glitterPhase: Math.random() * Math.PI * 2,
+          gravity: 0.18 + Math.random() * 0.14,
+          squish: 0.7 + Math.random() * 0.6,
+        });
+      }
+      // Add extra glitter sparkles
+      for (let i = 0; i < 50; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 8 + Math.random() * 18;
+        particles.push({
+          x, y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed - Math.random() * 6,
+          size: 2 + Math.random() * 5,
+          r: 255, g: 220, b: 150,
+          alpha: 1,
+          decay: 0.02 + Math.random() * 0.03,
+          wobble: 0,
+          wobbleSpeed: 0,
+          wobbleT: 0,
+          glitter: true,
+          glitterPhase: Math.random() * Math.PI * 2,
+          gravity: 0.25,
+          squish: 1,
+          sparkle: true,
+        });
+      }
+    }
+
+    function paintLoop() {
+      if (particles.length === 0) {
+        animating = false;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        return;
+      }
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles = particles.filter(p => p.alpha > 0.02);
+
+      particles.forEach(p => {
+        p.wobbleT += p.wobbleSpeed;
+        p.vx += Math.sin(p.wobbleT) * p.wobble;
+        p.vy += p.gravity;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vx *= 0.97;
+        p.vy *= 0.97;
+        p.alpha -= p.decay;
+        p.glitterPhase += 0.2;
+
+        let displayAlpha = p.alpha;
+        if (p.glitter) {
+          displayAlpha = p.alpha * (0.6 + 0.4 * Math.abs(Math.sin(p.glitterPhase)));
+        }
+
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, displayAlpha);
+        ctx.translate(p.x, p.y);
+
+        if (p.sparkle) {
+          // Draw star sparkle
+          ctx.fillStyle = `rgba(${p.r},${p.g},${p.b},1)`;
+          ctx.beginPath();
+          for (let s = 0; s < 4; s++) {
+            const a = (s / 4) * Math.PI * 2;
+            const len = p.size * (1 + 0.4 * Math.sin(p.glitterPhase + s));
+            ctx.moveTo(0, 0);
+            ctx.lineTo(Math.cos(a) * len, Math.sin(a) * len);
+          }
+          ctx.stroke();
+          ctx.fillRect(-1, -1, 2, 2);
+        } else {
+          // Draw paint blob (ellipse)
+          ctx.fillStyle = `rgba(${p.r},${p.g},${p.b},1)`;
+          ctx.beginPath();
+          ctx.ellipse(0, 0, p.size * p.squish, p.size / p.squish, Math.atan2(p.vy, p.vx), 0, Math.PI * 2);
+          ctx.fill();
+
+          // Drip effect
+          if (p.size > 10 && p.vy > 2) {
+            ctx.beginPath();
+            ctx.moveTo(0, p.size * 0.5);
+            ctx.quadraticCurveTo(p.size * 0.1, p.size * 1.2, 0, p.size * 1.6 * Math.min(1, p.vy / 8));
+            ctx.lineWidth = p.size * 0.25;
+            ctx.strokeStyle = `rgba(${p.r},${p.g},${p.b},${displayAlpha * 0.7})`;
+            ctx.stroke();
+          }
+        }
+        ctx.restore();
+      });
+
+      requestAnimationFrame(paintLoop);
+    }
+
+    const themeBtn = document.getElementById('themeBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    let isDark = false;
+
+    themeBtn.addEventListener('click', function(e) {
+      // Get button center on screen
+      const rect = themeBtn.getBoundingClientRect();
+      const bx = rect.left + rect.width / 2;
+      const by = rect.top + rect.height / 2;
+
+      isDark = !isDark;
+      document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      themeIcon.textContent = isDark ? '☀️' : '🎨';
+
+      // Burst!
+      spawnPaintBurst(bx, by, isDark);
+      if (!animating) {
+        animating = true;
+        paintLoop();
+      }
+    });
+  </script>
+
+</body>
+</html>
