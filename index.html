@@ -224,13 +224,13 @@ nav::before {
 }
 }
 .nav-logo-img {
-  height: 140px; /* bigger */
+  height: 160px;
   object-fit: contain;
   display: block;
-
-  mix-blend-mode: screen; /* removes black visually */
-  opacity: 0.95;
-  filter: sepia(1) saturate(2) hue-rotate(10deg) brightness(0.9);
+  .nav-logo-img:hover {
+  transform: scale(1.05);
+  transition: 0.3s ease;
+}
 }
     
     .nav-logo {
