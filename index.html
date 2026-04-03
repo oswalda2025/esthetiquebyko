@@ -6,7 +6,7 @@
   <title>Ko Esthetique — Wearable Art</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&family=Jost:wght@100;200;300;400&family=Imperial+Script&display=swap" rel="stylesheet" />  <style>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&family=Jost:wght@100;200;300;400&family=Imperial+Script&display=swap" rel="stylesheet" />
     /* ============================
        CSS CUSTOM PROPERTIES
     ============================ */
@@ -173,10 +173,44 @@
       filter: blur(2px);
     }
     .hero-content {
-      position: relative; z-index: 2;
-      padding: clamp(2rem, 6vw, 5rem);
-      max-width: 700px;
-    }
+  position: relative;
+  z-index: 2;
+  padding: clamp(3rem, 6vw, 6rem);
+}
+
+/* DIAGONAL TEXT */
+.hero-diagonal {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/* ESTH. */
+.hero-esth {
+  font-family: 'Imperial Script', cursive;
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  color: #1a1612;
+  margin-left: 0;
+}
+
+/* by */
+.hero-by {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: #6b5f52;
+  margin-left: 3rem;
+}
+
+/* Komal Oswal */
+.hero-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  letter-spacing: 0.1em;
+  color: #1a1612;
+  margin-left: 6rem;
+}
     .hero-eyebrow {
   font-size: 0.72rem;
   letter-spacing: 0.45em;
@@ -884,14 +918,12 @@
   <section class="hero" id="home">
     <div class="hero-img ph-hero img-placeholder" data-label=""></div>
     <div class="hero-content">
-      <p class="hero-eyebrow">Bespoke Pieces</p>
-      <h1 class="hero-title">Ko Esthetique</h1>
-      <p class="hero-sub">Each piece, a singular creation</p>
-      <a href="#collections" class="btn-primary">
-        Explore the Collection
-        <span class="arrow">→</span>
-      </a>
-    </div>
+  <div class="hero-diagonal">
+    <span class="hero-esth">Esth.</span>
+    <span class="hero-by">by</span>
+    <span class="hero-name">Komal Oswal</span>
+  </div>
+</div>
     <div class="hero-scroll-hint">
       <div class="scroll-line"></div>
       <span>Scroll</span>
