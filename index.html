@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ko Esthetique — Wearable Art</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&family=Jost:wght@100;200;300;400&display=swap" rel="stylesheet" />
-  <style>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&family=Jost:wght@100;200;300;400&family=Imperial+Script&display=swap" rel="stylesheet" />  <style>
     /* ============================
        CSS CUSTOM PROPERTIES
     ============================ */
@@ -25,19 +24,7 @@
       --shadow: 0 4px 40px rgba(26,22,18,0.06);
       --transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    [data-theme="dark"] {
-      --bg: #100e0c;
-      --bg-2: #1a1512;
-      --ink: #f0e8dc;
-      --ink-light: #a89880;
-      --accent: #c8a97e;
-      --accent-soft: #2a2018;
-      --white: #1a1512;
-      --nav-bg: rgba(16, 14, 12, 0.88);
-      --card-bg: #1a1512;
-      --border: rgba(240,232,220,0.08);
-      --shadow: 0 4px 40px rgba(0,0,0,0.3);
-    }
+    
 
     /* ============================
        RESET & BASE
@@ -191,30 +178,31 @@
       max-width: 700px;
     }
     .hero-eyebrow {
-      font-size: 0.65rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-      font-weight: 300;
-    }
+  font-size: 0.72rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: #f3dfc2;
+  margin-bottom: 1.2rem;
+  font-weight: 300;
+}
     .hero-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 200;
-      font-size: clamp(3rem, 8vw, 6.5rem);
-      line-height: 1.0;
-      color: #f9f6f1;
-      margin-bottom: 2rem;
-    }
+  font-family: 'Imperial Script', cursive;
+  font-weight: 400;
+  font-size: clamp(5rem, 13vw, 10rem);
+  line-height: 0.95;
+  color: #ffffff;
+  margin-bottom: 1.2rem;
+  text-shadow: 0 8px 30px rgba(0,0,0,0.18);
+}
     .hero-title em { font-style: italic; font-weight: 200; }
     .hero-sub {
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(249,246,241,0.6);
-      font-weight: 200;
-      margin-bottom: 3rem;
-    }
+  font-size: 0.78rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.82);
+  font-weight: 300;
+  margin-bottom: 3rem;
+}
     .btn-primary {
       display: inline-flex; align-items: center; gap: 0.75rem;
       padding: 1rem 2.5rem;
@@ -386,12 +374,7 @@
     .ph-jacket { background: linear-gradient(145deg, #cfc4b5, #9e8e7e); }
     .ph-tshirt { background: linear-gradient(145deg, #e4d8c8, #baa888); }
     .ph-hero { background: linear-gradient(145deg, #c8b89a, #a89070); }
-    [data-theme="dark"] .ph-saree { background: linear-gradient(145deg, #2a1e14, #3a2a1c); }
-    [data-theme="dark"] .ph-suit { background: linear-gradient(145deg, #201c18, #302820); }
-    [data-theme="dark"] .ph-shoes { background: linear-gradient(145deg, #241c14, #342418); }
-    [data-theme="dark"] .ph-purse { background: linear-gradient(145deg, #281e12, #382a18); }
-    [data-theme="dark"] .ph-jacket { background: linear-gradient(145deg, #1c1814, #28201a); }
-    [data-theme="dark"] .ph-tshirt { background: linear-gradient(145deg, #2c2018, #3c2c1c); }
+    
 
     /* ============================
        FULL-WIDTH IMAGE ROW
@@ -892,11 +875,7 @@
       <li><a href="#custom">Custom Orders</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <div class="nav-right">
-      <button class="theme-btn" id="themeBtn" title="Toggle theme" aria-label="Toggle dark/light mode">
-        <span class="theme-btn-icon" id="themeIcon">🎨</span>
-      </button>
-    </div>
+    <div class="nav-right"></div>
   </nav>
 
   <!-- ============================
@@ -905,8 +884,8 @@
   <section class="hero" id="home">
     <div class="hero-img ph-hero img-placeholder" data-label=""></div>
     <div class="hero-content">
-      <p class="hero-eyebrow">Ko Esthetique — Est. by Passion</p>
-      <h1 class="hero-title">Wearable Art,<br /><em>Hand-Painted</em><br />with Elegance</h1>
+      <p class="hero-eyebrow">Bespoke Pieces</p>
+      <h1 class="hero-title">Ko Esthetique</h1>
       <p class="hero-sub">Each piece, a singular creation</p>
       <a href="#collections" class="btn-primary">
         Explore the Collection
@@ -1490,27 +1469,7 @@
       requestAnimationFrame(paintLoop);
     }
 
-    const themeBtn = document.getElementById('themeBtn');
-    const themeIcon = document.getElementById('themeIcon');
-    let isDark = false;
-
-    themeBtn.addEventListener('click', function(e) {
-      // Get button center on screen
-      const rect = themeBtn.getBoundingClientRect();
-      const bx = rect.left + rect.width / 2;
-      const by = rect.top + rect.height / 2;
-
-      isDark = !isDark;
-      document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
-      themeIcon.textContent = isDark ? '☀️' : '🌙';
-
-      // Burst!
-      spawnPaintBurst(bx, by, isDark);
-      if (!animating) {
-        animating = true;
-        paintLoop();
-      }
-    });
+  
   </script>
 
 </body>
