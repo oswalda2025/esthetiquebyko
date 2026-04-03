@@ -541,12 +541,20 @@ nav::before {
       overflow: hidden;
       background: var(--bg-2);
     }
+    .section-img {
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
     .split-image .img-placeholder {
       width: 100%; height: 100%;
       min-height: 480px;
       transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .collection-split:hover .split-image .img-placeholder { transform: scale(1.04); }
+    .collection-split:hover .split-image .section-img { transform: scale(1.04); }
     .split-content {
       display: flex;
       flex-direction: column;
@@ -1058,7 +1066,7 @@ nav::before {
     @media (max-width: 900px) {
       .collection-split { grid-template-columns: 1fr; min-height: auto; }
       .collection-split.reverse { direction: ltr; }
-      .split-image .img-placeholder { min-height: 320px; }
+      .split-image .section-img { min-height: 320px; }
       .split-content { padding: clamp(2rem, 5vw, 3.5rem); }
       .three-col { grid-template-columns: 1fr 1fr; }
       .three-col-item:last-child { display: none; }
@@ -1167,8 +1175,8 @@ nav::before {
     <!-- SAREES -->
     <div class="collection-split">
       <div class="split-image parallax-host">
-        <div class="img-placeholder ph-saree parallax-inner" data-label="Saree Collection"></div>
-      </div>
+  <img src="sareex.png" alt="Saree Collection" class="section-img parallax-inner">
+</div>
       <div class="split-content">
         <div class="split-num reveal">01</div>
         <p class="section-label reveal reveal-delay-1">The Saree Edit</p>
@@ -1185,8 +1193,8 @@ nav::before {
     <!-- SUITS -->
     <div class="collection-split reverse">
       <div class="split-image parallax-host">
-        <div class="img-placeholder ph-suit parallax-inner" data-label="Suit Collection"></div>
-      </div>
+  <img src="suitp.png" alt="Suit Collection" class="section-img parallax-inner">
+</div>
       <div class="split-content">
         <div class="split-num reveal">02</div>
         <p class="section-label reveal reveal-delay-1">Tailored Art</p>
