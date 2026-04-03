@@ -88,17 +88,18 @@
   align-items: center;
   justify-content: space-between;
 
-  background: rgba(249, 246, 241, 0.94);
+  background: #f3ede5;
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 2px 20px rgba(26,22,18,0.04);
 }
+
 
 .nav-left,
 .nav-right {
   display: flex;
   gap: 2.5rem;
 }
-
 .nav-left,
 .nav-right {
   display: flex;
@@ -107,12 +108,41 @@
   width: 33%;
 }
 
+/* fine-tune positioning */
+.nav-left {
+  justify-content: flex-start;
+  padding-left: 1.5rem;
+}
+
+.nav-right {
+  justify-content: flex-end;
+  padding-right: 1.5rem;
+}
+
+/* fine-tune positioning */
+.nav-left {
+  justify-content: flex-start;
+  padding-left: 1.5rem;
+}
+
+.nav-right {
+  justify-content: flex-end;
+  padding-right: 1.5rem;
+}
+
 .nav-left {
   justify-content: flex-start;
 }
 
 .nav-right {
   justify-content: flex-end;
+}
+.nav-left a:nth-child(2) {
+  margin-left: 1.2rem; /* moves "About" right */
+}
+
+.nav-right a:first-child {
+  margin-right: 1.2rem; /* moves "Custom Orders" left */
 }
 
 .nav-left a,
@@ -143,6 +173,9 @@
   height: 82px;
   object-fit: contain;
   display: block;
+
+  mix-blend-mode: multiply;
+  opacity: 0.95;
 }
     nav.scrolled {
       background: var(--nav-bg);
