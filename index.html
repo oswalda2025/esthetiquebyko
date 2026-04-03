@@ -223,14 +223,14 @@ nav::before {
   background: transparent;
 }
 }
-
 .nav-logo-img {
-  height: 120px;
+  height: 140px; /* bigger */
   object-fit: contain;
   display: block;
 
-  mix-blend-mode: multiply;
+  mix-blend-mode: screen; /* removes black visually */
   opacity: 0.95;
+  filter: sepia(1) saturate(2) hue-rotate(10deg) brightness(0.9);
 }
     
     .nav-logo {
@@ -923,7 +923,7 @@ nav::before {
     }
     .form-group input::placeholder,
     .form-group textarea::placeholder { color: transparent; }
-    .form-group textarea { min-height: 120px; }
+    .form-group textarea { min-height: 160px; }
     .form-submit {
       display: inline-flex; align-items: center; gap: 0.75rem;
       padding: 1.1rem 2.5rem;
@@ -1104,7 +1104,7 @@ nav::before {
   </div>
 
   <div class="nav-center">
-    <img src="profilepic2.png" alt="Logo" class="nav-logo-img">
+    <img src="profilepic.png" alt="Logo" class="nav-logo-img">
   </div>
 
   <div class="nav-right">
