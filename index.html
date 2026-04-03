@@ -87,9 +87,34 @@
       background: rgba(203, 178, 149, 0.75);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(120, 102, 74, 0.10);
+      border-bottom: none;
       box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+      box-shadow: 
+  0 8px 30px rgba(0,0,0,0.04),  /* existing depth */
+  0 0 0 1px rgba(139, 110, 80, 0.18),  /* soft outline */
+  0 0 20px rgba(139, 110, 80, 0.12);   /* watercolor bleed */
     }
+
+    nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  border-radius: 0;
+
+  background: radial-gradient(
+      120% 60% at 50% 0%,
+      rgba(139,110,80,0.08),
+      transparent 70%
+    ),
+    radial-gradient(
+      120% 60% at 50% 100%,
+      rgba(139,110,80,0.08),
+      transparent 70%
+    );
+
+  pointer-events: none;
+}
 
     /* Decorative fade drip below navbar */
     nav::after {
