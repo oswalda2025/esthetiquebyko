@@ -5,11 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ko Esthetique — Wearable Art</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&family=Jost:wght@100;200;300;400&family=Imperial+Script&display=swap" rel="stylesheet" />
-<style>
-    /* ============================
-       CSS CUSTOM PROPERTIES
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&family=Jost:wght@100;200;300;400&family=Imperial+Script&display=swap" rel="stylesheet" />
+  <style>
     /* ============================
        CSS CUSTOM PROPERTIES
     ============================ */
@@ -27,7 +25,6 @@
       --shadow: 0 4px 40px rgba(26,22,18,0.06);
       --transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    
 
     /* ============================
        RESET & BASE
@@ -68,218 +65,105 @@
       transition: transform 0.12s ease, width 0.3s, height 0.3s;
       opacity: 0.5;
     }
-    body:has(a:hover) .cursor, body:has(button:hover) .cursor { width: 18px; height: 18px; }
+    body:has(a:hover) .cursor,
+    body:has(button:hover) .cursor { width: 18px; height: 18px; }
     @media (hover: none) { .cursor, .cursor-ring { display: none; } }
 
     /* ============================
        NAVBAR
     ============================ */
     nav {
-  position: fixed;
-  overflow: visible;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-
-  height: 150px;
-  padding: 0 5.5rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  background: rgba(203, 178, 149, 0.75); /* 🔥 translucent beige */
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-
-  border-bottom: 1px solid rgba(120, 102, 74, 0.10);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.04);
-  nav::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -60px;
-  width: 100%;
-  height: 60px;
-
-  background: linear-gradient(
-    to bottom,
-    rgba(203, 178, 149, 0.75),
-    rgba(203, 178, 149, 0.4),
-    rgba(203, 178, 149, 0)
-  );
-
-  pointer-events: none;
-}
-nav::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -42px;
-  width: 100%;
-  height: 90px;
-  pointer-events: none;
-  z-index: -1;
-
-  background:
-    radial-gradient(circle at 8% 8%, rgba(181, 140, 103, 0.22) 0 10px, transparent 11px),
-    radial-gradient(circle at 18% 20%, rgba(181, 140, 103, 0.16) 0 7px, transparent 8px),
-    radial-gradient(circle at 31% 10%, rgba(181, 140, 103, 0.18) 0 11px, transparent 12px),
-    radial-gradient(circle at 47% 18%, rgba(181, 140, 103, 0.14) 0 8px, transparent 9px),
-    radial-gradient(circle at 63% 12%, rgba(181, 140, 103, 0.19) 0 10px, transparent 11px),
-    radial-gradient(circle at 79% 22%, rgba(181, 140, 103, 0.15) 0 7px, transparent 8px),
-    radial-gradient(circle at 91% 11%, rgba(181, 140, 103, 0.2) 0 9px, transparent 10px),
-    linear-gradient(to bottom, rgba(203, 178, 149, 0.32), rgba(203, 178, 149, 0));
-  filter: blur(0.2px);
-}
-nav::before {
-  content: "❁   ❃   ❁";
-  position: absolute;
-  right: 5.5rem;
-  bottom: -18px;
-  font-size: 0.8rem;
-  letter-spacing: 1.1rem;
-  color: rgba(120, 102, 74, 0.32);
-  pointer-events: none;
-}
-
-}
-
-
-.nav-left,
-.nav-right {
-  display: flex;
-  gap: 2.5rem;
-}
-.nav-left,
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 3.2rem;
-  width: 33%;
-}
-
-/* fine-tune positioning */
-.nav-left {
-  justify-content: flex-start;
-  padding-left: 1.5rem;
-}
-
-.nav-right {
-  justify-content: flex-end;
-  padding-right: 1.5rem;
-}
-
-/* fine-tune positioning */
-.nav-left {
-  justify-content: flex-start;
-  padding-left: 1.5rem;
-}
-
-.nav-right {
-  justify-content: flex-end;
-  padding-right: 1.5rem;
-}
-
-.nav-left {
-  justify-content: flex-start;
-}
-
-.nav-right {
-  justify-content: flex-end;
-}
-.nav-left a:nth-child(2) {
-  margin-left: 3rem; /* moves "About" right */
-}
-
-.nav-right a:first-child {
-  margin-right: 3rem; /* moves "Custom Orders" left */
-}
-
-.nav-left a,
-.nav-right a {
-  font-size: 0.8rem;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: #6b5f52;
-  font-weight: 300;
-  transition: color 0.3s;
-  white-space: nowrap;
-}
-
-.nav-left a:hover,
-.nav-right a:hover {
-  color: #1a1612;
-}
-
-/* CENTER LOGO */
-.nav-center {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  .nav-center {
-  background: transparent;
-}
-}
-.nav-logo-img {
-  height: 450px;
-  object-fit: contain;
-  display: block;
-  .nav-logo-img:hover {
-  transform: scale(1.05);
-  transition: 0.3s ease;
-}
-}
-    
-    .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 200;
-      font-size: 1.4rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--ink);
+      position: fixed;
+      overflow: visible;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      height: 150px;
+      padding: 0 5.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(203, 178, 149, 0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(120, 102, 74, 0.10);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.04);
     }
-    .nav-links {
-      display: flex; align-items: center; gap: 2.5rem;
-      list-style: none;
+
+    /* Decorative fade drip below navbar */
+    nav::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -60px;
+      width: 100%;
+      height: 60px;
+      background: linear-gradient(
+        to bottom,
+        rgba(203, 178, 149, 0.45),
+        rgba(203, 178, 149, 0.18),
+        rgba(203, 178, 149, 0)
+      );
+      pointer-events: none;
+      z-index: -1;
     }
-    .nav-links a {
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
+
+    /* Decorative floral text below logo */
+    nav::before {
+      content: "❁   ❃   ❁";
+      position: absolute;
+      right: 5.5rem;
+      bottom: -18px;
+      font-size: 0.8rem;
+      letter-spacing: 1.1rem;
+      color: rgba(120, 102, 74, 0.32);
+      pointer-events: none;
+    }
+
+    .nav-left,
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 3.2rem;
+      width: 33%;
+    }
+    .nav-left { justify-content: flex-start; padding-left: 1.5rem; }
+    .nav-right { justify-content: flex-end; padding-right: 1.5rem; }
+
+    .nav-left a:nth-child(2) { margin-left: 3rem; }
+    .nav-right a:first-child { margin-right: 3rem; }
+
+    .nav-left a,
+    .nav-right a {
+      font-size: 0.8rem;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
-      color: var(--ink-light);
-      transition: color 0.3s;
+      color: #6b5f52;
       font-weight: 300;
+      transition: color 0.3s;
+      white-space: nowrap;
     }
-    .nav-links a:hover { color: var(--ink); }
-    .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+    .nav-left a:hover,
+    .nav-right a:hover { color: #1a1612; }
+
+    .nav-center {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .nav-logo-img {
+      height: 450px;
+      object-fit: contain;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .nav-logo-img:hover { transform: scale(1.05); }
 
     /* ============================
-       PAINT BURST DARK MODE BTN
+       PAINT BURST BTN
     ============================ */
-    .theme-btn {
-      position: relative;
-      width: 42px; height: 42px;
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      background: var(--card-bg);
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      overflow: visible;
-      transition: border-color 0.3s, background 0.3s;
-    }
-    .theme-btn:hover { border-color: var(--accent); }
-    .theme-btn-icon {
-      font-size: 1rem;
-      line-height: 1;
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-      user-select: none;
-    }
-    .theme-btn:hover .theme-btn-icon { transform: rotate(20deg) scale(1.15); }
-
-    /* Paint splash canvas */
     #paint-canvas {
       position: fixed;
       top: 0; left: 0;
@@ -295,7 +179,8 @@ nav::before {
       position: relative;
       height: 100svh;
       min-height: 600px;
-      display: flex; align-items: flex-end;
+      display: flex;
+      align-items: flex-end;
       overflow: hidden;
       margin-top: 132px;
     }
@@ -303,13 +188,11 @@ nav::before {
       position: absolute; inset: 0;
       background: linear-gradient(135deg, #d4c4b0 0%, #b8a898 40%, #9c8878 100%);
     }
-    
     .hero-img::after {
       content: '';
       position: absolute; inset: 0;
       background: linear-gradient(to top, rgba(26,22,18,0.55) 0%, rgba(26,22,18,0.1) 50%, transparent 100%);
     }
-    /* Placeholder figure shapes */
     .hero-img::before {
       content: '';
       position: absolute;
@@ -319,140 +202,80 @@ nav::before {
       border-radius: 60% 40% 0 0;
       filter: blur(2px);
     }
- .hero-content {
-  position: relative;
-  z-index: 2;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-}
 
-/* DIAGONAL TEXT */
-.hero-diagonal {
-  position: absolute;
-  left: 8%;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 2;
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+    }
 
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-.hero-text-panel {
-  position: absolute;
-  inset: 0; /* FULL SCREEN */
-  display: flex;
-  align-items: center;
-}
-.hero-text-panel::after {
-  content: "";
-  position: absolute;
-  inset: 0;
+    /* ── Hero text panel overlay ── */
+    .hero-text-panel {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+    }
 
-  background: linear-gradient(
-    to right,
-    rgba(249,246,241,0.75) 0%,
-    rgba(249,246,241,0.4) 30%,
-    rgba(249,246,241,0.1) 55%,
-    rgba(249,246,241,0) 80%
-  );
-  .hero-diagonal {
-  z-index: 2;
-  position: relative;
-}
-}
+    /* Gradient veil so left side is legible */
+    .hero-text-panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(249,246,241,0.75) 0%,
+        rgba(249,246,241,0.4) 30%,
+        rgba(249,246,241,0.1) 55%,
+        rgba(249,246,241,0) 80%
+      );
+      pointer-events: none;
+    }
 
-.hero-text-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    /* Cover image fills the panel */
+    .hero-text-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.75;
+    }
 
-  opacity: 0.75; /* adjust if needed */
-}
-.hero-diagonal {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-/* ESTH. */
-.hero-esth {
-  font-family: 'Imperial Script', cursive;
-  font-size: clamp(5.5rem, 10vw, 9rem);
-  line-height: 0.9;
+    /* Text stack sits above the image */
+    .hero-diagonal {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      padding-left: 8%;
+    }
 
-  color: #3e2f23 !important;  
-}
-
-
-.hero-by {
-  font-family: 'Jost', sans-serif;
-  font-size: 0.95rem;
-  letter-spacing: 0.42em;
-  text-transform: uppercase;
-  color: #6b5f52;
-  margin-left: 4.8rem;
-}
-
-/* Komal Oswal */
-.hero-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.2rem, 3.2vw, 3.3rem);
-  letter-spacing: 0.08em;
-  color: #1a1612;
-  margin-left: 9.8rem;
-}
-
-    .hero-eyebrow {
-  font-size: 0.72rem;
-  letter-spacing: 0.45em;
-  text-transform: uppercase;
-  color: #f3dfc2;
-  margin-bottom: 1.2rem;
-  font-weight: 300;
-}
-    .hero-title {
-  font-family: 'Imperial Script', cursive;
-  font-weight: 450;
-  font-size: clamp(5rem, 13vw, 10rem);
-  line-height: 0.95;
-  color: #ffffff;
-  margin-bottom: 1.2rem;
-  text-shadow: 0 8px 30px rgba(0,0,0,0.18);
-}
-    .hero-title em { font-style: italic; font-weight: 200; }
-    .hero-sub {
-  font-size: 0.78rem;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.82);
-  font-weight: 300;
-  margin-bottom: 3rem;
-}
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 0.75rem;
-      padding: 1rem 2.5rem;
-      border: 1px solid rgba(249,246,241,0.4);
-      color: #f9f6f1;
-      font-size: 0.65rem;
-      letter-spacing: 0.3em;
+    .hero-esth {
+      font-family: 'Imperial Script', cursive;
+      font-size: clamp(5.5rem, 10vw, 9rem);
+      line-height: 0.9;
+      color: #3e2f23;
+    }
+    .hero-by {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.42em;
       text-transform: uppercase;
-      font-weight: 300;
-      transition: background 0.4s, border-color 0.4s, color 0.4s;
-      cursor: pointer;
-      background: transparent;
+      color: #6b5f52;
+      margin-left: 4.8rem;
     }
-    .btn-primary:hover {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #f9f6f1;
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 3.2vw, 3.3rem);
+      letter-spacing: 0.08em;
+      color: #1a1612;
+      margin-left: 9.8rem;
     }
-    .btn-primary .arrow { transition: transform 0.3s; }
-    .btn-primary:hover .arrow { transform: translateX(5px); }
+
     .hero-scroll-hint {
       position: absolute; bottom: 2.5rem; right: clamp(1.5rem, 5vw, 4rem);
       display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
@@ -536,25 +359,70 @@ nav::before {
     }
     .collection-split.reverse { direction: rtl; }
     .collection-split.reverse > * { direction: ltr; }
+
     .split-image {
       position: relative;
       overflow: hidden;
       background: var(--bg-2);
     }
+
+    /* ─────────────────────────────────────────────────────────
+       THE PAINT-BLEND MAGIC
+       The <img class="section-img"> uses a CSS mask that is an
+       intersection of a horizontal and vertical gradient so ALL
+       four edges dissolve into the page background like wet
+       watercolour paint feathering into paper. The gradient
+       stops are tuned so the centre of the image is fully
+       opaque while edges fade over ~15% of each dimension.
+    ───────────────────────────────────────────────────────── */
     .section-img {
-  width: 100%;
-  height: 100%;
-  min-height: 480px;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-    .split-image .img-placeholder {
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       min-height: 480px;
+      object-fit: cover;
+      display: block;
       transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+
+      /* Horizontal gradient mask */
+      -webkit-mask-image:
+        linear-gradient(
+          to right,
+          transparent 0%,
+          black 14%,
+          black 86%,
+          transparent 100%
+        ),
+        /* Vertical gradient mask */
+        linear-gradient(
+          to bottom,
+          transparent 0%,
+          black 12%,
+          black 88%,
+          transparent 100%
+        );
+      -webkit-mask-composite: destination-in; /* intersect both gradients */
+
+      mask-image:
+        linear-gradient(
+          to right,
+          transparent 0%,
+          black 14%,
+          black 86%,
+          transparent 100%
+        ),
+        linear-gradient(
+          to bottom,
+          transparent 0%,
+          black 12%,
+          black 88%,
+          transparent 100%
+        );
+      mask-composite: intersect;
     }
+
+    /* Hover zoom still works */
     .collection-split:hover .split-image .section-img { transform: scale(1.04); }
+
     .split-content {
       display: flex;
       flex-direction: column;
@@ -571,7 +439,7 @@ nav::before {
       letter-spacing: -0.02em;
     }
     .split-content .section-title { margin-bottom: 1.2rem; }
-    .split-content .section-body { margin-bottom: 2.5rem; }
+    .split-content .section-body  { margin-bottom: 2.5rem; }
     .tag-row { display: flex; gap: 0.6rem; flex-wrap: wrap; }
     .tag {
       padding: 0.4rem 1rem;
@@ -584,7 +452,9 @@ nav::before {
       border-radius: 100px;
     }
 
-    /* Placeholder image styles */
+    /* ============================
+       PLACEHOLDER IMAGE STYLES
+    ============================ */
     .img-placeholder {
       position: relative;
       overflow: hidden;
@@ -603,19 +473,16 @@ nav::before {
       color: rgba(200,169,126,0.5);
       text-transform: uppercase;
     }
-
-    /* Each category gets its own warm palette */
-    .ph-saree { background: linear-gradient(145deg, #e8d5c0, #c4a882); }
-    .ph-suit { background: linear-gradient(145deg, #d4cbbf, #a89880); }
-    .ph-shoes { background: linear-gradient(145deg, #ddd0bf, #b8a090); }
-    .ph-purse { background: linear-gradient(145deg, #e0d0b8, #c0a878); }
+    .ph-saree  { background: linear-gradient(145deg, #e8d5c0, #c4a882); }
+    .ph-suit   { background: linear-gradient(145deg, #d4cbbf, #a89880); }
+    .ph-shoes  { background: linear-gradient(145deg, #ddd0bf, #b8a090); }
+    .ph-purse  { background: linear-gradient(145deg, #e0d0b8, #c0a878); }
     .ph-jacket { background: linear-gradient(145deg, #cfc4b5, #9e8e7e); }
     .ph-tshirt { background: linear-gradient(145deg, #e4d8c8, #baa888); }
-    .ph-hero { background: linear-gradient(145deg, #c8b89a, #a89070); }
-    
+    .ph-hero   { background: linear-gradient(145deg, #c8b89a, #a89070); }
 
     /* ============================
-       FULL-WIDTH IMAGE ROW
+       THREE-COL GALLERY BREAK
     ============================ */
     .three-col {
       display: grid;
@@ -677,7 +544,6 @@ nav::before {
       margin-top: 2.5rem;
       display: flex; gap: 3rem;
     }
-    .stat-item {}
     .stat-num {
       font-family: 'Cormorant Garamond', serif;
       font-size: 3rem;
@@ -693,9 +559,8 @@ nav::before {
       font-weight: 300;
       margin-top: 0.3rem;
     }
-    .about-text {}
     .about-text .section-title { margin-bottom: 1.5rem; }
-    .about-text .section-body { margin-bottom: 1.5rem; max-width: 480px; }
+    .about-text .section-body  { margin-bottom: 1.5rem; max-width: 480px; }
     .signature {
       font-family: 'Cormorant Garamond', serif;
       font-size: 2.2rem;
@@ -706,7 +571,7 @@ nav::before {
     }
 
     /* ============================
-       WIDE IMAGE BANNER
+       BANNER QUOTE
     ============================ */
     .banner-wide {
       height: 60vh;
@@ -736,7 +601,7 @@ nav::before {
     }
 
     /* ============================
-       PROCESS / HOW IT WORKS
+       PROCESS / CUSTOM ORDERS
     ============================ */
     .process {
       padding: clamp(5rem, 10vw, 10rem) clamp(1.5rem, 5vw, 4rem);
@@ -811,10 +676,7 @@ nav::before {
       cursor: pointer;
       border: 1px solid transparent;
     }
-    .btn-dark:hover {
-      background: var(--accent);
-      color: #f9f6f1;
-    }
+    .btn-dark:hover { background: var(--accent); color: #f9f6f1; }
 
     /* ============================
        GALLERY MOSAIC
@@ -848,7 +710,7 @@ nav::before {
       align-items: start;
     }
     .contact-info .section-title { margin-bottom: 1rem; }
-    .contact-info .section-body { margin-bottom: 3rem; max-width: 360px; }
+    .contact-info .section-body  { margin-bottom: 3rem; max-width: 360px; }
     .contact-links { display: flex; flex-direction: column; gap: 0; }
     .contact-link {
       display: flex; align-items: center; gap: 1.5rem;
@@ -872,7 +734,6 @@ nav::before {
       background: var(--accent);
       border-color: var(--accent);
     }
-    
     .contact-link-label {
       font-size: 0.6rem; letter-spacing: 0.2em;
       text-transform: uppercase; color: var(--ink-light);
@@ -1034,19 +895,22 @@ nav::before {
     .reveal {
       opacity: 0;
       transform: translateY(40px);
-      transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+      transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1),
+                  transform 0.9s cubic-bezier(0.16,1,0.3,1);
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
     .reveal-left {
       opacity: 0;
       transform: translateX(-50px);
-      transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+      transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1),
+                  transform 0.9s cubic-bezier(0.16,1,0.3,1);
     }
     .reveal-left.visible { opacity: 1; transform: translateX(0); }
     .reveal-right {
       opacity: 0;
       transform: translateX(50px);
-      transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+      transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1),
+                  transform 0.9s cubic-bezier(0.16,1,0.3,1);
     }
     .reveal-right.visible { opacity: 1; transform: translateX(0); }
     .reveal-delay-1 { transition-delay: 0.1s; }
@@ -1064,6 +928,12 @@ nav::before {
        MOBILE
     ============================ */
     @media (max-width: 900px) {
+      nav { height: 100px; padding: 0 1.5rem; }
+      .nav-logo-img { height: 280px; }
+      .hero { margin-top: 88px; }
+      .nav-left a:nth-child(2) { margin-left: 0; }
+      .nav-right a:first-child  { margin-right: 0; }
+      .nav-left, .nav-right { gap: 1.5rem; }
       .collection-split { grid-template-columns: 1fr; min-height: auto; }
       .collection-split.reverse { direction: ltr; }
       .split-image .section-img { min-height: 320px; }
@@ -1081,9 +951,10 @@ nav::before {
       .insta-cell:nth-child(n+4) { display: none; }
       .form-row { grid-template-columns: 1fr; gap: 0; }
       footer { flex-direction: column; text-align: center; }
-      .nav-links { display: none; }
     }
     @media (max-width: 600px) {
+      nav::before { display: none; }
+      .nav-left, .nav-right { display: none; }
       .three-col { grid-template-columns: 1fr; }
       .three-col-item:nth-child(n+2) { display: none; }
       .mosaic { grid-template-columns: 1fr; grid-template-rows: auto; }
@@ -1106,20 +977,20 @@ nav::before {
        NAVBAR
   ============================ -->
   <nav id="navbar">
-  <div class="nav-left">
-    <a href="#collections">Collections</a>
-    <a href="#about">About</a>
-  </div>
+    <div class="nav-left">
+      <a href="#collections">Collections</a>
+      <a href="#about">About</a>
+    </div>
 
-  <div class="nav-center">
-    <img src="profilepic3.png" alt="Logo" class="nav-logo-img">
-  </div>
+    <div class="nav-center">
+      <img src="profilepic3.png" alt="Ko Esthetique Logo" class="nav-logo-img">
+    </div>
 
-  <div class="nav-right">
-    <a href="#custom">Custom Orders</a>
-    <a href="#contact">Contact</a>
-  </div>
-</nav>
+    <div class="nav-right">
+      <a href="#custom">Custom Orders</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
 
   <!-- ============================
        HERO
@@ -1127,15 +998,15 @@ nav::before {
   <section class="hero" id="home">
     <div class="hero-img ph-hero img-placeholder" data-label=""></div>
     <div class="hero-content">
-  <div class="hero-text-panel">
-    <img src="coverpicx.png" alt="" class="hero-text-bg">
-    <div class="hero-diagonal">
-      <span class="hero-esth">Esthetique</span>
-      <span class="hero-by">by</span>
-      <span class="hero-name">Komal Oswal</span>
+      <div class="hero-text-panel">
+        <img src="coverpicx.png" alt="" class="hero-text-bg">
+        <div class="hero-diagonal">
+          <span class="hero-esth">Esthetique</span>
+          <span class="hero-by">by</span>
+          <span class="hero-name">Komal Oswal</span>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
     <div class="hero-scroll-hint">
       <div class="scroll-line"></div>
       <span>Scroll</span>
@@ -1147,7 +1018,6 @@ nav::before {
   ============================ -->
   <div class="marquee-strip">
     <div class="marquee-track" aria-hidden="true">
-      <!-- repeated twice for seamless loop -->
       <span class="marquee-item"><span class="marquee-dot"></span>Hand-Painted Sarees</span>
       <span class="marquee-item"><span class="marquee-dot"></span>Custom Suits</span>
       <span class="marquee-item"><span class="marquee-dot"></span>Artisan Purses</span>
@@ -1175,8 +1045,8 @@ nav::before {
     <!-- SAREES -->
     <div class="collection-split">
       <div class="split-image parallax-host">
-  <img src="sareex.png" alt="Saree Collection" class="section-img parallax-inner">
-</div>
+        <img src="sareex.png" alt="Saree Collection" class="section-img parallax-inner">
+      </div>
       <div class="split-content">
         <div class="split-num reveal">01</div>
         <p class="section-label reveal reveal-delay-1">The Saree Edit</p>
@@ -1193,8 +1063,8 @@ nav::before {
     <!-- SUITS -->
     <div class="collection-split reverse">
       <div class="split-image parallax-host">
-  <img src="suitp.png" alt="Suit Collection" class="section-img parallax-inner">
-</div>
+        <img src="suitp.png" alt="Suit Collection" class="section-img parallax-inner">
+      </div>
       <div class="split-content">
         <div class="split-num reveal">02</div>
         <p class="section-label reveal reveal-delay-1">Tailored Art</p>
@@ -1517,52 +1387,40 @@ nav::before {
   <script>
     // ── Custom cursor ──────────────────────────────────────────
     const cursor = document.getElementById('cursor');
-    const ring = document.getElementById('cursorRing');
+    const ring   = document.getElementById('cursorRing');
     let mx = 0, my = 0, rx = 0, ry = 0;
     document.addEventListener('mousemove', e => {
       mx = e.clientX; my = e.clientY;
       cursor.style.left = mx + 'px';
-      cursor.style.top = my + 'px';
+      cursor.style.top  = my + 'px';
     });
-    function animateRing() {
+    (function animateRing() {
       rx += (mx - rx) * 0.12;
       ry += (my - ry) * 0.12;
       ring.style.left = rx + 'px';
-      ring.style.top = ry + 'px';
+      ring.style.top  = ry + 'px';
       requestAnimationFrame(animateRing);
-    }
-    animateRing();
-
-    // ── Navbar scroll ──────────────────────────────────────────
-    const nav = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      
-    }, { passive: true });
+    })();
 
     // ── Reveal on scroll ──────────────────────────────────────
     const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-        }
-      });
+    const observer  = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
     revealEls.forEach(el => observer.observe(el));
 
     // ── Parallax ──────────────────────────────────────────────
-    const parallaxPairs = document.querySelectorAll('.parallax-host');
     function applyParallax() {
-      parallaxPairs.forEach(host => {
+      document.querySelectorAll('.parallax-host').forEach(host => {
         const inner = host.querySelector('.parallax-inner');
         if (!inner) return;
-        const rect = host.getBoundingClientRect();
+        const rect  = host.getBoundingClientRect();
         const viewH = window.innerHeight;
-        const pct = (viewH - rect.top) / (viewH + rect.height);
+        const pct   = (viewH - rect.top) / (viewH + rect.height);
         const shift = (pct - 0.5) * 60;
-        inner.style.transform = `translateY(${shift}px)`;
-        inner.style.height = 'calc(100% + 60px)';
-        inner.style.marginTop = '-30px';
+        inner.style.transform  = `translateY(${shift}px)`;
+        inner.style.height     = 'calc(100% + 60px)';
+        inner.style.marginTop  = '-30px';
       });
     }
     window.addEventListener('scroll', applyParallax, { passive: true });
@@ -1575,13 +1433,13 @@ nav::before {
       e.target.reset();
     }
 
-    // ── PAINT BURST DARK MODE ─────────────────────────────────
+    // ── PAINT BURST ───────────────────────────────────────────
     const canvas = document.getElementById('paint-canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
+    const ctx    = canvas.getContext('2d');
+    canvas.width  = window.innerWidth;
     canvas.height = window.innerHeight;
     window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
+      canvas.width  = window.innerWidth;
       canvas.height = window.innerHeight;
     });
 
@@ -1589,30 +1447,27 @@ nav::before {
     let animating = false;
 
     function hexToRgb(hex) {
-      const r = parseInt(hex.slice(1,3),16);
-      const g = parseInt(hex.slice(3,5),16);
-      const b = parseInt(hex.slice(5,7),16);
-      return {r,g,b};
+      return {
+        r: parseInt(hex.slice(1,3), 16),
+        g: parseInt(hex.slice(3,5), 16),
+        b: parseInt(hex.slice(5,7), 16)
+      };
     }
 
-    const lightColors = ['#c8a97e','#e8d9c5','#d4c4b0','#b8a898','#f0e8dc','#ddd0bf','#e4d8c8'];
-    const darkColors  = ['#c8a97e','#3a2a1c','#2a1e14','#4a3828','#6a4830','#d4a870','#8a6840'];
+    const palette = ['#c8a97e','#e8d9c5','#d4c4b0','#b8a898','#f0e8dc','#ddd0bf','#e4d8c8'];
 
-    function spawnPaintBurst(x, y, toDark) {
-      const palette = toDark ? darkColors : lightColors;
+    function spawnPaintBurst(x, y) {
       const count = 80 + Math.floor(Math.random() * 60);
       for (let i = 0; i < count; i++) {
         const angle = Math.random() * Math.PI * 2;
         const speed = 4 + Math.random() * 14;
         const size  = 6 + Math.random() * 22;
-        const color = palette[Math.floor(Math.random() * palette.length)];
-        const rgb   = hexToRgb(color);
+        const rgb   = hexToRgb(palette[Math.floor(Math.random() * palette.length)]);
         particles.push({
           x, y,
           vx: Math.cos(angle) * speed,
           vy: Math.sin(angle) * speed - Math.random() * 4,
-          size,
-          r: rgb.r, g: rgb.g, b: rgb.b,
+          size, ...rgb,
           alpha: 0.85 + Math.random() * 0.15,
           decay: 0.012 + Math.random() * 0.018,
           wobble: Math.random() * 0.3,
@@ -1621,10 +1476,9 @@ nav::before {
           glitter: Math.random() > 0.6,
           glitterPhase: Math.random() * Math.PI * 2,
           gravity: 0.18 + Math.random() * 0.14,
-          squish: 0.7 + Math.random() * 0.6,
+          squish: 0.7 + Math.random() * 0.6
         });
       }
-      // Add extra glitter sparkles
       for (let i = 0; i < 50; i++) {
         const angle = Math.random() * Math.PI * 2;
         const speed = 8 + Math.random() * 18;
@@ -1636,14 +1490,9 @@ nav::before {
           r: 255, g: 220, b: 150,
           alpha: 1,
           decay: 0.02 + Math.random() * 0.03,
-          wobble: 0,
-          wobbleSpeed: 0,
-          wobbleT: 0,
-          glitter: true,
-          glitterPhase: Math.random() * Math.PI * 2,
-          gravity: 0.25,
-          squish: 1,
-          sparkle: true,
+          wobble: 0, wobbleSpeed: 0, wobbleT: 0,
+          glitter: true, glitterPhase: Math.random() * Math.PI * 2,
+          gravity: 0.25, squish: 1, sparkle: true
         });
       }
     }
@@ -1655,65 +1504,59 @@ nav::before {
         return;
       }
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
       particles = particles.filter(p => p.alpha > 0.02);
-
       particles.forEach(p => {
         p.wobbleT += p.wobbleSpeed;
         p.vx += Math.sin(p.wobbleT) * p.wobble;
         p.vy += p.gravity;
-        p.x += p.vx;
-        p.y += p.vy;
-        p.vx *= 0.97;
-        p.vy *= 0.97;
+        p.x  += p.vx; p.y += p.vy;
+        p.vx *= 0.97; p.vy *= 0.97;
         p.alpha -= p.decay;
         p.glitterPhase += 0.2;
-
-        let displayAlpha = p.alpha;
-        if (p.glitter) {
-          displayAlpha = p.alpha * (0.6 + 0.4 * Math.abs(Math.sin(p.glitterPhase)));
-        }
-
+        let a = p.alpha * (p.glitter ? 0.6 + 0.4 * Math.abs(Math.sin(p.glitterPhase)) : 1);
         ctx.save();
-        ctx.globalAlpha = Math.max(0, displayAlpha);
+        ctx.globalAlpha = Math.max(0, a);
         ctx.translate(p.x, p.y);
-
         if (p.sparkle) {
-          // Draw star sparkle
-          ctx.fillStyle = `rgba(${p.r},${p.g},${p.b},1)`;
+          ctx.fillStyle = `rgb(${p.r},${p.g},${p.b})`;
           ctx.beginPath();
           for (let s = 0; s < 4; s++) {
-            const a = (s / 4) * Math.PI * 2;
+            const ang = (s / 4) * Math.PI * 2;
             const len = p.size * (1 + 0.4 * Math.sin(p.glitterPhase + s));
             ctx.moveTo(0, 0);
-            ctx.lineTo(Math.cos(a) * len, Math.sin(a) * len);
+            ctx.lineTo(Math.cos(ang) * len, Math.sin(ang) * len);
           }
           ctx.stroke();
           ctx.fillRect(-1, -1, 2, 2);
         } else {
-          // Draw paint blob (ellipse)
-          ctx.fillStyle = `rgba(${p.r},${p.g},${p.b},1)`;
+          ctx.fillStyle = `rgb(${p.r},${p.g},${p.b})`;
           ctx.beginPath();
           ctx.ellipse(0, 0, p.size * p.squish, p.size / p.squish, Math.atan2(p.vy, p.vx), 0, Math.PI * 2);
           ctx.fill();
-
-          // Drip effect
           if (p.size > 10 && p.vy > 2) {
             ctx.beginPath();
             ctx.moveTo(0, p.size * 0.5);
             ctx.quadraticCurveTo(p.size * 0.1, p.size * 1.2, 0, p.size * 1.6 * Math.min(1, p.vy / 8));
-            ctx.lineWidth = p.size * 0.25;
-            ctx.strokeStyle = `rgba(${p.r},${p.g},${p.b},${displayAlpha * 0.7})`;
+            ctx.lineWidth   = p.size * 0.25;
+            ctx.strokeStyle = `rgba(${p.r},${p.g},${p.b},${a * 0.7})`;
             ctx.stroke();
           }
         }
         ctx.restore();
       });
-
       requestAnimationFrame(paintLoop);
     }
 
-  
+    /* Trigger paint burst on logo click */
+    const logoImg = document.querySelector('.nav-logo-img');
+    if (logoImg) {
+      logoImg.style.cursor = 'pointer';
+      logoImg.addEventListener('click', e => {
+        const rect = logoImg.getBoundingClientRect();
+        spawnPaintBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+        if (!animating) { animating = true; paintLoop(); }
+      });
+    }
   </script>
 
 </body>
