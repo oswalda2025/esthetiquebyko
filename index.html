@@ -76,6 +76,7 @@
     ============================ */
     nav {
   position: fixed;
+  overflow: visible;
   top: 0;
   left: 0;
   right: 0;
@@ -92,7 +93,7 @@
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 
-  border-bottom: 1px solid rgba(0,0,0,0.05);
+  border-bottom: 1px solid rgba(120, 102, 74, 0.10);
   box-shadow: 0 8px 30px rgba(0,0,0,0.04);
   nav::after {
   content: "";
@@ -109,6 +110,47 @@
     rgba(203, 178, 149, 0)
   );
 
+  pointer-events: none;
+}
+nav::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -42px;
+  width: 100%;
+  height: 90px;
+  pointer-events: none;
+  z-index: -1;
+
+  background:
+    radial-gradient(circle at 8% 8%, rgba(181, 140, 103, 0.22) 0 10px, transparent 11px),
+    radial-gradient(circle at 18% 20%, rgba(181, 140, 103, 0.16) 0 7px, transparent 8px),
+    radial-gradient(circle at 31% 10%, rgba(181, 140, 103, 0.18) 0 11px, transparent 12px),
+    radial-gradient(circle at 47% 18%, rgba(181, 140, 103, 0.14) 0 8px, transparent 9px),
+    radial-gradient(circle at 63% 12%, rgba(181, 140, 103, 0.19) 0 10px, transparent 11px),
+    radial-gradient(circle at 79% 22%, rgba(181, 140, 103, 0.15) 0 7px, transparent 8px),
+    radial-gradient(circle at 91% 11%, rgba(181, 140, 103, 0.2) 0 9px, transparent 10px),
+    linear-gradient(to bottom, rgba(203, 178, 149, 0.32), rgba(203, 178, 149, 0));
+  filter: blur(0.2px);
+}
+nav::before {
+  content: "❁   ❃   ❁";
+  position: absolute;
+  right: 5.5rem;
+  bottom: -18px;
+  font-size: 0.8rem;
+  letter-spacing: 1.1rem;
+  color: rgba(120, 102, 74, 0.32);
+  pointer-events: none;
+}
+nav::after {
+  content: "❦   ❦   ❦";
+  position: absolute;
+  right: 5.5rem;
+  bottom: -18px;
+  font-size: 0.8rem;
+  letter-spacing: 1.1rem;
+  color: rgba(120, 102, 74, 0.28);
   pointer-events: none;
 }
 }
