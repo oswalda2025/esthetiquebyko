@@ -221,18 +221,20 @@
 
     /* Gradient veil so left side is legible */
     .hero-text-panel::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to right,
-        rgba(249,246,241,0.75) 0%,
-        rgba(249,246,241,0.4) 30%,
-        rgba(249,246,241,0.1) 55%,
-        rgba(249,246,241,0) 80%
-      );
-      pointer-events: none;
-    }
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    to right,
+    rgba(249,246,241,0.38) 0%,   /* was 0.75 */
+    rgba(249,246,241,0.2) 30%,   /* was 0.4 */
+    rgba(249,246,241,0.05) 55%,  /* was 0.1 */
+    rgba(249,246,241,0) 80%
+  );
+
+  pointer-events: none;
+}
 
     /* Cover image fills the panel */
     .hero-text-bg {
