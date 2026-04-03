@@ -88,10 +88,12 @@
   align-items: center;
   justify-content: space-between;
 
-  background: #f3ede5;
-  backdrop-filter: blur(12px);
+  background: rgba(203, 178, 149, 0.75); /* 🔥 translucent beige */
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
   border-bottom: 1px solid rgba(0,0,0,0.05);
-  box-shadow: 0 2px 20px rgba(26,22,18,0.04);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.04);
 }
 
 
@@ -180,11 +182,7 @@
   mix-blend-mode: multiply;
   opacity: 0.95;
 }
-    nav.scrolled {
-      background: var(--nav-bg);
-      backdrop-filter: blur(18px);
-      box-shadow: 0 1px 0 var(--border);
-    }
+    
     .nav-logo {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 200;
@@ -1435,7 +1433,7 @@
     // ── Navbar scroll ──────────────────────────────────────────
     const nav = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 60);
+      
     }, { passive: true });
 
     // ── Reveal on scroll ──────────────────────────────────────
