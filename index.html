@@ -467,6 +467,7 @@
     .hero-text-panel::after {
   content: "";
   position: absolute;
+
   top: 15%;
   bottom: 15%;
   left: 0;
@@ -478,6 +479,20 @@
     rgba(249, 246, 241, 0.45) 35%,
     rgba(249, 246, 241, 0.16) 70%,
     rgba(249, 246, 241, 0) 100%
+  );
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 12%,
+    black 100%
+  );
+
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 12%,
+    black 100%
   );
 
   pointer-events: none;
