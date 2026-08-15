@@ -84,14 +84,14 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(108, 42, 42, 0.92);
+      background: rgba(178, 148, 100, 0.93);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(80, 25, 25, 0.25);
+      border-bottom: 1px solid rgba(120, 95, 55, 0.3);
       box-shadow:
-        0 8px 30px rgba(0,0,0,0.12),
-        0 0 0 1px rgba(60, 20, 20, 0.18),
-        0 0 28px rgba(80, 20, 20, 0.18);
+        0 8px 30px rgba(0,0,0,0.10),
+        0 0 0 1px rgba(120, 95, 55, 0.15),
+        0 0 28px rgba(120, 95, 55, 0.15);
     }
 
     /* Decorative fade drip below navbar */
@@ -104,9 +104,9 @@
       height: 60px;
       background: linear-gradient(
         to bottom,
-        rgba(108, 42, 42, 0.28),
-        rgba(108, 42, 42, 0.10),
-        rgba(108, 42, 42, 0)
+        rgba(178, 148, 100, 0.26),
+        rgba(178, 148, 100, 0.09),
+        rgba(178, 148, 100, 0)
       );
       pointer-events: none;
       z-index: -1;
@@ -120,7 +120,7 @@
       bottom: -18px;
       font-size: 0.8rem;
       letter-spacing: 1.1rem;
-      color: rgba(200, 150, 150, 0.38);
+      color: rgba(255, 252, 244, 0.45);
       pointer-events: none;
     }
 
@@ -142,7 +142,7 @@
       font-size: 0.8rem;
       letter-spacing: 0.24em;
       text-transform: uppercase;
-      color: rgba(255, 235, 220, 0.82);
+      color: rgba(35, 26, 14, 0.82);
       font-weight: 300;
       transition: color 0.35s ease, text-shadow 0.35s ease;
       white-space: nowrap;
@@ -161,9 +161,9 @@
       /* starts invisible */
       background: radial-gradient(
         ellipse 100% 100% at 50% 50%,
-        rgba(255, 200, 160, 0.22) 0%,
-        rgba(220, 150, 120, 0.14) 45%,
-        rgba(180, 100, 80, 0.06) 70%,
+        rgba(255, 250, 235, 0.55) 0%,
+        rgba(255, 244, 220, 0.32) 45%,
+        rgba(255, 240, 210, 0.12) 70%,
         transparent 100%
       );
 
@@ -186,8 +186,8 @@
 
     .nav-left a:hover,
     .nav-right a:hover {
-      color: #ffffff;
-      text-shadow: 0 0 18px rgba(255, 210, 180, 0.55);
+      color: #000000;
+      text-shadow: 0 0 14px rgba(255, 250, 235, 0.7);
     }
 
     .nav-center {
@@ -201,6 +201,7 @@
       object-fit: contain;
       display: block;
       transition: transform 0.3s ease;
+      mix-blend-mode: multiply;
     }
     .nav-logo-img:hover { transform: scale(1.05); }
 
@@ -536,8 +537,6 @@
     }
     .ph-saree  { background: linear-gradient(145deg, #e8d5c0, #c4a882); }
     .ph-suit   { background: linear-gradient(145deg, #d4cbbf, #a89880); }
-    .ph-shoes  { background: linear-gradient(145deg, #ddd0bf, #b8a090); }
-    .ph-purse  { background: linear-gradient(145deg, #e0d0b8, #c0a878); }
     .ph-jacket { background: linear-gradient(145deg, #cfc4b5, #9e8e7e); }
     .ph-tshirt { background: linear-gradient(145deg, #e4d8c8, #baa888); }
     .ph-hero   { background: linear-gradient(145deg, #c8b89a, #a89070); }
@@ -744,15 +743,14 @@
     ============================ */
     .mosaic {
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr 1fr;
-      grid-template-rows: repeat(2, 42vh);
+      grid-template-columns: repeat(3, 1fr);
       gap: 3px;
     }
     .mosaic-item {
       overflow: hidden;
       position: relative;
+      height: 55vh;
     }
-    .mosaic-item:first-child { grid-row: span 2; }
     .mosaic-item .img-placeholder {
       height: 100%;
       min-height: 240px;
@@ -894,7 +892,7 @@
     .insta-handle:hover { color: var(--ink); }
     .insta-grid {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 3px;
     }
     .insta-cell {
@@ -1005,11 +1003,10 @@
       .about-visual { height: 380px; margin-bottom: 1rem; }
       .process-grid { grid-template-columns: 1fr; gap: 0; }
       .process-grid::before { display: none; }
-      .mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 38vw); }
-      .mosaic-item:first-child { grid-row: span 1; }
+      .mosaic { grid-template-columns: 1fr; height: auto; }
+      .mosaic-item { height: 45vh; }
       .contact { grid-template-columns: 1fr; }
       .insta-grid { grid-template-columns: repeat(3, 1fr); }
-      .insta-cell:nth-child(n+4) { display: none; }
       .form-row { grid-template-columns: 1fr; gap: 0; }
       footer { flex-direction: column; text-align: center; }
     }
@@ -1018,10 +1015,7 @@
       .nav-left, .nav-right { display: none; }
       .three-col { grid-template-columns: 1fr; }
       .three-col-item:nth-child(n+2) { display: none; }
-      .mosaic { grid-template-columns: 1fr; grid-template-rows: auto; }
-      .mosaic-item .img-placeholder { min-height: 60vw; }
-      .insta-grid { grid-template-columns: repeat(2, 1fr); }
-      .insta-cell:nth-child(n+3) { display: none; }
+      .insta-grid { grid-template-columns: repeat(3, 1fr); }
     }
   </style>
 </head>
@@ -1233,7 +1227,8 @@
         <h2 class="section-title reveal reveal-delay-1">Where<br /><em>Craft Meets</em><br />Couture</h2>
         <p class="section-body reveal reveal-delay-2">Ko Esthetique was born from a love of fashion and fine art — and the belief that the two should never be kept apart. Every piece we create is hand-painted from scratch, making each one a singular work of art.</p>
         <p class="section-body reveal reveal-delay-3" style="margin-top:1rem;">We use only the finest American paints — chosen for their vibrancy, permanence, and the way they hold a brushstroke with the confidence of a master's hand.</p>
-        <p class="section-body reveal reveal-delay-4" style="margin-top:1rem;">From silk sarees and elegant suits to shoes, purses, jackets, and t-shirts — if you can wear it, we can paint it.</p>
+        <p class="section-body reveal reveal-delay-4" style="margin-top:1rem;">From silk sarees and elegant suits to jackets and t-shirts — if you can wear it, we can paint it.</p>
+        <p class="section-body reveal reveal-delay-4" style="margin-top:1rem;">Ko Esthetique is run by Komal Oswal, who hand-paints every single piece herself.</p>
         <div class="signature reveal reveal-delay-4">Ko Esthetique</div>
       </div>
     </div>
@@ -1245,12 +1240,6 @@
   <div class="mosaic">
     <div class="mosaic-item">
       <div class="img-placeholder ph-saree" style="height:100%;" data-label="Saree I"></div>
-    </div>
-    <div class="mosaic-item">
-      <div class="img-placeholder ph-shoes" style="height:100%;" data-label="Shoes I"></div>
-    </div>
-    <div class="mosaic-item">
-      <div class="img-placeholder ph-purse" style="height:100%;" data-label="Purse I"></div>
     </div>
     <div class="mosaic-item">
       <div class="img-placeholder ph-jacket" style="height:100%;" data-label="Jacket I"></div>
@@ -1316,14 +1305,6 @@
         <div class="insta-overlay"></div>
       </div>
       <div class="insta-cell">
-        <div class="img-placeholder ph-purse" style="height:100%;" data-label=""></div>
-        <div class="insta-overlay"></div>
-      </div>
-      <div class="insta-cell">
-        <div class="img-placeholder ph-shoes" style="height:100%;" data-label=""></div>
-        <div class="insta-overlay"></div>
-      </div>
-      <div class="insta-cell">
         <div class="img-placeholder ph-tshirt" style="height:100%;" data-label=""></div>
         <div class="insta-overlay"></div>
       </div>
@@ -1341,11 +1322,11 @@
         <p class="section-body reveal reveal-delay-2" style="margin: 1rem 0 2.5rem;">Reach out for custom orders, collaborations, or simply to say hello. We'd love to hear from you.</p>
 
         <div class="contact-links">
-          <a href="/cdn-cgi/l/email-protection#cba0a4a6aaa7a4b8bcaaa78baca6aaa2a7e5a8a4a6" class="contact-link reveal reveal-delay-2">
+          <a href="mailto:komaloswal@gmail.com" class="contact-link reveal reveal-delay-2">
             <div class="contact-link-icon">✉</div>
             <div class="contact-link-text">
               <div class="contact-link-label">Email</div>
-              <div class="contact-link-val"><span class="__cf_email__" data-cfemail="244f4b4945484b57534548644349454d480a474b49">[email&#160;protected]</span></div>
+              <div class="contact-link-val">komaloswal@gmail.com</div>
             </div>
           </a>
           <a href="tel:+919872856625" class="contact-link reveal reveal-delay-3">
@@ -1388,8 +1369,11 @@
           Send Message <span>→</span>
         </button>
         <div id="formSuccess" style="display:none; margin-top:1rem; font-size:0.75rem; letter-spacing:0.1em; color:var(--accent); font-weight:300;">
-          ✓ Thank you — we'll be in touch soon.
+          ✓ Your email app should now be open with your message ready to send.
         </div>
+        <p style="margin-top:1.5rem; font-size:0.75rem; line-height:1.9; color:var(--ink-light); font-weight:300; letter-spacing:0.03em;">
+          To start an order, please text us on WhatsApp or give us a call at <strong style="color:var(--ink); font-weight:400;">+91 98728 56625</strong> — it's the fastest way to begin.
+        </p>
       </form>
     </div>
   </section>
@@ -1403,7 +1387,7 @@
       <li><a href="#collections">Collections</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#custom">Custom Orders</a></li>
-      <li><a href="/cdn-cgi/l/email-protection#93f8fcfef2fffce0e4f2ffd3f4fef2faffbdf0fcfe">Contact</a></li>
+      <li><a href="mailto:komaloswal@gmail.com">Contact</a></li>
     </ul>
     <div class="footer-copy">© 2025 Ko Esthetique. All rights reserved.</div>
   </footer>
@@ -1472,8 +1456,21 @@
     applyParallax();
 
     // ── Contact form ──────────────────────────────────────────
+    // Static sites have no backend to send mail from, so this
+    // opens the visitor's own email app with everything pre-filled
+    // and addressed to the studio — the closest a no-backend site
+    // can get to an actual "send".
     function handleSubmit(e) {
       e.preventDefault();
+      const name    = document.getElementById('fname').value;
+      const email   = document.getElementById('femail').value;
+      const subject = document.getElementById('fsubject').value || 'New Inquiry — Ko Esthetique';
+      const message = document.getElementById('fmessage').value;
+
+      const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
+      const mailtoLink = `mailto:komaloswal@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailtoLink;
+
       document.getElementById('formSuccess').style.display = 'block';
       e.target.reset();
     }
