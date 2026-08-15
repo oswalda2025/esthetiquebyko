@@ -1094,16 +1094,13 @@ mask-image: linear-gradient(
     }
 
     /* Blend photos softly into their placeholder cubes:
-       feather the edges so each photo fades into the
+       feather the edges so the banner photo fades into the
        surrounding neutral tone instead of ending in a
-       hard rectangle. */
+       hard rectangle. (Mosaic/Instagram/About photos are
+       shown at full crop, no blend.) */
 
     .split-image,
-    .mosaic-item,
-    .insta-cell,
-    .banner-wide,
-    .about-img-main,
-    .about-img-accent {
+    .banner-wide {
       background: var(--cube-1);
     }
 
@@ -1112,11 +1109,7 @@ mask-image: linear-gradient(
       position: relative;
     }
 
-    .mosaic-item .img-placeholder,
-    .insta-cell .img-placeholder,
-    .banner-wide .img-placeholder,
-    .about-img-main img,
-    .about-img-accent img {
+    .banner-wide .img-placeholder {
 
       -webkit-mask-image:
         linear-gradient(
@@ -1158,8 +1151,6 @@ mask-image: linear-gradient(
     /* A faint inner glow ties the feathered edge back to
        the cube color without darkening the photo itself. */
 
-    .mosaic-item::after,
-    .insta-cell::after,
     .banner-wide::after {
       content: "";
 
@@ -2323,15 +2314,17 @@ mask-image: linear-gradient(
 
       .about {
         padding-top: clamp(4rem, 12vw, 6rem);
+
+        row-gap: 2rem;
       }
 
       .about-visual {
-        height: 320px;
+        height: auto;
       }
 
       .about-img-main {
         width: 100%;
-        height: 100%;
+        height: 260px;
         position: relative;
         top: auto;
         left: auto;
@@ -2339,6 +2332,14 @@ mask-image: linear-gradient(
 
       .about-img-accent {
         display: none;
+      }
+
+      .about-stat {
+        margin-top: 1.5rem;
+
+        flex-wrap: wrap;
+
+        row-gap: 1rem;
       }
 
       .insta-grid {
@@ -3077,19 +3078,6 @@ mask-image: linear-gradient(
 
             <div class="stat-label">
               Unique Pieces
-            </div>
-
-          </div>
-
-
-          <div class="stat-item">
-
-            <div class="stat-num">
-              US
-            </div>
-
-            <div class="stat-label">
-              Premium Paints
             </div>
 
           </div>
