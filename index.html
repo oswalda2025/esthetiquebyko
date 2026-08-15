@@ -344,9 +344,21 @@
   mix-blend-mode: normal;
   background: transparent;
   transition: transform 0.3s ease;
+  pointer-events: none;
 }
     .nav-logo-img:hover {
       transform: scale(1.05);
+    }
+
+    .logo-hit-area {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 260px;
+      height: 150px;
+      z-index: 5;
+      cursor: pointer;
     }
 
 
@@ -1012,97 +1024,6 @@ mask-image: linear-gradient(
   object-position: center;
   background: #f9f6f1;
 }
-
-
-    /* ============================
-       TWO-ITEM GALLERY
-    ============================ */
-
-    .three-col {
-      display: grid;
-
-      grid-template-columns:
-        repeat(2, 1fr);
-
-      gap: 2px;
-    }
-
-
-    .three-col-item {
-      position: relative;
-
-      overflow: hidden;
-
-      height: 65vh;
-
-      min-height: 380px;
-    }
-
-
-    .three-col-item
-    .img-placeholder {
-      height: 100%;
-
-      transition:
-        transform 0.7s cubic-bezier(
-          0.16,
-          1,
-          0.3,
-          1
-        );
-    }
-
-
-    .three-col-item:hover
-    .img-placeholder {
-      transform: scale(1.05);
-    }
-
-
-    .three-col-caption {
-      position: absolute;
-
-      bottom: 0;
-      left: 0;
-      right: 0;
-
-      padding:
-        2rem 1.5rem 1.5rem;
-
-      background:
-        linear-gradient(
-          to top,
-          rgba(16, 14, 12, 0.6),
-          transparent
-        );
-
-      color: #f9f6f1;
-
-      font-size: 0.65rem;
-
-      letter-spacing: 0.2em;
-
-      text-transform: uppercase;
-
-      font-weight: 200;
-
-      transform:
-        translateY(8px);
-
-      opacity: 0;
-
-      transition:
-        opacity 0.4s,
-        transform 0.4s;
-    }
-
-
-    .three-col-item:hover
-    .three-col-caption {
-      opacity: 1;
-
-      transform: translateY(0);
-    }
 
 
     /* ============================
@@ -2138,6 +2059,10 @@ mask-image: linear-gradient(
         height: 280px;
       }
 
+      .logo-hit-area {
+        height: 100px;
+      }
+
       #glitter-canvas {
         height: 100px;
       }
@@ -2176,11 +2101,6 @@ mask-image: linear-gradient(
       .split-content {
         padding:
           clamp(2rem, 5vw, 3.5rem);
-      }
-
-      .three-col {
-        grid-template-columns:
-          1fr 1fr;
       }
 
       .about {
@@ -2242,10 +2162,6 @@ mask-image: linear-gradient(
       .nav-left,
       .nav-right {
         display: none;
-      }
-
-      .three-col {
-        grid-template-columns: 1fr;
       }
 
       .insta-grid {
@@ -2328,17 +2244,17 @@ mask-image: linear-gradient(
 
     <div class="nav-center">
 
+      <img
+        src="profilepic3.png"
+        alt="Ko Esthetique Logo"
+        class="nav-logo-img"
+      />
+
       <a
         href="#home"
         id="logoHomeLink"
-        aria-label="Go to top">
-
-        <img
-          src="profilepic3.png"
-          alt="Ko Esthetique Logo"
-          class="nav-logo-img"
-        />
-
+        aria-label="Go to top"
+        class="logo-hit-area">
       </a>
 
     </div>
@@ -2690,46 +2606,6 @@ mask-image: linear-gradient(
         </div>
 
       </div>
-
-    </div>
-
-
-    <!-- ============================
-         GALLERY
-    ============================ -->
-
-    <div class="three-col">
-
-
-      <div class="three-col-item">
-
-        <img
-          src="photo2.png"
-          alt="Jacket Detail"
-          class="img-placeholder"
-        />
-
-        <div class="three-col-caption">
-          Painted Jackets
-        </div>
-
-      </div>
-
-
-      <div class="three-col-item">
-
-        <img
-          src="photo3.png"
-          alt="T-Shirt Detail"
-          class="img-placeholder photo3"
-        />
-
-        <div class="three-col-caption">
-          Painted Tees
-        </div>
-
-      </div>
-
 
     </div>
 
