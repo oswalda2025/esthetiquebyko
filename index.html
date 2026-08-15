@@ -163,7 +163,7 @@
 
       overflow: visible;
 
-      background: rgba(223, 167, 167, 0.94);
+      background: rgba(0, 0, 0, 0.94);
 
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
@@ -173,7 +173,7 @@
     }
 
 
-    /* Soft pink fade into hero */
+    /* Soft fade into hero */
 
     nav::after {
   content: "";
@@ -189,10 +189,10 @@
 
   background: linear-gradient(
     to bottom,
-    rgba(223, 167, 167, 0.92) 0%,
-    rgba(223, 167, 167, 0.55) 40%,
-    rgba(223, 167, 167, 0.2) 72%,
-    rgba(223, 167, 167, 0) 100%
+    rgba(0, 0, 0, 0.92) 0%,
+    rgba(0, 0, 0, 0.55) 40%,
+    rgba(0, 0, 0, 0.2) 72%,
+    rgba(0, 0, 0, 0) 100%
   );
 }
 
@@ -257,7 +257,7 @@
 
       text-transform: uppercase;
 
-      color: rgba(35, 26, 14, 0.82);
+      color: rgba(255, 255, 255, 0.82);
 
       font-weight: 300;
 
@@ -286,9 +286,9 @@
 
       background: radial-gradient(
         ellipse 100% 100% at 50% 50%,
-        rgba(255, 245, 245, 0.55) 0%,
-        rgba(255, 235, 235, 0.32) 45%,
-        rgba(255, 225, 225, 0.12) 70%,
+        rgba(255, 255, 255, 0.55) 0%,
+        rgba(255, 255, 255, 0.32) 45%,
+        rgba(255, 255, 255, 0.12) 70%,
         transparent 100%
       );
 
@@ -319,10 +319,10 @@
 
     .nav-left a:hover,
     .nav-right a:hover {
-      color: #000000;
+      color: #ffffff;
 
       text-shadow:
-        0 0 14px rgba(255, 245, 245, 0.75);
+        0 0 14px rgba(255, 255, 255, 0.75);
     }
 
 
@@ -337,6 +337,8 @@
       transform: translate(-50%, -50%);
 
       z-index: 4;
+
+      background: #000;
     }
 
     .nav-logo-img {
@@ -346,7 +348,9 @@
 
       display: block;
 
-      mix-blend-mode: multiply;
+      mix-blend-mode: normal;
+
+      background: #000;
 
       transition: transform 0.3s ease;
     }
@@ -1445,9 +1449,9 @@
       padding:
         1.1rem 3rem;
 
-      background: var(--ink);
+      background: #000000;
 
-      color: var(--bg);
+      color: #ffffff;
 
       font-size: 0.65rem;
 
@@ -1460,18 +1464,25 @@
       cursor: pointer;
 
       border:
-        1px solid transparent;
+        1px solid #000000;
 
       transition:
         background 0.4s,
-        color 0.4s;
+        color 0.4s,
+        box-shadow 0.4s;
     }
 
 
     .btn-dark:hover {
-      background: var(--accent);
+      background: #000000;
 
-      color: #f9f6f1;
+      color: #ffffff;
+
+      box-shadow:
+        -6px -6px 18px -4px rgba(255, 255, 255, 0.55),
+        6px -6px 18px -4px rgba(255, 255, 255, 0.55),
+        -6px 6px 18px -4px rgba(255, 255, 255, 0.55),
+        6px 6px 18px -4px rgba(255, 255, 255, 0.55);
     }
 
 
@@ -1879,9 +1890,9 @@
       padding:
         1.1rem 2.5rem;
 
-      background: var(--ink);
+      background: #000000;
 
-      color: var(--bg);
+      color: #ffffff;
 
       font-size: 0.65rem;
 
@@ -1894,7 +1905,7 @@
       cursor: pointer;
 
       border:
-        1px solid transparent;
+        1px solid #000000;
 
       align-self: flex-start;
 
@@ -1903,14 +1914,21 @@
       transition:
         background 0.4s,
         color 0.4s,
+        box-shadow 0.4s,
         transform 0.2s;
     }
 
 
     .form-submit:hover {
-      background: var(--accent);
+      background: #000000;
 
-      color: #f9f6f1;
+      color: #ffffff;
+
+      box-shadow:
+        -6px -6px 18px -4px rgba(255, 255, 255, 0.55),
+        6px -6px 18px -4px rgba(255, 255, 255, 0.55),
+        -6px 6px 18px -4px rgba(255, 255, 255, 0.55),
+        6px 6px 18px -4px rgba(255, 255, 255, 0.55);
     }
 
 
@@ -2352,9 +2370,12 @@
     class="hero"
     id="home">
 
-    <div
-      class="hero-img ph-hero img-placeholder"
-      data-label="">
+    <div class="hero-img">
+      <img
+        src="photo1.png"
+        alt="Ko Esthetique hero background"
+        style="width:100%;height:100%;"
+      />
     </div>
 
 
@@ -2685,10 +2706,11 @@
 
       <div class="three-col-item">
 
-        <div
-          class="img-placeholder ph-jacket"
-          data-label="Jacket Detail">
-        </div>
+        <img
+          src="photo2.png"
+          alt="Jacket Detail"
+          class="img-placeholder"
+        />
 
         <div class="three-col-caption">
           Painted Jackets
@@ -2699,10 +2721,11 @@
 
       <div class="three-col-item">
 
-        <div
-          class="img-placeholder ph-tshirt"
-          data-label="T-Shirt Detail">
-        </div>
+        <img
+          src="photo3.png"
+          alt="T-Shirt Detail"
+          class="img-placeholder"
+        />
 
         <div class="three-col-caption">
           Painted Tees
@@ -2723,10 +2746,11 @@
       <div
         class="split-image parallax-host">
 
-        <div
-          class="img-placeholder ph-jacket parallax-inner"
-          data-label="Jacket Collection">
-        </div>
+        <img
+          src="photo4.png"
+          alt="Jacket Collection"
+          class="img-placeholder parallax-inner"
+        />
 
       </div>
 
@@ -2800,10 +2824,11 @@
       <div
         class="split-image parallax-host">
 
-        <div
-          class="img-placeholder ph-tshirt parallax-inner"
-          data-label="T-Shirt Collection">
-        </div>
+        <img
+          src="photo5.png"
+          alt="T-Shirt Collection"
+          class="img-placeholder parallax-inner"
+        />
 
       </div>
 
@@ -2880,10 +2905,11 @@
   <div
     class="banner-wide parallax-host">
 
-    <div
-      class="img-placeholder ph-hero parallax-inner"
-      data-label="">
-    </div>
+    <img
+      src="photo6.png"
+      alt="Ko Esthetique banner"
+      class="img-placeholder parallax-inner"
+    />
 
 
     <div class="banner-overlay">
@@ -2915,28 +2941,22 @@
 
         <div class="about-img-main">
 
-          <div
-            class="img-placeholder ph-saree"
-            style="
-              height:100%;
-              min-height:400px;
-            "
-            data-label="The Artist at Work">
-          </div>
+          <img
+            src="photo7.png"
+            alt="The Artist at Work"
+            style="height:100%;min-height:400px;"
+          />
 
         </div>
 
 
         <div class="about-img-accent">
 
-          <div
-            class="img-placeholder ph-suit"
-            style="
-              height:100%;
-              min-height:200px;
-            "
-            data-label="Detail">
-          </div>
+          <img
+            src="photo8.png"
+            alt="Detail"
+            style="height:100%;min-height:200px;"
+          />
 
         </div>
 
@@ -3090,33 +3110,36 @@
 
     <div class="mosaic-item">
 
-      <div
-        class="img-placeholder ph-saree"
+      <img
+        src="photo9.png"
+        alt="Saree I"
+        class="img-placeholder"
         style="height:100%;"
-        data-label="Saree I">
-      </div>
+      />
 
     </div>
 
 
     <div class="mosaic-item">
 
-      <div
-        class="img-placeholder ph-jacket"
+      <img
+        src="photo10.png"
+        alt="Jacket I"
+        class="img-placeholder"
         style="height:100%;"
-        data-label="Jacket I">
-      </div>
+      />
 
     </div>
 
 
     <div class="mosaic-item">
 
-      <div
-        class="img-placeholder ph-tshirt"
+      <img
+        src="photo11.png"
+        alt="Tee I"
+        class="img-placeholder"
         style="height:100%;"
-        data-label="Tee I">
-      </div>
+      />
 
     </div>
 
@@ -3313,11 +3336,12 @@
 
       <div class="insta-cell">
 
-        <div
-          class="img-placeholder ph-saree"
+        <img
+          src="photo12.png"
+          alt="Instagram post 1"
+          class="img-placeholder"
           style="height:100%;"
-          data-label="">
-        </div>
+        />
 
         <div class="insta-overlay">
         </div>
@@ -3327,11 +3351,12 @@
 
       <div class="insta-cell">
 
-        <div
-          class="img-placeholder ph-jacket"
+        <img
+          src="photo13.png"
+          alt="Instagram post 2"
+          class="img-placeholder"
           style="height:100%;"
-          data-label="">
-        </div>
+        />
 
         <div class="insta-overlay">
         </div>
@@ -3341,11 +3366,12 @@
 
       <div class="insta-cell">
 
-        <div
-          class="img-placeholder ph-tshirt"
+        <img
+          src="photo14.png"
+          alt="Instagram post 3"
+          class="img-placeholder"
           style="height:100%;"
-          data-label="">
-        </div>
+        />
 
         <div class="insta-overlay">
         </div>
@@ -4837,24 +4863,6 @@ ${message}`;
 
 
           gctx.restore();
-
-
-          f.y +=
-            f.speed;
-
-
-          f.x +=
-            f.drift;
-
-
-          if (
-            f.y >
-            gc.height + 4
-          ) {
-
-            randomFlake(f);
-
-          }
 
 
         }
