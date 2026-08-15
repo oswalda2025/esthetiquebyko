@@ -31,6 +31,11 @@
       --card-bg: #f2ece3;
       --border: rgba(26, 22, 18, 0.08);
       --transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+      --cube-1: #f6f1ea;
+      --cube-2: #e8ddd0;
+      --cube-3: #e3d2ce;
+      --cube-4: #cfc3b7;
     }
 
 
@@ -359,6 +364,93 @@
       height: 150px;
       z-index: 5;
       cursor: pointer;
+    }
+
+
+    /* ============================
+       MOBILE MENU TOGGLE
+    ============================ */
+
+    .nav-toggle {
+      display: none;
+
+      position: relative;
+      z-index: 6;
+
+      width: 42px;
+      height: 42px;
+
+      align-items: center;
+      justify-content: center;
+
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 50%;
+
+      color: rgba(255, 255, 255, 0.9);
+
+      font-size: 1.3rem;
+      letter-spacing: 0.15em;
+
+      cursor: pointer;
+
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .nav-toggle:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .nav-toggle span {
+      pointer-events: none;
+      transform: translateY(-2px);
+    }
+
+
+    .mobile-menu {
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 998;
+
+      background: rgba(0, 0, 0, 0.97);
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      gap: 2.2rem;
+
+      opacity: 0;
+      visibility: hidden;
+
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    .mobile-menu.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-menu a {
+      font-size: 1.1rem;
+
+      letter-spacing: 0.28em;
+
+      text-transform: uppercase;
+
+      color: rgba(255, 255, 255, 0.88);
+
+      font-weight: 300;
+
+      transition: color 0.3s;
+    }
+
+    .mobile-menu a:hover {
+      color: var(--accent);
     }
 
 
@@ -972,58 +1064,112 @@ mask-image: linear-gradient(
 
 
     .ph-saree {
-      background:
-        linear-gradient(
-          145deg,
-          #e8d5c0,
-          #c4a882
-        );
+      background: var(--cube-1);
     }
 
 
     .ph-suit {
-      background:
-        linear-gradient(
-          145deg,
-          #d4cbbf,
-          #a89880
-        );
+      background: var(--cube-2);
     }
 
 
     .ph-jacket {
-      background:
-        linear-gradient(
-          145deg,
-          #cfc4b5,
-          #9e8e7e
-        );
+      background: var(--cube-3);
     }
 
 
     .ph-tshirt {
-      background:
-        linear-gradient(
-          145deg,
-          #e4d8c8,
-          #baa888
-        );
+      background: var(--cube-4);
     }
 
 
     .ph-hero {
-      background:
-        linear-gradient(
-          145deg,
-          #c8b89a,
-          #a89070
-        );
+      background: var(--cube-2);
     }
+
     .photo3 {
-  object-fit: contain;
-  object-position: center;
-  background: #f9f6f1;
-}
+      object-fit: contain;
+      object-position: center;
+      background: #f9f6f1;
+    }
+
+    /* Blend photos softly into their placeholder cubes:
+       feather the edges so each photo fades into the
+       surrounding neutral tone instead of ending in a
+       hard rectangle. */
+
+    .split-image,
+    .mosaic-item,
+    .insta-cell,
+    .banner-wide,
+    .about-img-main,
+    .about-img-accent {
+      background: var(--cube-1);
+    }
+
+    .mosaic-item,
+    .insta-cell {
+      position: relative;
+    }
+
+    .mosaic-item .img-placeholder,
+    .insta-cell .img-placeholder,
+    .banner-wide .img-placeholder,
+    .about-img-main img,
+    .about-img-accent img {
+
+      -webkit-mask-image:
+        linear-gradient(
+          to right,
+          transparent 0%,
+          black 8%,
+          black 92%,
+          transparent 100%
+        ),
+        linear-gradient(
+          to bottom,
+          transparent 0%,
+          black 8%,
+          black 92%,
+          transparent 100%
+        );
+
+      -webkit-mask-composite: destination-in;
+
+      mask-image:
+        linear-gradient(
+          to right,
+          transparent 0%,
+          black 8%,
+          black 92%,
+          transparent 100%
+        ),
+        linear-gradient(
+          to bottom,
+          transparent 0%,
+          black 8%,
+          black 92%,
+          transparent 100%
+        );
+
+      mask-composite: intersect;
+    }
+
+    /* A faint inner glow ties the feathered edge back to
+       the cube color without darkening the photo itself. */
+
+    .mosaic-item::after,
+    .insta-cell::after,
+    .banner-wide::after {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      pointer-events: none;
+
+      box-shadow: inset 0 0 40px 6px rgba(249, 246, 241, 0.3);
+    }
 
 
     /* ============================
@@ -2164,6 +2310,37 @@ mask-image: linear-gradient(
         display: none;
       }
 
+      .nav-toggle {
+        display: flex;
+
+        position: absolute;
+
+        right: 1.25rem;
+        top: 50%;
+
+        transform: translateY(-50%);
+      }
+
+      .about {
+        padding-top: clamp(4rem, 12vw, 6rem);
+      }
+
+      .about-visual {
+        height: 320px;
+      }
+
+      .about-img-main {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        top: auto;
+        left: auto;
+      }
+
+      .about-img-accent {
+        display: none;
+      }
+
       .insta-grid {
         grid-template-columns:
           repeat(3, 1fr);
@@ -2272,7 +2449,49 @@ mask-image: linear-gradient(
 
     </div>
 
+
+    <button
+      class="nav-toggle"
+      id="navToggle"
+      aria-label="Open menu"
+      aria-expanded="false">
+
+      <span>
+        ⋮
+      </span>
+
+    </button>
+
   </nav>
+
+
+  <!-- Mobile full-screen menu -->
+
+  <div
+    class="mobile-menu"
+    id="mobileMenu">
+
+    <a href="#home" class="mobile-menu-link">
+      Home
+    </a>
+
+    <a href="#collections" class="mobile-menu-link">
+      Collections
+    </a>
+
+    <a href="#about" class="mobile-menu-link">
+      About
+    </a>
+
+    <a href="#custom" class="mobile-menu-link">
+      Custom Orders
+    </a>
+
+    <a href="#contact" class="mobile-menu-link">
+      Contact
+    </a>
+
+  </div>
 
 
   <!-- ============================
@@ -3749,6 +3968,53 @@ mask-image: linear-gradient(
 
       }
     );
+
+
+    /* ============================
+       MOBILE MENU
+    ============================ */
+
+    const navToggle =
+      document.getElementById('navToggle');
+
+    const mobileMenu =
+      document.getElementById('mobileMenu');
+
+
+    function closeMobileMenu() {
+
+      mobileMenu.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+
+    }
+
+
+    navToggle.addEventListener(
+      'click',
+      () => {
+
+        const isOpen =
+          mobileMenu.classList.toggle('open');
+
+        navToggle.setAttribute(
+          'aria-expanded',
+          isOpen ? 'true' : 'false'
+        );
+
+      }
+    );
+
+
+    mobileMenu
+      .querySelectorAll('a')
+      .forEach(link => {
+
+        link.addEventListener(
+          'click',
+          closeMobileMenu
+        );
+
+      });
 
 
     /* ============================
