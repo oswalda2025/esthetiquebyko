@@ -393,20 +393,17 @@
     .hero-img {
       position: absolute;
       inset: 0;
-      padding-top: 150px;
-      padding-bottom: 0;
+      overflow: hidden;
       background: var(--bg);
-      display: flex;
-      justify-content: flex-end;
-      align-items: flex-end;
     }
 
     .hero-img img {
-      width: auto;
+      width: 100%;
       height: 100%;
-      max-width: 100%;
-      object-fit: contain;
-      object-position: right bottom;
+      object-fit: cover;
+      object-position: right 22%;
+      transform: scale(1.2);
+      transform-origin: 100% 0%;
     }
 
     .hero-text-veil {
@@ -487,39 +484,6 @@
       0%, 100% { opacity: 0.3; }
       50% { opacity: 1; }
     }
-
-
-    /* ============================
-       ART OF MAKING (split)
-    ============================ */
-
-    .making {
-      display: grid;
-      grid-template-columns: 1fr 1.15fr;
-      min-height: 68vh;
-    }
-
-    .making-content {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: clamp(3rem, 7vw, 6.5rem);
-    }
-
-    .making-content .heading { margin-bottom: 1.1rem; }
-    .making-content .body-text { margin-bottom: 1.8rem; }
-
-    .making-image {
-      position: relative;
-      overflow: hidden;
-      background: var(--bg-2);
-    }
-
-    .making-image img {
-      transition: transform 0.9s cubic-bezier(0.16,1,0.3,1);
-    }
-
-    .making-image:hover img { transform: scale(1.045); }
 
 
     /* ============================
@@ -912,13 +876,9 @@
       nav { height: 96px; padding: 0 1.5rem; }
       nav::after { bottom: -44px; height: 44px; }
       #glitter-canvas { height: 96px; }
-      .hero-img { padding-top: 110px; }
 
       .nav-left, .nav-right { gap: 1.3rem; width: auto; }
       .nav-left a:nth-child(3), .nav-right a:nth-child(3) { display: none; }
-
-      .making { grid-template-columns: 1fr; }
-      .making-image { min-height: 380px; }
 
       .collections-grid { grid-template-columns: repeat(3, 1fr); }
       .craft-grid { grid-template-columns: repeat(3, 1fr); row-gap: 2rem; }
@@ -951,7 +911,7 @@
       }
 
       .hero { height: 82svh; min-height: 560px; }
-      .hero-img { padding-top: 100px; justify-content: center; }
+      .hero-img img { object-position: right 12%; transform: scale(1.15); }
       .hero-inner { padding-left: 1.5rem; padding-right: 1.5rem; max-width: 100%; }
       .hero-headline { font-size: clamp(2.2rem, 9vw, 3rem); }
       .hero-text-veil {
@@ -1069,32 +1029,6 @@
     <div class="hero-scroll-hint">
       <div class="scroll-line"></div>
       <span>Scroll</span>
-    </div>
-
-  </section>
-
-
-  <!-- ============================
-       THE ART OF MAKING
-  ============================ -->
-
-  <section class="making">
-
-    <div class="making-content">
-      <p class="eyebrow reveal">Our Philosophy</p>
-      <h2 class="heading upper reveal reveal-delay-1">The Art of Making</h2>
-      <p class="body-text reveal reveal-delay-2">
-        Every piece begins as a canvas of fabric and evolves
-        through colour, texture, embroidery and embellishment —
-        layered by hand to create something uniquely yours.
-      </p>
-      <a href="#craft" class="link-arrow reveal reveal-delay-3">
-        Discover the Craft <span>→</span>
-      </a>
-    </div>
-
-    <div class="making-image">
-      <img src="photo3.png" alt="Hand-painting detail on fabric" />
     </div>
 
   </section>
