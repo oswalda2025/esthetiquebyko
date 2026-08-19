@@ -528,10 +528,11 @@
     }
 
     .hero-img img {
-  width: 72%;
+  width: auto;
   height: 100%;
-  object-fit: cover;
-  object-position: center top;
+  max-width: 96%;
+  object-fit: contain;
+  object-position: right center;
 }
 
 
@@ -541,13 +542,7 @@
       position: absolute;
       inset: 0;
 
-      background:
-        linear-gradient(
-          to top,
-          rgba(26, 22, 18, 0.55) 0%,
-          rgba(26, 22, 18, 0.1) 50%,
-          transparent 100%
-        );
+      pointer-events: none;
     }
 
 
@@ -2533,16 +2528,16 @@ mask-image: linear-gradient(
 
         <div class="hero-diagonal">
 
-          <span class="hero-esth">
-            Esthetique
+          <span class="hero-esth" style="font-size: clamp(2.2rem, 3.6vw, 3.4rem); font-family: 'Cormorant Garamond', serif; font-style: italic; line-height: 1.25;">
+            Wearable Art • Handcrafted Couture
           </span>
 
-          <span class="hero-by">
-            by
+          <span class="hero-by" style="letter-spacing: 0.18em; margin-left: 0.2rem; font-size: 0.85rem;">
+            Hand-painted | Hand-embroidered | Bespoke
           </span>
 
-          <span class="hero-name">
-            Komal Oswal
+          <span class="hero-name" style="margin-left: 0.2rem; margin-top: 0.6rem;">
+            by Komal Oswal
           </span>
 
         </div>
