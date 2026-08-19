@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Ko Esthetique — Wearable Art</title>
+  <title>KO Esthètique — Wearable Art, Crafted Differently</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&family=Jost:wght@100;200;300;400&family=Imperial+Script&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300;1,400&family=Jost:wght@100;200;300;400;500&display=swap"
     rel="stylesheet"
   />
 
@@ -23,19 +23,14 @@
     :root {
       --bg: #f9f6f1;
       --bg-2: #f2ece3;
+      --bg-3: #efe6d9;
       --ink: #1a1612;
       --ink-light: #6b5f52;
       --accent: #c8a97e;
       --accent-soft: #e8d9c5;
       --white: #ffffff;
-      --card-bg: #f2ece3;
-      --border: rgba(26, 22, 18, 0.08);
+      --border: rgba(26, 22, 18, 0.09);
       --transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-
-      --cube-1: #f6f1ea;
-      --cube-2: #e8ddd0;
-      --cube-3: #e3d2ce;
-      --cube-4: #cfc3b7;
     }
 
 
@@ -43,9 +38,7 @@
        RESET
     ============================ */
 
-    *,
-    *::before,
-    *::after {
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -71,16 +64,8 @@
       object-fit: cover;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    input,
-    textarea,
-    button {
-      font-family: inherit;
-    }
+    a { text-decoration: none; color: inherit; }
+    input, textarea, button { font-family: inherit; }
 
 
     /* ============================
@@ -88,46 +73,28 @@
     ============================ */
 
     .cursor {
-  position: fixed;
-  z-index: 9999;
-
-  width: 6px;
-  height: 6px;
-
-  background: rgba(120, 88, 62, 0.55);
+      position: fixed;
+      z-index: 9999;
+      width: 6px;
+      height: 6px;
+      background: rgba(120, 88, 62, 0.55);
       border-radius: 50%;
-
       pointer-events: none;
-
       transform: translate(-50%, -50%);
-
-      transition:
-        width 0.3s,
-        height 0.3s,
-        opacity 0.3s;
-
+      transition: width 0.3s, height 0.3s, opacity 0.3s;
       mix-blend-mode: multiply;
     }
 
     .cursor-ring {
       position: fixed;
       z-index: 9998;
-
       width: 28px;
       height: 28px;
-
       border: 1px solid rgba(120, 88, 62, 0.28);
       border-radius: 50%;
-
       pointer-events: none;
-
       transform: translate(-50%, -50%);
-
-      transition:
-        transform 0.12s ease,
-        width 0.3s,
-        height 0.3s;
-
+      transition: transform 0.12s ease, width 0.3s, height 0.3s;
       opacity: 0.5;
     }
 
@@ -138,10 +105,7 @@
     }
 
     @media (hover: none) {
-      .cursor,
-      .cursor-ring {
-        display: none;
-      }
+      .cursor, .cursor-ring { display: none; }
     }
 
 
@@ -151,350 +115,267 @@
 
     nav {
       position: fixed;
-
-      top: 0;
-      left: 0;
-      right: 0;
-
+      top: 0; left: 0; right: 0;
       z-index: 1000;
-
-      height: 150px;
-
+      height: 130px;
       padding: 0 5.5rem;
-
       display: flex;
       align-items: center;
       justify-content: space-between;
-
       overflow: visible;
-
       background: linear-gradient(
         to bottom,
-        rgba(249, 246, 241, 0.58) 0%,
-        rgba(249, 246, 241, 0.58) 75%,
+        rgba(249, 246, 241, 0.62) 0%,
+        rgba(249, 246, 241, 0.62) 75%,
         rgba(249, 246, 241, 0) 100%
       );
-
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
-
-      border-bottom: none;
-      box-shadow: none;
     }
-
-
-    /* Soft fade into hero: continues the navbar's own
-       fade (which starts at 75% of its height / the last
-       25% nearest its base) further down so the translucent
-       tint blends all the way into the cover photo. */
 
     nav::after {
-  content: "";
-  position: absolute;
-
-  left: 0;
-  right: 0;
-  bottom: -64px;
-
-  height: 64px;
-
-  pointer-events: none;
-
-  background: linear-gradient(
-    to bottom,
-    rgba(249, 246, 241, 0.16) 0%,
-    rgba(249, 246, 241, 0.07) 45%,
-    rgba(249, 246, 241, 0) 100%
-  );
-}
-
-    /* Decorative flowers */
-
-    nav::before {
-      content: "❁   ❃   ❁";
-
+      content: "";
       position: absolute;
-
-      right: 5.5rem;
-      bottom: -18px;
-
-      font-size: 0.8rem;
-      letter-spacing: 1.1rem;
-
-      color: rgba(26, 22, 18, 0.32);
-
+      left: 0; right: 0; bottom: -56px;
+      height: 56px;
       pointer-events: none;
-
-      z-index: 2;
+      background: linear-gradient(
+        to bottom,
+        rgba(249, 246, 241, 0.14) 0%,
+        rgba(249, 246, 241, 0.06) 45%,
+        rgba(249, 246, 241, 0) 100%
+      );
     }
 
-
-    .nav-left,
-    .nav-right {
+    .nav-left, .nav-right {
       display: flex;
       align-items: center;
-
-      gap: 3.2rem;
-
-      width: 33%;
-
+      gap: 2.6rem;
+      width: 38%;
       position: relative;
       z-index: 3;
     }
 
-    .nav-left {
-      justify-content: flex-start;
-      padding-left: 1.5rem;
-    }
+    .nav-left { justify-content: flex-start; }
+    .nav-right { justify-content: flex-end; }
 
-    .nav-right {
-      justify-content: flex-end;
-      padding-right: 1.5rem;
-    }
-
-    .nav-left a:nth-child(2) {
-      margin-left: 3rem;
-    }
-
-    .nav-right a:first-child {
-      margin-right: 3rem;
-    }
-
-
-    .nav-left a,
-    .nav-right a {
-      font-size: 0.8rem;
-
-      letter-spacing: 0.24em;
-
+    .nav-left a, .nav-right a {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-
       color: rgba(26, 22, 18, 0.86);
-
       font-weight: 400;
-
       white-space: nowrap;
-
       position: relative;
-
-      padding: 0.45rem 1rem;
-
-      text-shadow:
-        0 1px 10px rgba(249, 246, 241, 0.9);
-
-      transition:
-        color 0.35s ease,
-        text-shadow 0.35s ease;
+      padding: 0.4rem 0.2rem;
+      transition: color 0.35s ease;
     }
 
-
-    /* Watercolor hover */
-
-    .nav-left a::before,
-    .nav-right a::before {
+    .nav-left a::after, .nav-right a::after {
       content: "";
-
       position: absolute;
-      inset: 0;
-
-      border-radius: 4px;
-
-      background: radial-gradient(
-        ellipse 100% 100% at 50% 50%,
-        rgba(255, 255, 255, 0.85) 0%,
-        rgba(255, 255, 255, 0.55) 45%,
-        rgba(255, 255, 255, 0.22) 70%,
-        transparent 100%
-      );
-
-      opacity: 0;
-
-      transform: scaleX(0.6) scaleY(0.5);
-
-      filter: blur(6px);
-
-      transition:
-        opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-        filter 0.45s ease;
-
-      pointer-events: none;
-
-      z-index: -1;
+      left: 0.2rem; right: 0.2rem;
+      bottom: 0.1rem;
+      height: 1px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
     }
 
-    .nav-left a:hover::before,
-    .nav-right a:hover::before {
-      opacity: 1;
-
-      transform: scaleX(1.1) scaleY(1.15);
-
-      filter: blur(3px);
+    .nav-left a:hover::after, .nav-right a:hover::after {
+      transform: scaleX(1);
     }
 
-    .nav-left a:hover,
-    .nav-right a:hover {
-      color: #000000;
-
-      text-shadow:
-        0 1px 12px rgba(255, 255, 255, 0.95);
-    }
-
-
-    /* Logo */
+    .nav-left a:hover, .nav-right a:hover { color: #000; }
 
     .nav-center {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 4;
-}
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 4;
+    }
 
-.nav-text-logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.8rem;
-  font-weight: 700;
-  color: #111;
-  letter-spacing: 0.03em;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: opacity 0.3s ease;
-}
+    .nav-text-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.1rem;
+      font-weight: 500;
+      color: #111;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+    }
 
-.nav-text-logo:hover {
-  opacity: 0.65;
-}
-    
-
-    
-
-
-    /* ============================
-       MOBILE MENU TOGGLE
-    ============================ */
+    .nav-text-logo:hover { opacity: 0.65; }
 
     .nav-toggle {
       display: none;
-
       position: relative;
       z-index: 6;
-
-      width: 44px;
-      height: 44px;
-
+      width: 42px; height: 42px;
       align-items: center;
       justify-content: center;
-
       background: rgba(249, 246, 241, 0.35);
       border: 1.5px solid rgba(26, 22, 18, 0.35);
       border-radius: 50%;
-
       color: rgba(26, 22, 18, 0.9);
-
-      font-size: 1.4rem;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-
-      text-shadow: 0 1px 8px rgba(249, 246, 241, 0.9);
-
+      font-size: 1.3rem;
       cursor: pointer;
-
       transition: background 0.3s, border-color 0.3s;
     }
 
-    .nav-toggle:hover {
-      background: rgba(249, 246, 241, 0.6);
-      border-color: rgba(26, 22, 18, 0.6);
-    }
-
-    .nav-toggle span {
-      pointer-events: none;
-      transform: translateY(-2px);
-    }
-
+    .nav-toggle:hover { background: rgba(249, 246, 241, 0.6); }
+    .nav-toggle span { pointer-events: none; transform: translateY(-2px); }
 
     .mobile-menu {
       position: fixed;
-
       inset: 0;
-
       z-index: 998;
-
       background: rgba(0, 0, 0, 0.97);
-
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-
-      gap: 2.2rem;
-
+      gap: 2rem;
       opacity: 0;
       visibility: hidden;
-
       transition: opacity 0.4s ease, visibility 0.4s ease;
     }
 
-    .mobile-menu.open {
-      opacity: 1;
-      visibility: visible;
-    }
+    .mobile-menu.open { opacity: 1; visibility: visible; }
 
     .mobile-menu a {
-      font-size: 1.1rem;
-
-      letter-spacing: 0.28em;
-
+      font-size: 1.05rem;
+      letter-spacing: 0.26em;
       text-transform: uppercase;
-
       color: rgba(255, 255, 255, 0.88);
-
       font-weight: 300;
-
       transition: color 0.3s;
     }
 
-    .mobile-menu a:hover {
-      color: var(--accent);
-    }
+    .mobile-menu a:hover { color: var(--accent); }
 
 
     /* ============================
-       PAINT EFFECT CANVAS
+       PAINT + GLITTER CANVASES
     ============================ */
 
     #paint-canvas {
-      position: fixed;
-
-      top: 0;
-      left: 0;
-
-      width: 100vw;
-      height: 100vh;
-
+      position: fixed; top: 0; left: 0;
+      width: 100vw; height: 100vh;
       pointer-events: none;
-
       z-index: 99999;
+    }
+
+    #glitter-canvas {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 130px;
+      pointer-events: none;
+      z-index: 1001;
     }
 
 
     /* ============================
-       GLITTER
+       SHARED UTILITIES
     ============================ */
 
-    #glitter-canvas {
-      position: fixed;
+    section { overflow: hidden; }
 
-      top: 0;
-      left: 0;
+    .wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 clamp(1.5rem, 5vw, 5.5rem);
+    }
 
-      width: 100%;
-      height: 150px;
+    .eyebrow {
+      font-size: 0.62rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 400;
+      margin-bottom: 1.1rem;
+    }
 
-      pointer-events: none;
+    .heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      line-height: 1.12;
+      color: var(--ink);
+      letter-spacing: 0.01em;
+    }
 
-      z-index: 1001;
+    .heading.upper { text-transform: uppercase; letter-spacing: 0.02em; }
+
+    .body-text {
+      font-size: 0.86rem;
+      line-height: 1.95;
+      color: var(--ink-light);
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      max-width: 420px;
+    }
+
+    .link-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+      font-weight: 400;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 0.25rem;
+      transition: gap 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .link-arrow:hover {
+      gap: 0.85rem;
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .link-arrow span { transition: transform 0.3s ease; }
+
+    .btn-dark {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 1.05rem 2.6rem;
+      background: #000;
+      color: #fff;
+      font-size: 0.63rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      font-weight: 300;
+      cursor: pointer;
+      border: 1px solid #000;
+      transition: box-shadow 0.4s;
+    }
+
+    .btn-dark:hover {
+      box-shadow:
+        -5px -5px 16px -4px rgba(255,255,255,0.5),
+        5px -5px 16px -4px rgba(255,255,255,0.5),
+        -5px 5px 16px -4px rgba(255,255,255,0.5),
+        5px 5px 16px -4px rgba(255,255,255,0.5);
+    }
+
+    .section-center {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto clamp(3rem, 6vw, 5rem);
+    }
+
+    .section-center .eyebrow { }
+    .section-center .heading { margin-bottom: 0.4rem; }
+    .section-sub {
+      font-size: 0.8rem;
+      color: var(--ink-light);
+      font-weight: 300;
+      letter-spacing: 0.04em;
     }
 
 
@@ -504,1500 +385,402 @@
 
     .hero {
       position: relative;
-
-      height: 88svh;
-      min-height: 600px;
-
-      display: flex;
-      align-items: flex-end;
-
+      height: 92svh;
+      min-height: 620px;
       overflow: hidden;
-
-      margin-top: 0;
     }
-
 
     .hero-img {
       position: absolute;
       inset: 0;
-
-      padding-top: 175px;
-      padding-bottom: 24px;
-
-      background:#f9f6f1;
+      padding-top: 150px;
+      padding-bottom: 0;
+      background: var(--bg);
       display: flex;
       justify-content: flex-end;
-      align-items: center;
+      align-items: flex-end;
     }
 
     .hero-img img {
-  width: auto;
-  height: 100%;
-  max-width: 96%;
-  object-fit: contain;
-  object-position: right center;
-}
+      width: auto;
+      height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+      object-position: right bottom;
+    }
 
-
-    .hero-img::after {
-      content: "";
-
+    .hero-text-veil {
       position: absolute;
       inset: 0;
-
+      background: linear-gradient(
+        to right,
+        rgba(249, 246, 241, 0.85) 0%,
+        rgba(249, 246, 241, 0.55) 30%,
+        rgba(249, 246, 241, 0.1) 58%,
+        rgba(249, 246, 241, 0) 100%
+      );
       pointer-events: none;
     }
 
-
     .hero-content {
-      position: relative;
-
-      z-index: 2;
-
-      width: 100%;
-      height: 100%;
-    }
-
-
-    .hero-text-panel {
       position: absolute;
       inset: 0;
-
+      z-index: 2;
       display: flex;
       align-items: center;
     }
 
-
-    /* Left text readability veil */
-
-    .hero-text-panel::after {
-  content: "";
-  position: absolute;
-
-  top: 15%;
-  bottom: 15%;
-  left: 0;
-  width: 55%;
-
-  background: linear-gradient(
-    to right,
-    rgba(249, 246, 241, 0.72) 0%,
-    rgba(249, 246, 241, 0.45) 35%,
-    rgba(249, 246, 241, 0.16) 70%,
-    rgba(249, 246, 241, 0) 100%
-  );
-
-  -webkit-mask-image: linear-gradient(
-  to bottom,
-  transparent 0%,
-  black 12%,
-  black 88%,
-  transparent 100%
-);
-
-mask-image: linear-gradient(
-  to bottom,
-  transparent 0%,
-  black 12%,
-  black 88%,
-  transparent 100%
-);
-
-  pointer-events: none;
-}
-    .hero-text-bg {
-      position: absolute;
-      inset: 0;
-
-      width: 100%;
-      height: 100%;
-
-      opacity: 0.98;
-
-      pointer-events: none
+    .hero-inner {
+      padding-left: clamp(1.75rem, 8vw, 6.5rem);
+      max-width: 620px;
     }
 
-
-    .hero-diagonal {
-      position: relative;
-
-      z-index: 2;
-
-      display: flex;
-      flex-direction: column;
-
-      gap: 0.35rem;
-
-      padding-left: 8%;
-    }
-
-
-    .hero-esth {
-      font-family: 'Imperial Script', cursive;
-
-      font-size:
-        clamp(5.5rem, 10vw, 9rem);
-
-      line-height: 0.9;
-
-      color: #3e2f23;
-    }
-
-
-    .hero-by {
-      font-family: 'Jost', sans-serif;
-
-      font-size: 1.05rem;
-
-      letter-spacing: 0.52em;
-
-      text-transform: uppercase;
-
-      color: #8b6a50;
-
-      margin-left: 4.8rem;
-
-      font-weight: 300;
-
-      text-shadow:
-        0 1px 8px rgba(249, 246, 241, 0.6);
-    }
-
-
-    .hero-name {
+    .hero-headline {
       font-family: 'Cormorant Garamond', serif;
-
-      font-size:
-        clamp(2.2rem, 3.2vw, 3.3rem);
-
-      letter-spacing: 0.08em;
-
+      font-weight: 300;
+      text-transform: uppercase;
+      font-size: clamp(2.6rem, 5.4vw, 4.4rem);
+      line-height: 1.08;
+      letter-spacing: 0.01em;
       color: #1a1612;
-
-      margin-left: 9.8rem;
+      margin-bottom: 1.4rem;
     }
 
-
-    .hero-scroll-hint {
-      position: absolute;
-
-      bottom: 2.5rem;
-      right: clamp(1.5rem, 5vw, 4rem);
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      gap: 0.5rem;
-
-      color: rgba(249, 246, 241, 0.45);
-
-      font-size: 0.6rem;
-
-      letter-spacing: 0.25em;
-
-      text-transform: uppercase;
-
-      font-weight: 200;
-
-      z-index: 3;
-    }
-
-
-    .scroll-line {
-      width: 1px;
-      height: 48px;
-
-      background:
-        linear-gradient(
-          to bottom,
-          rgba(249, 246, 241, 0.4),
-          transparent
-        );
-
-      animation: scrollPulse 8s ease infinite;
-    }
-
-
-    @keyframes scrollPulse {
-      0%,
-      100% {
-        opacity: 0.3;
-      }
-
-      50% {
-        opacity: 1;
-      }
-    }
-
-
-    /* ============================
-       COMMON SECTION STYLES
-    ============================ */
-
-    section {
-      overflow: hidden;
-    }
-
-
-    .section-label {
-      font-size: 0.6rem;
-
-      letter-spacing: 0.4em;
-
-      text-transform: uppercase;
-
-      color: var(--accent);
-
-      font-weight: 300;
-
-      margin-bottom: 1.2rem;
-    }
-
-
-    .section-title {
-      font-family:
-        'Cormorant Garamond',
-        serif;
-
-      font-weight: 200;
-
-      font-size:
-        clamp(2rem, 4.5vw, 3.5rem);
-
-      line-height: 1.1;
-
-      color: var(--ink);
-    }
-
-
-    .section-title em {
-      font-style: italic;
-    }
-
-
-    .section-body {
-      font-size: 0.8rem;
-
-      line-height: 2;
-
+    .hero-sub {
+      font-size: 0.82rem;
+      line-height: 1.9;
+      letter-spacing: 0.03em;
       color: var(--ink-light);
-
       font-weight: 300;
-
-      letter-spacing: 0.05em;
-
-      max-width: 380px;
+      margin-bottom: 2.2rem;
     }
 
-
-    /* ============================
-       MARQUEE
-    ============================ */
-
-    .marquee-strip {
-      background: var(--ink);
-
-      color: var(--bg);
-
-      padding: 1.1rem 0;
-
-      overflow: hidden;
-
-      white-space: nowrap;
-    }
-
-
-    .marquee-track {
-      display: inline-flex;
-
-      animation:
-        marqueeScroll 28s linear infinite;
-    }
-
-
-    .marquee-item {
-      display: inline-flex;
-
+    .hero-cta-row {
+      display: flex;
       align-items: center;
-
-      gap: 2rem;
-
-      padding: 0 2rem;
-
-      font-size: 0.6rem;
-
-      letter-spacing: 0.3em;
-
-      text-transform: uppercase;
-
-      font-weight: 200;
-    }
-
-
-    .marquee-dot {
-      width: 4px;
-      height: 4px;
-
-      border-radius: 50%;
-
-      background: var(--accent);
-
-      flex-shrink: 0;
-    }
-
-
-    @keyframes marqueeScroll {
-      from {
-        transform: translateX(0);
-      }
-
-      to {
-        transform: translateX(-50%);
-      }
-    }
-
-
-    /* ============================
-       COLLECTIONS
-    ============================ */
-
-    .collection-split {
-      display: grid;
-
-      grid-template-columns:
-        1fr 1fr;
-
-      min-height: 85vh;
-    }
-
-
-    .collection-split.reverse {
-      direction: rtl;
-    }
-
-
-    .collection-split.reverse > * {
-      direction: ltr;
-    }
-
-
-    .split-image {
-      position: relative;
-
-      overflow: hidden;
-
-      background: var(--bg-2);
-    }
-
-
-    .section-img {
-      width: 100%;
-      height: 100%;
-
-      min-height: 480px;
-
-      object-fit: cover;
-
-      display: block;
-
-      transition:
-        transform 0.8s cubic-bezier(
-          0.16,
-          1,
-          0.3,
-          1
-        );
-
-
-      -webkit-mask-image:
-        linear-gradient(
-          to right,
-          transparent 0%,
-          black 14%,
-          black 86%,
-          transparent 100%
-        ),
-        linear-gradient(
-          to bottom,
-          transparent 0%,
-          black 12%,
-          black 88%,
-          transparent 100%
-        );
-
-
-      -webkit-mask-composite:
-        destination-in;
-
-
-      mask-image:
-        linear-gradient(
-          to right,
-          transparent 0%,
-          black 14%,
-          black 86%,
-          transparent 100%
-        ),
-        linear-gradient(
-          to bottom,
-          transparent 0%,
-          black 12%,
-          black 88%,
-          transparent 100%
-        );
-
-
-      mask-composite:
-        intersect;
-    }
-
-
-    .collection-split:hover
-    .split-image
-    .section-img {
-      transform: scale(1.04);
-    }
-
-
-    .split-content {
-      display: flex;
-
-      flex-direction: column;
-
-      justify-content: center;
-
-      padding:
-        clamp(3rem, 7vw, 7rem);
-    }
-
-
-    .split-num {
-      font-family:
-        'Cormorant Garamond',
-        serif;
-
-      font-size: 5rem;
-
-      font-weight: 200;
-
-      color: var(--border);
-
-      line-height: 1;
-
-      margin-bottom: 1.5rem;
-    }
-
-
-    .split-content .section-title {
-      margin-bottom: 1.2rem;
-    }
-
-
-    .split-content .section-body {
-      margin-bottom: 2.5rem;
-    }
-
-
-    .tag-row {
-      display: flex;
-
-      gap: 0.6rem;
-
+      gap: 2.2rem;
       flex-wrap: wrap;
     }
 
-
-    .tag {
-      padding:
-        0.4rem 1rem;
-
-      border:
-        1px solid var(--border);
-
-      font-size: 0.6rem;
-
-      letter-spacing: 0.2em;
-
-      text-transform: uppercase;
-
-      font-weight: 300;
-
-      color: var(--ink-light);
-
-      border-radius: 100px;
-    }
-
-
-    /* ============================
-       PLACEHOLDERS
-    ============================ */
-
-    .img-placeholder {
-      position: relative;
-
-      overflow: hidden;
-    }
-
-
-    .img-placeholder::before {
-      content:
-        attr(data-label);
-
+    .hero-scroll-hint {
       position: absolute;
-
-      inset: 0;
-
+      bottom: 2.2rem;
+      right: clamp(1.5rem, 5vw, 4rem);
       display: flex;
-
+      flex-direction: column;
       align-items: center;
-
-      justify-content: center;
-
-      font-family:
-        'Cormorant Garamond',
-        serif;
-
-      font-size: 1.2rem;
-
-      font-weight: 200;
-
-      letter-spacing: 0.2em;
-
-      color:
-        rgba(200, 169, 126, 0.5);
-
+      gap: 0.5rem;
+      color: rgba(26, 22, 18, 0.35);
+      font-size: 0.58rem;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
+      z-index: 3;
     }
 
-
-    .ph-saree {
-      background: var(--cube-1);
+    .scroll-line {
+      width: 1px; height: 44px;
+      background: linear-gradient(to bottom, rgba(26,22,18,0.35), transparent);
+      animation: scrollPulse 8s ease infinite;
     }
 
-
-    .ph-suit {
-      background: var(--cube-2);
-    }
-
-
-    .ph-jacket {
-      background: var(--cube-3);
-    }
-
-
-    .ph-tshirt {
-      background: var(--cube-4);
-    }
-
-
-    .ph-hero {
-      background: var(--cube-2);
-    }
-
-    .photo3 {
-      object-fit: contain;
-      object-position: center;
-      background: #f9f6f1;
-    }
-
-    /* Blend photos softly into their placeholder cubes:
-       feather the edges so the banner photo fades into the
-       surrounding neutral tone instead of ending in a
-       hard rectangle. (Mosaic/Instagram/About photos are
-       shown at full crop, no blend.) */
-
-    .split-image,
-    .banner-wide {
-      background: var(--cube-1);
-    }
-
-    .mosaic-item,
-    .insta-cell {
-      position: relative;
-    }
-
-    .banner-wide .img-placeholder {
-
-      -webkit-mask-image:
-        linear-gradient(
-          to right,
-          transparent 0%,
-          black 8%,
-          black 92%,
-          transparent 100%
-        ),
-        linear-gradient(
-          to bottom,
-          transparent 0%,
-          black 8%,
-          black 92%,
-          transparent 100%
-        );
-
-      -webkit-mask-composite: destination-in;
-
-      mask-image:
-        linear-gradient(
-          to right,
-          transparent 0%,
-          black 8%,
-          black 92%,
-          transparent 100%
-        ),
-        linear-gradient(
-          to bottom,
-          transparent 0%,
-          black 8%,
-          black 92%,
-          transparent 100%
-        );
-
-      mask-composite: intersect;
-    }
-
-    /* A faint inner glow ties the feathered edge back to
-       the cube color without darkening the photo itself. */
-
-    .banner-wide::after {
-      content: "";
-
-      position: absolute;
-      inset: 0;
-
-      pointer-events: none;
-
-      box-shadow: inset 0 0 40px 6px rgba(249, 246, 241, 0.3);
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
     }
 
 
     /* ============================
-       ABOUT
+       ART OF MAKING (split)
     ============================ */
 
-    .about {
-      padding:
-        clamp(5rem, 10vw, 10rem)
-        clamp(1.5rem, 5vw, 4rem);
-
+    .making {
       display: grid;
-
-      grid-template-columns:
-        1fr 1.2fr;
-
-      gap:
-        clamp(3rem, 6vw, 7rem);
-
-      align-items: center;
+      grid-template-columns: 1fr 1.15fr;
+      min-height: 68vh;
     }
 
-
-    .about-visual {
-      position: relative;
-
-      height: 600px;
-    }
-
-
-    .about-img-main {
-      position: absolute;
-
-      top: 0;
-      left: 0;
-
-      width: 78%;
-      height: 82%;
-
-      overflow: hidden;
-    }
-
-
-    .about-img-accent {
-      position: absolute;
-
-      bottom: 0;
-      right: 0;
-
-      width: 45%;
-      height: 45%;
-
-      overflow: hidden;
-
-      border:
-        8px solid var(--bg);
-    }
-
-
-    .about-stat {
-      margin-top: 2.5rem;
-
+    .making-content {
       display: flex;
-
-      gap: 3rem;
-    }
-
-
-    .stat-num {
-      font-family:
-        'Cormorant Garamond',
-        serif;
-
-      font-size: 3rem;
-
-      font-weight: 200;
-
-      color: var(--ink);
-
-      line-height: 1;
-    }
-
-
-    .stat-label {
-      font-size: 0.6rem;
-
-      letter-spacing: 0.2em;
-
-      text-transform: uppercase;
-
-      color: var(--ink-light);
-
-      font-weight: 300;
-
-      margin-top: 0.3rem;
-    }
-
-
-    .about-text
-    .section-title {
-      margin-bottom: 1.5rem;
-    }
-
-
-    .about-text
-    .section-body {
-      margin-bottom: 1.5rem;
-
-      max-width: 480px;
-    }
-
-
-    .signature {
-      font-family:
-        'Cormorant Garamond',
-        serif;
-
-      font-size: 2.2rem;
-
-      font-style: italic;
-
-      font-weight: 200;
-
-      color: var(--accent);
-
-      margin-top: 2.5rem;
-    }
-
-
-    /* ============================
-       BANNER
-    ============================ */
-
-    .banner-wide {
-      height: 60vh;
-
-      min-height: 300px;
-
-      position: relative;
-
-      overflow: hidden;
-    }
-
-
-    .banner-wide
-    .img-placeholder {
-      height: 100%;
-
-      transform-origin:
-        center center;
-    }
-
-
-    .banner-overlay {
-      position: absolute;
-
-      inset: 0;
-
-      display: flex;
-
-      align-items: center;
-
+      flex-direction: column;
       justify-content: center;
-
-      background:
-        rgba(26, 22, 18, 0.48);
+      padding: clamp(3rem, 7vw, 6.5rem);
     }
 
+    .making-content .heading { margin-bottom: 1.1rem; }
+    .making-content .body-text { margin-bottom: 1.8rem; }
 
-    .banner-quote {
-      font-family:
-        'Cormorant Garamond',
-        serif;
-
-      font-size:
-        clamp(1.8rem, 4vw, 3.5rem);
-
-      font-weight: 200;
-
-      font-style: italic;
-
-      color: #f9f6f1;
-
-      text-align: center;
-
-      letter-spacing: 0.03em;
-
-      max-width: 800px;
-
-      padding: 0 2rem;
-    }
-
-
-    /* ============================
-       CUSTOM ORDERS
-    ============================ */
-
-    .process {
-      padding:
-        clamp(5rem, 10vw, 10rem)
-        clamp(1.5rem, 5vw, 4rem);
-
-      background:
-        var(--bg-2);
-    }
-
-
-    .process-header {
-      text-align: center;
-
-      margin-bottom:
-        clamp(3rem, 6vw, 6rem);
-    }
-
-
-    .process-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap: 2rem;
-
-      max-width: 1100px;
-
-      margin: 0 auto;
-
+    .making-image {
       position: relative;
-    }
-
-
-    .process-grid::before {
-      content: "";
-
-      position: absolute;
-
-      top: 28px;
-
-      left:
-        calc(16.6% + 1rem);
-
-      right:
-        calc(16.6% + 1rem);
-
-      height: 1px;
-
-      background:
-        linear-gradient(
-          to right,
-          transparent,
-          var(--border),
-          var(--border),
-          transparent
-        );
-    }
-
-
-    .process-card {
-      text-align: center;
-
-      padding:
-        2.5rem 1.5rem;
-    }
-
-
-    .process-num {
-      width: 56px;
-
-      height: 56px;
-
-      border:
-        1px solid var(--border);
-
-      border-radius: 50%;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      margin:
-        0 auto 2rem;
-
-      font-family:
-        'Cormorant Garamond',
-        serif;
-
-      font-size: 1.3rem;
-
-      font-weight: 200;
-
-      color: var(--accent);
-
-      background: var(--bg);
-
-      position: relative;
-
-      z-index: 1;
-    }
-
-
-    .process-card h3 {
-      font-family:
-        'Cormorant Garamond',
-        serif;
-
-      font-size: 1.4rem;
-
-      font-weight: 300;
-
-      margin-bottom: 0.8rem;
-    }
-
-
-    .process-card p {
-      font-size: 0.75rem;
-
-      line-height: 1.9;
-
-      color: var(--ink-light);
-
-      font-weight: 300;
-    }
-
-
-    .process-cta {
-      text-align: center;
-
-      margin-top: 4rem;
-    }
-
-
-    .btn-dark {
-      display: inline-flex;
-
-      align-items: center;
-
-      gap: 0.75rem;
-
-      padding:
-        1.1rem 3rem;
-
-      background: #000000;
-
-      color: #ffffff;
-
-      font-size: 0.65rem;
-
-      letter-spacing: 0.3em;
-
-      text-transform: uppercase;
-
-      font-weight: 300;
-
-      cursor: pointer;
-
-      border:
-        1px solid #000000;
-
-      transition:
-        background 0.4s,
-        color 0.4s,
-        box-shadow 0.4s;
-    }
-
-
-    .btn-dark:hover {
-      background: #000000;
-
-      color: #ffffff;
-
-      box-shadow:
-        -6px -6px 18px -4px rgba(255, 255, 255, 0.55),
-        6px -6px 18px -4px rgba(255, 255, 255, 0.55),
-        -6px 6px 18px -4px rgba(255, 255, 255, 0.55),
-        6px 6px 18px -4px rgba(255, 255, 255, 0.55);
-    }
-
-
-    /* ============================
-       MOSAIC
-    ============================ */
-
-    .mosaic {
-      display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap: 3px;
-    }
-
-
-    .mosaic-item {
       overflow: hidden;
-
-      position: relative;
-
-      height: 55vh;
-    }
-
-
-    .mosaic-item
-    .img-placeholder {
-      height: 100%;
-
-      min-height: 240px;
-
-      transition:
-        transform 0.7s cubic-bezier(
-          0.16,
-          1,
-          0.3,
-          1
-        );
-    }
-
-
-    .mosaic-item:hover
-    .img-placeholder {
-      transform: scale(1.06);
-    }
-
-
-    /* ============================
-       INSTAGRAM
-    ============================ */
-
-    .insta-strip {
-      padding:
-        clamp(4rem, 8vw, 8rem)
-        clamp(1.5rem, 5vw, 4rem);
-
       background: var(--bg-2);
     }
 
-
-    .insta-header {
-      display: flex;
-
-      align-items: center;
-
-      justify-content:
-        space-between;
-
-      margin-bottom: 2.5rem;
+    .making-image img {
+      transition: transform 0.9s cubic-bezier(0.16,1,0.3,1);
     }
 
+    .making-image:hover img { transform: scale(1.045); }
 
-    .insta-handle {
-      display: flex;
 
-      align-items: center;
+    /* ============================
+       COLLECTIONS OVERVIEW
+    ============================ */
 
-      gap: 0.8rem;
-
-      font-size: 0.7rem;
-
-      letter-spacing: 0.2em;
-
-      text-transform: uppercase;
-
-      font-weight: 300;
-
-      color: var(--ink-light);
-
-      transition: color 0.3s;
+    .collections-section {
+      padding: clamp(5rem, 9vw, 8rem) 0;
     }
 
-
-    .insta-handle:hover {
-      color: var(--ink);
-    }
-
-
-    .insta-grid {
+    .collections-grid {
       display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap: 3px;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.1rem;
     }
 
+    .collection-card {
+      display: flex;
+      flex-direction: column;
+    }
 
-    .insta-cell {
-      aspect-ratio: 1;
-
-      overflow: hidden;
-
+    .collection-thumb {
       position: relative;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      background: var(--bg-2);
+      margin-bottom: 1rem;
     }
 
-
-    .insta-cell
-    .img-placeholder {
-      height: 100%;
-
-      transition:
-        transform 0.5s cubic-bezier(
-          0.16,
-          1,
-          0.3,
-          1
-        );
+    .collection-thumb img {
+      transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
     }
 
+    .collection-card:hover .collection-thumb img { transform: scale(1.07); }
 
-    .insta-cell:hover
-    .img-placeholder {
-      transform: scale(1.08);
+    .collection-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
     }
 
-
-    .insta-overlay {
-      position: absolute;
-
-      inset: 0;
-
-      background:
-        rgba(200, 169, 126, 0);
-
-      transition:
-        background 0.3s;
+    .collection-desc {
+      font-size: 0.7rem;
+      line-height: 1.6;
+      color: var(--ink-light);
+      font-weight: 300;
     }
 
+    .collections-cta {
+      text-align: center;
+      margin-top: clamp(2.5rem, 5vw, 4rem);
+    }
 
-    .insta-cell:hover
-    .insta-overlay {
-      background:
-        rgba(200, 169, 126, 0.15);
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      padding: 1rem 2.4rem;
+      border: 1px solid var(--ink);
+      font-size: 0.63rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      font-weight: 400;
+      color: var(--ink);
+      transition: background 0.35s, color 0.35s;
+    }
+
+    .btn-outline:hover {
+      background: var(--ink);
+      color: var(--bg);
     }
 
 
     /* ============================
-       CONTACT
+       THE CRAFT
     ============================ */
 
-    .contact {
-      padding:
-        clamp(5rem, 10vw, 10rem)
-        clamp(1.5rem, 5vw, 4rem);
+    .craft-section {
+      padding: clamp(5rem, 9vw, 8rem) 0;
+      background: var(--bg-2);
+    }
 
+    .craft-grid {
       display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.1rem;
+      position: relative;
+    }
 
-      grid-template-columns:
-        1fr 1.3fr;
+    .craft-item { display: flex; flex-direction: column; }
 
-      gap:
-        clamp(3rem, 8vw, 8rem);
+    .craft-thumb {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      background: var(--bg-3);
+      margin-bottom: 1.1rem;
+    }
 
-      align-items: start;
+    .craft-thumb img {
+      transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .craft-item:hover .craft-thumb img { transform: scale(1.07); }
+
+    .craft-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.3rem;
+    }
+
+    .craft-name {
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 0.45rem;
+    }
+
+    .craft-desc {
+      font-size: 0.7rem;
+      line-height: 1.65;
+      color: var(--ink-light);
+      font-weight: 300;
+    }
+
+    .craft-cta { text-align: center; margin-top: clamp(2.5rem, 5vw, 4rem); }
+
+
+    /* ============================
+       BESPOKE
+    ============================ */
+
+    .bespoke-section {
+      padding: clamp(5rem, 9vw, 8rem) 0;
+    }
+
+    .bespoke-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.6fr;
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: center;
+    }
+
+    .bespoke-content .eyebrow { }
+    .bespoke-content .heading { margin-bottom: 1.1rem; }
+    .bespoke-content .body-text { margin-bottom: 2rem; }
+
+    .bespoke-gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.9rem;
+    }
+
+    .bespoke-photo {
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-2);
+      aspect-ratio: 3/4.4;
+    }
+
+    .bespoke-photo:nth-child(2) { margin-top: 2rem; }
+    .bespoke-photo:nth-child(4) { margin-top: -1rem; }
+
+    .bespoke-photo img {
+      transition: transform 0.8s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .bespoke-photo:hover img { transform: scale(1.06); }
+
+
+    /* ============================
+       ABOUT THE ARTIST
+    ============================ */
+
+    .about-section {
+      padding: clamp(5rem, 9vw, 8rem) 0;
+      background: var(--bg-2);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2.5rem, 6vw, 5.5rem);
+      align-items: center;
+    }
+
+    .about-photo {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4/4.6;
+      background: var(--bg-3);
+    }
+
+    .about-photo img {
+      transition: transform 0.8s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .about-photo:hover img { transform: scale(1.04); }
+
+    .about-text .eyebrow { }
+    .about-text .heading { margin-bottom: 1.2rem; }
+    .about-text .body-text { margin-bottom: 1.6rem; max-width: 460px; }
+
+    .about-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--ink);
+      margin-bottom: 0.15rem;
+    }
+
+    .about-role {
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 1.8rem;
     }
 
 
-    .contact-info
-    .section-title {
+    /* ============================
+       JOURNAL
+    ============================ */
+
+    .journal-section {
+      padding: clamp(5rem, 9vw, 8rem) 0;
+    }
+
+    .journal-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.1rem;
+    }
+
+    .journal-thumb {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      background: var(--bg-2);
       margin-bottom: 1rem;
     }
 
-
-    .contact-info
-    .section-body {
-      margin-bottom: 3rem;
-
-      max-width: 360px;
+    .journal-thumb img {
+      transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
     }
 
+    .journal-item:hover .journal-thumb img { transform: scale(1.07); }
 
-    .contact-links {
-      display: flex;
-
-      flex-direction: column;
+    .journal-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.98rem;
+      font-weight: 400;
+      letter-spacing: 0.01em;
     }
 
-
-    .contact-link {
-      display: flex;
-
-      align-items: center;
-
-      gap: 1.5rem;
-
-      padding: 1.4rem 0;
-
-      border-bottom:
-        1px solid var(--border);
-
-      cursor: pointer;
-
-      transition:
-        padding-left 0.3s;
-    }
-
-
-    .contact-link:first-child {
-      border-top:
-        1px solid var(--border);
-    }
-
-
-    .contact-link:hover {
-      padding-left: 0.5rem;
-    }
-
-
-    .contact-link-icon {
-      width: 38px;
-
-      height: 38px;
-
-      border:
-        1px solid var(--border);
-
-      border-radius: 50%;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      flex-shrink: 0;
-
-      transition:
-        background 0.3s,
-        border-color 0.3s;
-    }
-
-
-    .contact-link:hover
-    .contact-link-icon {
-      background: var(--accent);
-
-      border-color: var(--accent);
-    }
-
-
-    .contact-link-label {
-      font-size: 0.6rem;
-
-      letter-spacing: 0.2em;
-
-      text-transform: uppercase;
-
-      color: var(--ink-light);
-
-      font-weight: 300;
-
-      margin-bottom: 0.2rem;
-    }
-
-
-    .contact-link-val {
-      font-size: 0.9rem;
-
-      font-weight: 300;
-
-      color: var(--ink);
-
-      letter-spacing: 0.03em;
-    }
-
-
-    /* FORM */
-
-    .contact-form {
-      display: flex;
-
-      flex-direction: column;
-    }
-
-
-    .form-row {
-      display: grid;
-
-      grid-template-columns:
-        1fr 1fr;
-
-      gap: 1.5rem;
-    }
-
-
-    .form-group {
-      position: relative;
-
-      margin-bottom: 1.5rem;
-    }
-
-
-    .form-group label {
-      position: absolute;
-
-      top: 1rem;
-
-      left: 0;
-
-      font-size: 0.65rem;
-
-      letter-spacing: 0.2em;
-
-      text-transform: uppercase;
-
-      color: var(--ink-light);
-
-      font-weight: 300;
-
-      pointer-events: none;
-
-      transition:
-        transform 0.3s,
-        color 0.3s;
-    }
-
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-
-      background: transparent;
-
-      border: none;
-
-      border-bottom:
-        1px solid var(--border);
-
-      padding:
-        1rem 0 0.6rem;
-
-      font-size: 0.85rem;
-
-      font-weight: 300;
-
-      color: var(--ink);
-
-      outline: none;
-
-      resize: none;
-    }
-
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      border-bottom-color:
-        var(--accent);
-    }
-
-
-    .form-group input:focus + label,
-    .form-group input:not(:placeholder-shown) + label,
-    .form-group textarea:focus + label,
-    .form-group textarea:not(:placeholder-shown) + label {
-      transform:
-        translateY(-1.6rem)
-        scale(0.85);
-
-      color: var(--accent);
-
-      transform-origin: left;
-    }
-
-
-    .form-group input::placeholder,
-    .form-group textarea::placeholder {
-      color: transparent;
-    }
-
-
-    .form-group textarea {
-      min-height: 160px;
-    }
-
-
-    .form-submit {
-      display: inline-flex;
-
-      align-items: center;
-
-      gap: 0.75rem;
-
-      padding:
-        1.1rem 2.5rem;
-
-      background: #000000;
-
-      color: #ffffff;
-
-      font-size: 0.65rem;
-
-      letter-spacing: 0.3em;
-
-      text-transform: uppercase;
-
-      font-weight: 300;
-
-      cursor: pointer;
-
-      border:
-        1px solid #000000;
-
-      align-self: flex-start;
-
-      margin-top: 1rem;
-
-      transition:
-        background 0.4s,
-        color 0.4s,
-        box-shadow 0.4s,
-        transform 0.2s;
-    }
-
-
-    .form-submit:hover {
-      background: #000000;
-
-      color: #ffffff;
-
-      box-shadow:
-        -6px -6px 18px -4px rgba(255, 255, 255, 0.55),
-        6px -6px 18px -4px rgba(255, 255, 255, 0.55),
-        -6px 6px 18px -4px rgba(255, 255, 255, 0.55),
-        6px 6px 18px -4px rgba(255, 255, 255, 0.55);
-    }
-
-
-    .form-submit:active {
-      transform: scale(0.97);
-    }
+    .journal-cta { text-align: center; margin-top: clamp(2.5rem, 5vw, 4rem); }
 
 
     /* ============================
@@ -2005,295 +788,150 @@ mask-image: linear-gradient(
     ============================ */
 
     footer {
-      padding:
-        3rem clamp(1.5rem, 5vw, 4rem);
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content:
-        space-between;
-
-      border-top:
-        1px solid var(--border);
-
-      flex-wrap: wrap;
-
-      gap: 1.5rem;
+      background: var(--ink);
+      color: var(--bg);
+      padding: clamp(4rem, 8vw, 6rem) 0 2rem;
     }
 
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 2.5rem;
+      padding-bottom: clamp(3rem, 6vw, 4.5rem);
+      border-bottom: 1px solid rgba(249,246,241,0.14);
+    }
 
     .footer-logo {
-      font-family:
-        'Cormorant Garamond',
-        serif;
-
-      font-size: 1.1rem;
-
-      font-weight: 200;
-
-      letter-spacing: 0.3em;
-
-      text-transform: uppercase;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.7rem;
     }
 
-
-    .footer-copy {
-      font-size: 0.6rem;
-
-      letter-spacing: 0.15em;
-
-      color: var(--ink-light);
-
+    .footer-tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: rgba(249,246,241,0.55);
       font-weight: 300;
+      margin-bottom: 1.6rem;
     }
 
-
-    .footer-links {
+    .footer-social {
       display: flex;
-
-      gap: 2rem;
-
-      list-style: none;
+      gap: 0.9rem;
     }
 
+    .footer-social a {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(249,246,241,0.25);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      transition: background 0.3s, border-color 0.3s;
+    }
 
-    .footer-links a {
-      font-size: 0.6rem;
+    .footer-social a:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
 
-      letter-spacing: 0.2em;
-
+    .footer-col-title {
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-
-      color: var(--ink-light);
-
-      font-weight: 300;
-
-      transition: color 0.3s;
+      color: rgba(249,246,241,0.5);
+      margin-bottom: 1.3rem;
     }
 
+    .footer-col a, .footer-col span {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: rgba(249,246,241,0.82);
+      margin-bottom: 0.85rem;
+      transition: color 0.3s;
+      cursor: default;
+    }
 
-    .footer-links a:hover {
-      color: var(--ink);
+    .footer-col a:hover { color: var(--accent); cursor: pointer; }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding-top: 1.8rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      color: rgba(249,246,241,0.45);
     }
 
 
     /* ============================
-       SCROLL ANIMATIONS
+       SCROLL REVEAL
     ============================ */
 
     .reveal {
       opacity: 0;
-
-      transform:
-        translateY(40px);
-
-      transition:
-        opacity 0.9s
-          cubic-bezier(0.16, 1, 0.3, 1),
-
-        transform 0.9s
-          cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(36px);
+      transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
     }
-
-
-    .reveal.visible {
-      opacity: 1;
-
-      transform:
-        translateY(0);
-    }
-
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
     .reveal-left {
       opacity: 0;
-
-      transform:
-        translateX(-50px);
-
-      transition:
-        opacity 0.9s
-          cubic-bezier(0.16, 1, 0.3, 1),
-
-        transform 0.9s
-          cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateX(-40px);
+      transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
     }
-
-
-    .reveal-left.visible {
-      opacity: 1;
-
-      transform:
-        translateX(0);
-    }
-
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
 
     .reveal-right {
       opacity: 0;
-
-      transform:
-        translateX(50px);
-
-      transition:
-        opacity 0.9s
-          cubic-bezier(0.16, 1, 0.3, 1),
-
-        transform 0.9s
-          cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateX(40px);
+      transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
     }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
 
-
-    .reveal-right.visible {
-      opacity: 1;
-
-      transform:
-        translateX(0);
-    }
-
-
-    .reveal-delay-1 {
-      transition-delay: 0.1s;
-    }
-
-    .reveal-delay-2 {
-      transition-delay: 0.2s;
-    }
-
-    .reveal-delay-3 {
-      transition-delay: 0.35s;
-    }
-
-    .reveal-delay-4 {
-      transition-delay: 0.5s;
-    }
-
-
-    /* ============================
-       PARALLAX
-    ============================ */
-
-    .parallax-host {
-      overflow: hidden;
-    }
-
-    .parallax-inner {
-      will-change: transform;
-    }
+    .reveal-delay-1 { transition-delay: 0.08s; }
+    .reveal-delay-2 { transition-delay: 0.16s; }
+    .reveal-delay-3 { transition-delay: 0.24s; }
+    .reveal-delay-4 { transition-delay: 0.32s; }
+    .reveal-delay-5 { transition-delay: 0.4s; }
 
 
     /* ============================
        TABLET
     ============================ */
 
-    @media (max-width: 900px) {
+    @media (max-width: 1000px) {
 
-      nav {
-        height: 100px;
+      nav { height: 96px; padding: 0 1.5rem; }
+      nav::after { bottom: -44px; height: 44px; }
+      #glitter-canvas { height: 96px; }
+      .hero-img { padding-top: 110px; }
 
-        padding: 0 1.5rem;
-      }
+      .nav-left, .nav-right { gap: 1.3rem; width: auto; }
+      .nav-left a:nth-child(3), .nav-right a:nth-child(3) { display: none; }
 
-      nav::after {
-        bottom: -50px;
+      .making { grid-template-columns: 1fr; }
+      .making-image { min-height: 380px; }
 
-        height: 50px;
-      }
+      .collections-grid { grid-template-columns: repeat(3, 1fr); }
+      .craft-grid { grid-template-columns: repeat(3, 1fr); row-gap: 2rem; }
 
+      .bespoke-grid { grid-template-columns: 1fr; }
+      .bespoke-gallery { grid-template-columns: repeat(4, 1fr); }
 
+      .about-grid { grid-template-columns: 1fr; }
+      .about-photo { max-width: 420px; }
 
-      .logo-hit-area {
-        height: 100px;
-      }
+      .journal-grid { grid-template-columns: repeat(2, 1fr); }
 
-      #glitter-canvas {
-        height: 100px;
-      }
-
-      .hero {
-        margin-top: 0;
-      }
-
-      .hero-img {
-        padding-top: 120px;
-        padding-bottom: 16px;
-      }
-
-      .nav-left a:nth-child(2) {
-        margin-left: 0;
-      }
-
-      .nav-right a:first-child {
-        margin-right: 0;
-      }
-
-      .nav-left,
-      .nav-right {
-        gap: 1.5rem;
-      }
-
-      .collection-split {
-        grid-template-columns: 1fr;
-
-        min-height: auto;
-      }
-
-      .collection-split.reverse {
-        direction: ltr;
-      }
-
-      .split-image .section-img {
-        min-height: 320px;
-      }
-
-      .split-content {
-        padding:
-          clamp(2rem, 5vw, 3.5rem);
-      }
-
-      .about {
-        grid-template-columns: 1fr;
-      }
-
-      .about-visual {
-        height: 380px;
-
-        margin-bottom: 1rem;
-      }
-
-      .process-grid {
-        grid-template-columns: 1fr;
-
-        gap: 0;
-      }
-
-      .process-grid::before {
-        display: none;
-      }
-
-      .mosaic {
-        grid-template-columns: 1fr;
-      }
-
-      .mosaic-item {
-        height: 45vh;
-      }
-
-      .contact {
-        grid-template-columns: 1fr;
-      }
-
-      .form-row {
-        grid-template-columns: 1fr;
-
-        gap: 0;
-      }
-
-      footer {
-        flex-direction: column;
-
-        text-align: center;
-      }
+      .footer-grid { grid-template-columns: 1fr 1fr; row-gap: 2.5rem; }
     }
 
 
@@ -2301,118 +939,54 @@ mask-image: linear-gradient(
        MOBILE
     ============================ */
 
-    @media (max-width: 600px) {
+    @media (max-width: 640px) {
 
-      nav::before {
-        display: none;
-      }
-
-      .nav-left,
-      .nav-right {
-        display: none;
-      }
-
+      nav::before { display: none; }
+      .nav-left, .nav-right { display: none; }
       .nav-toggle {
         display: flex;
-
         position: absolute;
-
-        right: 1.25rem;
-        top: 50%;
-
+        right: 1.25rem; top: 50%;
         transform: translateY(-50%);
       }
 
-      .about {
-        padding-top: clamp(4rem, 12vw, 6rem);
-
-        row-gap: 2rem;
+      .hero { height: 82svh; min-height: 560px; }
+      .hero-img { padding-top: 100px; justify-content: center; }
+      .hero-inner { padding-left: 1.5rem; padding-right: 1.5rem; max-width: 100%; }
+      .hero-headline { font-size: clamp(2.2rem, 9vw, 3rem); }
+      .hero-text-veil {
+        background: linear-gradient(
+          to bottom,
+          rgba(249,246,241,0.92) 0%,
+          rgba(249,246,241,0.7) 40%,
+          rgba(249,246,241,0.15) 75%,
+          rgba(249,246,241,0) 100%
+        );
       }
 
-      .about-visual {
-        height: auto;
-      }
+      .collections-grid { grid-template-columns: repeat(2, 1fr); }
+      .craft-grid { grid-template-columns: repeat(2, 1fr); }
 
-      .about-img-main {
-        width: 100%;
-        height: 260px;
-        position: relative;
-        top: auto;
-        left: auto;
-      }
+      .bespoke-gallery { grid-template-columns: repeat(2, 1fr); }
+      .bespoke-photo:nth-child(2) { margin-top: 0; }
+      .bespoke-photo:nth-child(3) { margin-top: 1.5rem; }
+      .bespoke-photo:nth-child(4) { margin-top: 0; }
 
-      .about-img-accent {
-        display: none;
-      }
+      .journal-grid { grid-template-columns: repeat(1, 1fr); }
 
-      .about-stat {
-        margin-top: 1.5rem;
-        margin-bottom: 2.5rem;
-
-        justify-content: space-between;
-
-        gap: 1rem;
-
-        width: 100%;
-      }
-
-      .insta-grid {
-        grid-template-columns:
-          repeat(3, 1fr);
-      }
-
-      .hero-diagonal {
-        padding-left: 6%;
-      }
-
-      .hero-esth {
-        font-size:
-          clamp(4rem, 18vw, 6rem);
-      }
-
-      .hero-name {
-        margin-left: 3rem;
-      }
-
-      .hero-by {
-        margin-left: 2rem;
-      }
+      .footer-grid { grid-template-columns: 1fr; }
     }
 
   </style>
-
 </head>
 
 <body>
 
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
 
-  <!-- ============================
-       CUSTOM CURSOR
-  ============================ -->
-
-  <div
-    class="cursor"
-    id="cursor">
-  </div>
-
-  <div
-    class="cursor-ring"
-    id="cursorRing">
-  </div>
-
-
-  <!-- Paint burst canvas -->
-
-  <canvas
-    id="paint-canvas">
-  </canvas>
-
-
-  <!-- Navbar glitter canvas -->
-
-  <canvas
-    id="glitter-canvas">
-  </canvas>
+  <canvas id="paint-canvas"></canvas>
+  <canvas id="glitter-canvas"></canvas>
 
 
   <!-- ============================
@@ -2422,87 +996,37 @@ mask-image: linear-gradient(
   <nav id="navbar">
 
     <div class="nav-left">
-
-      <a href="#collections">
-        Collections
-      </a>
-
-      <a href="#about">
-        About
-      </a>
-
+      <a href="#collections">Collections</a>
+      <a href="#craft">The Craft</a>
+      <a href="#bespoke">Bespoke</a>
     </div>
-
 
     <div class="nav-center">
- 
-  <a
-    href="#home"
-    id="logoHomeLink"
-    aria-label="Go to top"
-    class="nav-text-logo">
-
-    KO_Esthetique
-
-  </a>
-
-</div>
-
-
-    <div class="nav-right">
-
-      <a href="#custom">
-        Custom Orders
+      <a href="#home" id="logoHomeLink" aria-label="Go to top" class="nav-text-logo">
+        KO Esthètique
       </a>
-
-      <a href="#contact">
-        Contact
-      </a>
-
     </div>
 
+    <div class="nav-right">
+      <a href="#about">About</a>
+      <a href="#journal">Journal</a>
+      <a href="#footer">Contact</a>
+    </div>
 
-    <button
-      class="nav-toggle"
-      id="navToggle"
-      aria-label="Open menu"
-      aria-expanded="false">
-
-      <span>
-        ⋮
-      </span>
-
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+      <span>⋮</span>
     </button>
 
   </nav>
 
-
-  <!-- Mobile full-screen menu -->
-
-  <div
-    class="mobile-menu"
-    id="mobileMenu">
-
-    <a href="#home" class="mobile-menu-link">
-      Home
-    </a>
-
-    <a href="#collections" class="mobile-menu-link">
-      Collections
-    </a>
-
-    <a href="#about" class="mobile-menu-link">
-      About
-    </a>
-
-    <a href="#custom" class="mobile-menu-link">
-      Custom Orders
-    </a>
-
-    <a href="#contact" class="mobile-menu-link">
-      Contact
-    </a>
-
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home">Home</a>
+    <a href="#collections">Collections</a>
+    <a href="#craft">The Craft</a>
+    <a href="#bespoke">Bespoke</a>
+    <a href="#about">About</a>
+    <a href="#journal">Journal</a>
+    <a href="#footer">Contact</a>
   </div>
 
 
@@ -2510,1167 +1034,337 @@ mask-image: linear-gradient(
        HERO
   ============================ -->
 
-  <section
-    class="hero"
-    id="home">
+  <section class="hero" id="home">
 
     <div class="hero-img">
-      <img
-        src="photo1.png"
-        alt="Ko Esthetique hero background"
-        style="width:100%;height:100%;"
-      />
+      <img src="coverp1.png" alt="Hand-painted saree by KO Esthètique" />
     </div>
 
+    <div class="hero-text-veil"></div>
 
     <div class="hero-content">
+      <div class="hero-inner">
 
-      <div class="hero-text-panel">
+        <h1 class="hero-headline reveal visible">
+          Wearable Art,<br />Crafted Differently.
+        </h1>
 
-        <img
-          src="coverp1.png"
-          alt="Ko Esthetique"
-          class="hero-text-bg"
-        />
+        <p class="hero-sub reveal reveal-delay-1 visible">
+          Hand painting • Hand embroidery<br />
+          Bespoke craftsmanship
+        </p>
 
-
-        <div class="hero-diagonal">
-
-          <span class="hero-esth" style="font-size: clamp(2.2rem, 3.6vw, 3.4rem); font-family: 'Cormorant Garamond', serif; font-style: italic; line-height: 1.25;">
-            Wearable Art • Handcrafted Couture
-          </span>
-
-          <span class="hero-by" style="letter-spacing: 0.18em; margin-left: 0.2rem; font-size: 0.85rem;">
-            Hand-painted | Hand-embroidered | Bespoke
-          </span>
-
-          <span class="hero-name" style="margin-left: 0.2rem; margin-top: 0.6rem;">
-            by Komal Oswal
-          </span>
-
+        <div class="hero-cta-row reveal reveal-delay-2 visible">
+          <a href="#collections" class="btn-dark">
+            Explore the Collection
+          </a>
+          <a href="#craft" class="link-arrow">
+            Discover the Craft <span>→</span>
+          </a>
         </div>
 
       </div>
-
     </div>
-
 
     <div class="hero-scroll-hint">
-
-      <div class="scroll-line">
-      </div>
-
-      <span>
-        Scroll
-      </span>
-
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
     </div>
 
   </section>
 
 
-  
-
   <!-- ============================
-       COLLECTIONS
+       THE ART OF MAKING
   ============================ -->
 
-  <div id="collections">
-
-
-    <!-- ============================
-         01 SAREES
-    ============================ -->
-
-    <div class="collection-split">
-
-      <div
-        class="split-image parallax-host">
-
-        <img
-          src="sareex.png"
-          alt="Saree Collection"
-          class="section-img parallax-inner"
-        />
-
-      </div>
-
-
-      <div class="split-content">
-
-        <div class="split-num reveal">
-          01
-        </div>
-
-
-        <p
-          class="section-label reveal reveal-delay-1">
-
-          The Saree Edit
-
-        </p>
-
-
-        <h2
-          class="section-title reveal reveal-delay-2">
-
-          Draped in
-          <br />
-
-          <em>
-            Painted Poetry
-          </em>
-
-        </h2>
-
-
-        <p
-          class="section-body reveal reveal-delay-3">
-
-          Each saree is a canvas —
-          hand-painted with flowing motifs
-          in vibrant, fade-resistant
-          American paints.
-          No two are ever alike.
-
-        </p>
-
-
-        <div
-          class="tag-row reveal reveal-delay-4">
-
-          <span class="tag">
-            Hand-Painted
-          </span>
-
-          <span class="tag">
-            Unique
-          </span>
-
-          <span class="tag">
-            Premium Fabric
-          </span>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- ============================
-         02 SUITS
-    ============================ -->
-
-    <div
-      class="collection-split reverse">
-
-      <div
-        class="split-image parallax-host">
-
-        <img
-          src="suitp.png"
-          alt="Suit Collection"
-          class="section-img parallax-inner"
-        />
-
-      </div>
-
-
-      <div class="split-content">
-
-        <div class="split-num reveal">
-          02
-        </div>
-
-
-        <p
-          class="section-label reveal reveal-delay-1">
-
-          Tailored Art
-
-        </p>
-
-
-        <h2
-          class="section-title reveal reveal-delay-2">
-
-          Suits That
-          <br />
-
-          <em>
-            Tell a Story
-          </em>
-
-        </h2>
-
-
-        <p
-          class="section-body reveal reveal-delay-3">
-
-          Traditional silhouettes
-          transformed into one-of-a-kind
-          art pieces.
-
-          Paint meets precision tailoring
-          in every hand-crafted suit.
-
-        </p>
-
-
-        <div
-          class="tag-row reveal reveal-delay-4">
-
-          <span class="tag">
-            Bespoke
-          </span>
-
-          <span class="tag">
-            Artisanal
-          </span>
-
-          <span class="tag">
-            Custom
-          </span>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- ============================
-         03 JACKETS
-    ============================ -->
-
-    <div class="collection-split">
-
-      <div
-        class="split-image parallax-host">
-
-        <img
-          src="photo4.png"
-          alt="Jacket Collection"
-          class="img-placeholder parallax-inner"
-        />
-
-      </div>
-
-
-      <div class="split-content">
-
-        <div class="split-num reveal">
-          03
-        </div>
-
-
-        <p
-          class="section-label reveal reveal-delay-1">
-
-          Outerwear Redefined
-
-        </p>
-
-
-        <h2
-          class="section-title reveal reveal-delay-2">
-
-          Jackets That
-          <br />
-
-          <em>
-            Wear You
-          </em>
-
-        </h2>
-
-
-        <p
-          class="section-body reveal reveal-delay-3">
-
-          Bold brushstrokes on denim,
-          leather, and canvas.
-
-          Each jacket is a personal
-          manifesto — painted by hand,
-          worn with pride.
-
-        </p>
-
-
-        <div
-          class="tag-row reveal reveal-delay-4">
-
-          <span class="tag">
-            Statement Piece
-          </span>
-
-          <span class="tag">
-            Custom Design
-          </span>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- ============================
-         04 T-SHIRTS
-    ============================ -->
-
-    <div
-      class="collection-split reverse">
-
-      <div
-        class="split-image parallax-host">
-
-        <img
-          src="photo5.png"
-          alt="T-Shirt Collection"
-          class="img-placeholder parallax-inner"
-        />
-
-      </div>
-
-
-      <div class="split-content">
-
-        <div class="split-num reveal">
-          04
-        </div>
-
-
-        <p
-          class="section-label reveal reveal-delay-1">
-
-          Everyday Artistry
-
-        </p>
-
-
-        <h2
-          class="section-title reveal reveal-delay-2">
-
-          <em>
-            Art
-          </em>
-
-          You Can
-
-          <br />
-
-          Live In
-
-        </h2>
-
-
-        <p
-          class="section-body reveal reveal-delay-3">
-
-          Even the simplest garment
-          becomes extraordinary when
-          touched by paint and intention.
-
-          Hand-painted tees for those
-          who wear their personality.
-
-        </p>
-
-
-        <div
-          class="tag-row reveal reveal-delay-4">
-
-          <span class="tag">
-            Casual Luxury
-          </span>
-
-          <span class="tag">
-            Handcrafted
-          </span>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-  </div>
-
-
-  <!-- ============================
-       QUOTE BANNER
-  ============================ -->
-
-  <div
-    class="banner-wide parallax-host">
-
-    <img
-      src="photo6.png"
-      alt="Ko Esthetique banner"
-      class="img-placeholder parallax-inner"
-    />
-
-
-    <div class="banner-overlay">
-
-      <p class="banner-quote reveal">
-
-        "Every brushstroke is an act of
-        devotion — to the art, and to you."
-
+  <section class="making">
+
+    <div class="making-content">
+      <p class="eyebrow reveal">Our Philosophy</p>
+      <h2 class="heading upper reveal reveal-delay-1">The Art of Making</h2>
+      <p class="body-text reveal reveal-delay-2">
+        Every piece begins as a canvas of fabric and evolves
+        through colour, texture, embroidery and embellishment —
+        layered by hand to create something uniquely yours.
       </p>
-
-    </div>
-
-  </div>
-
-
-  <!-- ============================
-       ABOUT
-  ============================ -->
-
-  <section id="about">
-
-    <div class="about">
-
-
-      <div
-        class="about-visual reveal-left">
-
-
-        <div class="about-img-main">
-
-          <img
-            src="photo7.png"
-            alt="The Artist at Work"
-            style="height:100%;min-height:400px;"
-          />
-
-        </div>
-
-
-        <div class="about-img-accent">
-
-          <img
-            src="photo8.png"
-            alt="Detail"
-            style="height:100%;min-height:200px;"
-          />
-
-        </div>
-
-
-        <div class="about-stat">
-
-
-          <div class="stat-item">
-
-            <div class="stat-num">
-              100%
-            </div>
-
-            <div class="stat-label">
-              Handmade
-            </div>
-
-          </div>
-
-
-          <div class="stat-item">
-
-            <div class="stat-num">
-              ∞
-            </div>
-
-            <div class="stat-label">
-              Unique Pieces
-            </div>
-
-          </div>
-
-
-        </div>
-
-      </div>
-
-
-      <div class="about-text">
-
-
-        <p class="section-label reveal">
-          Our Story
-        </p>
-
-
-        <h2
-          class="section-title reveal reveal-delay-1">
-
-          Where
-
-          <br />
-
-          <em>
-            Craft Meets
-          </em>
-
-          <br />
-
-          Couture
-
-        </h2>
-
-
-        <p
-          class="section-body reveal reveal-delay-2">
-
-          Ko Esthetique was born from a
-          love of fashion and fine art —
-          and the belief that the two
-          should never be kept apart.
-
-          Every piece we create is
-          hand-painted from scratch,
-          making each one a singular
-          work of art.
-
-        </p>
-
-
-        <p
-          class="section-body reveal reveal-delay-3"
-          style="margin-top:1rem;">
-
-          We use only the finest American
-          paints — chosen for their
-          vibrancy, permanence, and the way
-          they hold a brushstroke with the
-          confidence of a master's hand.
-
-        </p>
-
-
-        <p
-          class="section-body reveal reveal-delay-4"
-          style="margin-top:1rem;">
-
-          From silk sarees and elegant
-          suits to jackets and t-shirts,
-          every piece is transformed into
-          one-of-a-kind wearable art.
-
-        </p>
-
-
-        <p
-          class="section-body reveal reveal-delay-4"
-          style="margin-top:1rem;">
-
-          Ko Esthetique is run by Komal
-          Oswal, who hand-paints every
-          single piece herself.
-
-        </p>
-
-
-        <div
-          class="signature reveal reveal-delay-4">
-
-          Ko Esthetique
-
-        </div>
-
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ============================
-       MOSAIC GALLERY
-  ============================ -->
-
-  <div class="mosaic">
-
-
-    <div class="mosaic-item">
-
-      <img
-        src="photo9.png"
-        alt="Saree I"
-        class="img-placeholder"
-        style="height:100%;"
-      />
-
-    </div>
-
-
-    <div class="mosaic-item">
-
-      <img
-        src="photo10.png"
-        alt="Jacket I"
-        class="img-placeholder"
-        style="height:100%;"
-      />
-
-    </div>
-
-
-    <div class="mosaic-item">
-
-      <img
-        src="photo11.png"
-        alt="Tee I"
-        class="img-placeholder"
-        style="height:100%;"
-      />
-
-    </div>
-
-
-  </div>
-
-
-  <!-- ============================
-       CUSTOM ORDERS
-  ============================ -->
-
-  <section
-    id="custom"
-    class="process">
-
-
-    <div class="process-header">
-
-
-      <p class="section-label reveal">
-
-        Custom Orders
-
-      </p>
-
-
-      <h2
-        class="section-title reveal reveal-delay-1">
-
-        Your Vision,
-
-        <br />
-
-        <em>
-          Our Brushstroke
-        </em>
-
-      </h2>
-
-
-    </div>
-
-
-    <div class="process-grid">
-
-
-      <div class="process-card reveal">
-
-        <div class="process-num">
-          I
-        </div>
-
-        <h3>
-          Share Your Idea
-        </h3>
-
-        <p>
-
-          Tell us what you envision —
-          a color palette, a mood,
-          a pattern, or a story.
-
-          We listen before we paint.
-
-        </p>
-
-      </div>
-
-
-      <div
-        class="process-card reveal reveal-delay-2">
-
-        <div class="process-num">
-          II
-        </div>
-
-        <h3>
-          Customize Your Design
-        </h3>
-
-        <p>
-
-          We collaborate with you to
-          refine every detail — from the
-          garment to the palette to the
-          final composition.
-
-        </p>
-
-      </div>
-
-
-      <div
-        class="process-card reveal reveal-delay-3">
-
-        <div class="process-num">
-          III
-        </div>
-
-        <h3>
-          Receive Your Piece
-        </h3>
-
-        <p>
-
-          Your hand-painted creation
-          arrives — one of a kind,
-          made with intention,
-          and crafted just for you.
-
-        </p>
-
-      </div>
-
-
-    </div>
-
-
-    <div class="process-cta">
-
-      <a
-        href="#contact"
-        class="btn-dark reveal reveal-delay-4">
-
-        Begin Your Custom Order
-
-        <span>
-          →
-        </span>
-
+      <a href="#craft" class="link-arrow reveal reveal-delay-3">
+        Discover the Craft <span>→</span>
       </a>
-
     </div>
 
+    <div class="making-image">
+      <img src="photo3.png" alt="Hand-painting detail on fabric" />
+    </div>
 
   </section>
 
 
   <!-- ============================
-       INSTAGRAM
+       COLLECTIONS OVERVIEW
   ============================ -->
 
-  <section class="insta-strip">
+  <section class="collections-section" id="collections">
+    <div class="wrap">
 
+      <div class="section-center">
+        <p class="eyebrow reveal">Explore</p>
+        <h2 class="heading upper reveal reveal-delay-1">Collections</h2>
+      </div>
 
-    <div class="insta-header">
+      <div class="collections-grid">
 
+        <div class="collection-card reveal">
+          <div class="collection-thumb">
+            <img src="sareex.png" alt="Sarees collection" />
+          </div>
+          <div class="collection-name">Sarees</div>
+          <p class="collection-desc">Hand-painted sarees</p>
+        </div>
 
-      <div>
+        <div class="collection-card reveal reveal-delay-1">
+          <div class="collection-thumb">
+            <img src="suitp.png" alt="Suits collection" />
+          </div>
+          <div class="collection-name">Suits</div>
+          <p class="collection-desc">Artisanal suits &amp; occasionwear</p>
+        </div>
 
-        <p class="section-label">
-          Follow the Studio
-        </p>
+        <div class="collection-card reveal reveal-delay-2">
+          <div class="collection-thumb">
+            <img src="photo5.png" alt="Dresses collection" />
+          </div>
+          <div class="collection-name">Dresses</div>
+          <p class="collection-desc">Wearable art for contemporary occasions</p>
+        </div>
 
+        <div class="collection-card reveal reveal-delay-3">
+          <div class="collection-thumb">
+            <img src="photo4.png" alt="Jackets collection" />
+          </div>
+          <div class="collection-name">Jackets</div>
+          <p class="collection-desc">Statement pieces with personalised artistry</p>
+        </div>
 
-        <h3
-          style="
-            font-family:'Cormorant Garamond',serif;
-            font-weight:200;
-            font-size:1.8rem;
-          ">
-
-          Behind the
-
-          <em>
-            Brushstroke
-          </em>
-
-        </h3>
+        <div class="collection-card reveal reveal-delay-4">
+          <div class="collection-thumb">
+            <img src="photo6.png" alt="Stoles and accessories collection" />
+          </div>
+          <div class="collection-name">Stoles &amp; Accessories</div>
+          <p class="collection-desc">Smaller canvases, same craftsmanship</p>
+        </div>
 
       </div>
 
-
-      <a
-        href="https://instagram.com/ko_esthetique"
-        target="_blank"
-        rel="noopener"
-        class="insta-handle">
-
-        <span>
-          📷
-        </span>
-
-        @ko_esthetique
-
-      </a>
-
+      <div class="collections-cta reveal">
+        <a href="#footer" class="btn-outline">View All Collections</a>
+      </div>
 
     </div>
-
-
-    <div class="insta-grid">
-
-
-      <div class="insta-cell">
-
-        <img
-          src="photo12.png"
-          alt="Instagram post 1"
-          class="img-placeholder"
-          style="height:100%;"
-        />
-
-        <div class="insta-overlay">
-        </div>
-
-      </div>
-
-
-      <div class="insta-cell">
-
-        <img
-          src="photo13.png"
-          alt="Instagram post 2"
-          class="img-placeholder"
-          style="height:100%;"
-        />
-
-        <div class="insta-overlay">
-        </div>
-
-      </div>
-
-
-      <div class="insta-cell">
-
-        <img
-          src="photo14.png"
-          alt="Instagram post 3"
-          class="img-placeholder"
-          style="height:100%;"
-        />
-
-        <div class="insta-overlay">
-        </div>
-
-      </div>
-
-
-    </div>
-
-
   </section>
 
 
   <!-- ============================
-       CONTACT
+       THE CRAFT
   ============================ -->
 
-  <section id="contact">
+  <section class="craft-section" id="craft">
+    <div class="wrap">
 
-    <div class="contact">
+      <div class="section-center">
+        <p class="eyebrow reveal">Process</p>
+        <h2 class="heading upper reveal reveal-delay-1">The Craft</h2>
+      </div>
 
+      <div class="craft-grid">
 
-      <div class="contact-info">
-
-
-        <p class="section-label reveal">
-
-          Get in Touch
-
-        </p>
-
-
-        <h2
-          class="section-title reveal reveal-delay-1">
-
-          Let's Create
-
-          <br />
-
-          <em>
-            Something
-          </em>
-
-          <br />
-
-          Together
-
-        </h2>
-
-
-        <p
-          class="section-body reveal reveal-delay-2"
-          style="
-            margin:
-              1rem 0 2.5rem;
-          ">
-
-          Reach out for custom orders,
-          collaborations, or simply
-          to say hello.
-
-          We'd love to hear from you.
-
-        </p>
-
-
-        <div class="contact-links">
-
-
-          <!-- EMAIL -->
-
-          <a
-            href="mailto:komaloswal@gmail.com"
-            class="contact-link reveal reveal-delay-2">
-
-
-            <div class="contact-link-icon">
-              ✉
-            </div>
-
-
-            <div class="contact-link-text">
-
-              <div class="contact-link-label">
-                Email
-              </div>
-
-              <div class="contact-link-val">
-                komaloswal@gmail.com
-              </div>
-
-            </div>
-
-
-          </a>
-
-
-          <!-- PHONE -->
-
-
-          <a
-            href="tel:+919872856625"
-            class="contact-link reveal reveal-delay-3">
-
-
-            <div class="contact-link-icon">
-              ☏
-            </div>
-
-
-            <div class="contact-link-text">
-
-              <div class="contact-link-label">
-                Phone / WhatsApp
-              </div>
-
-              <div class="contact-link-val">
-                +91 98728 56625
-              </div>
-
-            </div>
-
-
-          </a>
-
-
-          <!-- INSTAGRAM -->
-
-
-          <a
-            href="https://instagram.com/ko_esthetique"
-            target="_blank"
-            rel="noopener"
-            class="contact-link reveal reveal-delay-4">
-
-
-            <div class="contact-link-icon">
-              ◈
-            </div>
-
-
-            <div class="contact-link-text">
-
-              <div class="contact-link-label">
-                Instagram
-              </div>
-
-              <div class="contact-link-val">
-                @ko_esthetique
-              </div>
-
-            </div>
-
-
-          </a>
-
-
+        <div class="craft-item reveal">
+          <div class="craft-thumb">
+            <img src="photo7.png" alt="Fine fabric selection" />
+          </div>
+          <div class="craft-num">01</div>
+          <div class="craft-name">The Canvas</div>
+          <p class="craft-desc">Fine fabrics chosen with intention.</p>
         </div>
 
+        <div class="craft-item reveal reveal-delay-1">
+          <div class="craft-thumb">
+            <img src="photo8.png" alt="Hand-painting the artwork" />
+          </div>
+          <div class="craft-num">02</div>
+          <div class="craft-name">The Paint</div>
+          <p class="craft-desc">Hand-painted artwork with precision.</p>
+        </div>
+
+        <div class="craft-item reveal reveal-delay-2">
+          <div class="craft-thumb">
+            <img src="photo9.png" alt="Hand and machine embroidery" />
+          </div>
+          <div class="craft-num">03</div>
+          <div class="craft-name">The Thread</div>
+          <p class="craft-desc">Hand &amp; machine embroidery in harmony.</p>
+        </div>
+
+        <div class="craft-item reveal reveal-delay-3">
+          <div class="craft-thumb">
+            <img src="photo10.png" alt="Embellishment detail" />
+          </div>
+          <div class="craft-num">04</div>
+          <div class="craft-name">The Detail</div>
+          <p class="craft-desc">Embellishments that add depth and character.</p>
+        </div>
+
+        <div class="craft-item reveal reveal-delay-4">
+          <div class="craft-thumb">
+            <img src="photo11.png" alt="Final finishing touches" />
+          </div>
+          <div class="craft-num">05</div>
+          <div class="craft-name">The Finish</div>
+          <p class="craft-desc">Thoughtful finishing for a flawless piece.</p>
+        </div>
 
       </div>
 
-
-      <!-- CONTACT FORM -->
-
-
-      <form
-        class="contact-form"
-        id="contactForm"
-        onsubmit="handleSubmit(event)">
-
-
-        <div class="form-row">
-
-
-          <div class="form-group">
-
-            <input
-              type="text"
-              id="fname"
-              placeholder="Name"
-              required
-            />
-
-            <label for="fname">
-              Name
-            </label>
-
-          </div>
-
-
-          <div class="form-group">
-
-            <input
-              type="email"
-              id="femail"
-              placeholder="Email"
-              required
-            />
-
-            <label for="femail">
-              Email
-            </label>
-
-          </div>
-
-
-        </div>
-
-
-        <div class="form-group">
-
-          <input
-            type="text"
-            id="fsubject"
-            placeholder="Subject"
-          />
-
-          <label for="fsubject">
-
-            Subject / Item of Interest
-
-          </label>
-
-        </div>
-
-
-        <div class="form-group">
-
-          <textarea
-            id="fmessage"
-            rows="5"
-            placeholder="Message"
-            required>
-          </textarea>
-
-          <label for="fmessage">
-
-            Tell us your vision
-
-          </label>
-
-        </div>
-
-
-        <button
-          type="submit"
-          class="form-submit">
-
-          Send Message
-
-          <span>
-            →
-          </span>
-
-        </button>
-
-
-        <div
-          id="formSuccess"
-          style="
-            display:none;
-            margin-top:1rem;
-            font-size:0.75rem;
-            letter-spacing:0.1em;
-            color:var(--accent);
-            font-weight:300;
-          ">
-
-          ✓ Your email app should now
-          be open with your message
-          ready to send.
-
-        </div>
-
-
-        <p
-          style="
-            margin-top:1.5rem;
-            font-size:0.75rem;
-            line-height:1.9;
-            color:var(--ink-light);
-            font-weight:300;
-          ">
-
-          To start an order, please text
-          us on WhatsApp or give us a call
-          at
-
-          <strong
-            style="
-              color:var(--ink);
-              font-weight:400;
-            ">
-
-            +91 98728 56625
-
-          </strong>
-
-          — it's the fastest way to begin.
-
-        </p>
-
-
-      </form>
-
+      <div class="craft-cta reveal">
+        <a href="#bespoke" class="btn-outline">Explore the Craft</a>
+      </div>
 
     </div>
+  </section>
 
+
+  <!-- ============================
+       BESPOKE
+  ============================ -->
+
+  <section class="bespoke-section" id="bespoke">
+    <div class="wrap">
+
+      <div class="bespoke-grid">
+
+        <div class="bespoke-content">
+          <p class="eyebrow reveal">Bespoke</p>
+          <h2 class="heading upper reveal reveal-delay-1">
+            Made for you.<br />Made only once.
+          </h2>
+          <p class="body-text reveal reveal-delay-2">
+            Your story, your inspiration, our craftsmanship —
+            brought together to create something exclusively yours.
+          </p>
+          <a href="#footer" class="btn-dark reveal reveal-delay-3">
+            Begin Your Bespoke Piece
+          </a>
+        </div>
+
+        <div class="bespoke-gallery">
+          <div class="bespoke-photo reveal">
+            <img src="suitp.png" alt="Bespoke piece detail 1" />
+          </div>
+          <div class="bespoke-photo reveal reveal-delay-1">
+            <img src="photo4.png" alt="Bespoke piece detail 2" />
+          </div>
+          <div class="bespoke-photo reveal reveal-delay-2">
+            <img src="photo9.png" alt="Bespoke piece detail 3" />
+          </div>
+          <div class="bespoke-photo reveal reveal-delay-3">
+            <img src="photo10.png" alt="Bespoke piece detail 4" />
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================
+       ABOUT THE ARTIST
+  ============================ -->
+
+  <section class="about-section" id="about">
+    <div class="wrap">
+
+      <div class="about-grid">
+
+        <div class="about-photo reveal-left">
+          <img src="profilepic.png" alt="Komal Oswal at work" />
+        </div>
+
+        <div class="about-text">
+          <p class="eyebrow reveal reveal-delay-1">About Komal</p>
+          <h2 class="heading upper reveal reveal-delay-2">About the Artist</h2>
+          <p class="body-text reveal reveal-delay-3">
+            Art has always been my way of seeing. From paintings on
+            canvas to art on fabric, my journey has been about
+            merging creativity with craftsmanship to create
+            wearable pieces of art.
+          </p>
+
+          <div class="reveal reveal-delay-4">
+            <div class="about-name">Komal Oswal</div>
+            <div class="about-role">Founder &amp; Artist, KO Esthètique</div>
+          </div>
+
+          <a href="#journal" class="link-arrow reveal reveal-delay-5">
+            Read More <span>→</span>
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================
+       JOURNAL
+  ============================ -->
+
+  <section class="journal-section" id="journal">
+    <div class="wrap">
+
+      <div class="section-center">
+        <p class="eyebrow reveal">Stories from the atelier</p>
+        <h2 class="heading upper reveal reveal-delay-1">The Journal</h2>
+      </div>
+
+      <div class="journal-grid">
+
+        <a href="#" class="journal-item reveal">
+          <div class="journal-thumb">
+            <img src="photo8.png" alt="The making of a piece" />
+          </div>
+          <div class="journal-title">The Making of a Piece</div>
+        </a>
+
+        <a href="#" class="journal-item reveal reveal-delay-1">
+          <div class="journal-thumb">
+            <img src="photo9.png" alt="Behind the brush" />
+          </div>
+          <div class="journal-title">Behind the Brush</div>
+        </a>
+
+        <a href="#" class="journal-item reveal reveal-delay-2">
+          <div class="journal-thumb">
+            <img src="photo10.png" alt="The story behind the motif" />
+          </div>
+          <div class="journal-title">The Story Behind the Motif</div>
+        </a>
+
+        <a href="#" class="journal-item reveal reveal-delay-3">
+          <div class="journal-thumb">
+            <img src="profilepic2.png" alt="From canvas to couture" />
+          </div>
+          <div class="journal-title">From Canvas to Couture</div>
+        </a>
+
+      </div>
+
+      <div class="journal-cta reveal">
+        <a href="#footer" class="link-arrow">View All Stories <span>→</span></a>
+      </div>
+
+    </div>
   </section>
 
 
@@ -3678,66 +1372,53 @@ mask-image: linear-gradient(
        FOOTER
   ============================ -->
 
-  <footer>
+  <footer id="footer">
+    <div class="wrap">
 
+      <div class="footer-grid">
 
-    <div class="footer-logo">
+        <div>
+          <div class="footer-logo">KO Esthètique</div>
+          <p class="footer-tag">Wearable Art • Crafted by Hand</p>
+          <div class="footer-social">
+            <a href="https://instagram.com/ko_esthetique" target="_blank" rel="noopener" aria-label="Instagram">◈</a>
+            <a href="https://wa.me/919872856625" target="_blank" rel="noopener" aria-label="WhatsApp">☏</a>
+            <a href="mailto:komaloswal@gmail.com" aria-label="Email">✉</a>
+          </div>
+        </div>
 
-      Ko Esthetique
+        <div class="footer-col">
+          <p class="footer-col-title">Explore</p>
+          <a href="#collections">Collections</a>
+          <a href="#craft">The Craft</a>
+          <a href="#bespoke">Bespoke</a>
+          <a href="#about">About</a>
+          <a href="#journal">Journal</a>
+        </div>
 
-    </div>
+        <div class="footer-col">
+          <p class="footer-col-title">Help</p>
+          <span>Shipping</span>
+          <span>Returns</span>
+          <span>Care Guide</span>
+          <span>FAQs</span>
+        </div>
 
+        <div class="footer-col">
+          <p class="footer-col-title">Connect</p>
+          <a href="https://wa.me/919872856625" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="mailto:komaloswal@gmail.com">Email</a>
+          <a href="https://instagram.com/ko_esthetique" target="_blank" rel="noopener">Instagram</a>
+        </div>
 
-    <ul class="footer-links">
+      </div>
 
-
-      <li>
-
-        <a href="#collections">
-          Collections
-        </a>
-
-      </li>
-
-
-      <li>
-
-        <a href="#about">
-          About
-        </a>
-
-      </li>
-
-
-      <li>
-
-        <a href="#custom">
-          Custom Orders
-        </a>
-
-      </li>
-
-
-      <li>
-
-        <a href="mailto:komaloswal@gmail.com">
-          Contact
-        </a>
-
-      </li>
-
-
-    </ul>
-
-
-    <div class="footer-copy">
-
-      © 2026 Ko Esthetique.
-      All rights reserved.
+      <div class="footer-bottom">
+        <span>© 2026 KO Esthètique. All rights reserved.</span>
+        <span>Ludhiana, India</span>
+      </div>
 
     </div>
-
-
   </footer>
 
 
@@ -3747,1177 +1428,254 @@ mask-image: linear-gradient(
 
   <script>
 
-
-    /* ============================
-       START AT TOP
-    ============================ */
-
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
-
     window.scrollTo(0, 0);
 
 
-    /* ============================
-       CUSTOM CURSOR
-    ============================ */
+    /* CUSTOM CURSOR */
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
 
-    const cursor =
-      document.getElementById('cursor');
-
-    const ring =
-      document.getElementById('cursorRing');
-
-
-    let mx = 0;
-    let my = 0;
-
-    let rx = 0;
-    let ry = 0;
-
-
-    document.addEventListener(
-      'mousemove',
-      e => {
-
-        mx = e.clientX;
-        my = e.clientY;
-
-        cursor.style.left =
-          mx + 'px';
-
-        cursor.style.top =
-          my + 'px';
-
-      }
-    );
-
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top = my + 'px';
+    });
 
     function animateRing() {
-
-      rx +=
-        (mx - rx) * 0.12;
-
-      ry +=
-        (my - ry) * 0.12;
-
-
-      ring.style.left =
-        rx + 'px';
-
-      ring.style.top =
-        ry + 'px';
-
-
-      requestAnimationFrame(
-        animateRing
-      );
-
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px';
+      ring.style.top = ry + 'px';
+      requestAnimationFrame(animateRing);
     }
-
-
     animateRing();
 
 
-    /* ============================
-       LOGO CLICK
-    ============================ */
-
-    const logoLink =
-      document.getElementById(
-        'logoHomeLink'
-      );
-
-
-    logoLink.addEventListener(
-      'click',
-      e => {
-
-        e.preventDefault();
+    /* LOGO CLICK -> PAINT BURST */
+    const logoLink = document.getElementById('logoHomeLink');
+    logoLink.addEventListener('click', e => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const rect = logoLink.getBoundingClientRect();
+      spawnPaintBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+      if (!animating) { animating = true; paintLoop(); }
+    });
 
 
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-
-
-        const rect =
-          logoLink.getBoundingClientRect();
-
-
-        spawnPaintBurst(
-          rect.left +
-            rect.width / 2,
-
-          rect.top +
-            rect.height / 2
-        );
-
-
-        if (!animating) {
-
-          animating = true;
-
-          paintLoop();
-
-        }
-
-      }
-    );
-
-
-    /* ============================
-       MOBILE MENU
-    ============================ */
-
-    const navToggle =
-      document.getElementById('navToggle');
-
-    const mobileMenu =
-      document.getElementById('mobileMenu');
-
+    /* MOBILE MENU */
+    const navToggle = document.getElementById('navToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
 
     function closeMobileMenu() {
-
       mobileMenu.classList.remove('open');
       navToggle.setAttribute('aria-expanded', 'false');
-
     }
 
+    navToggle.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
 
-    navToggle.addEventListener(
-      'click',
-      () => {
-
-        const isOpen =
-          mobileMenu.classList.toggle('open');
-
-        navToggle.setAttribute(
-          'aria-expanded',
-          isOpen ? 'true' : 'false'
-        );
-
-      }
-    );
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
+    });
 
 
-    mobileMenu
-      .querySelectorAll('a')
-      .forEach(link => {
-
-        link.addEventListener(
-          'click',
-          closeMobileMenu
-        );
-
+    /* SCROLL REVEAL */
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
       });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
 
+    revealEls.forEach(el => observer.observe(el));
 
-    /* ============================
-       SCROLL REVEAL
-    ============================ */
 
-    const revealEls =
-      document.querySelectorAll(
-        '.reveal, .reveal-left, .reveal-right'
-      );
-
-
-    const observer =
-      new IntersectionObserver(
-
-        entries => {
-
-          entries.forEach(
-            entry => {
-
-              if (
-                entry.isIntersecting
-              ) {
-
-                entry.target
-                  .classList
-                  .add('visible');
-
-              }
-
-            }
-          );
-
-        },
-
-        {
-          threshold: 0.12,
-
-          rootMargin:
-            '0px 0px -60px 0px'
-        }
-
-      );
-
-
-    revealEls.forEach(
-      element =>
-        observer.observe(element)
-    );
-
-
-    /* ============================
-       PARALLAX
-    ============================ */
-
-    function applyParallax() {
-
-      document
-        .querySelectorAll(
-          '.parallax-host'
-        )
-        .forEach(host => {
-
-
-          const inner =
-            host.querySelector(
-              '.parallax-inner'
-            );
-
-
-          if (!inner) {
-            return;
-          }
-
-
-          const rect =
-            host.getBoundingClientRect();
-
-
-          const viewH =
-            window.innerHeight;
-
-
-          const pct =
-            (viewH - rect.top) /
-            (viewH + rect.height);
-
-
-          const shift =
-            (pct - 0.5) * 60;
-
-
-          inner.style.transform =
-            `translateY(${shift}px)`;
-
-
-          inner.style.height =
-            'calc(100% + 60px)';
-
-
-          inner.style.marginTop =
-            '-30px';
-
-
-        });
-
-    }
-
-
-    window.addEventListener(
-      'scroll',
-      applyParallax,
-      {
-        passive: true
-      }
-    );
-
-
-    applyParallax();
-
-
-    /* ============================
-       CONTACT FORM
-    ============================ */
-
-    function handleSubmit(e) {
-
-      e.preventDefault();
-
-
-      const name =
-        document
-          .getElementById('fname')
-          .value;
-
-
-      const email =
-        document
-          .getElementById('femail')
-          .value;
-
-
-      const subject =
-        document
-          .getElementById('fsubject')
-          .value
-        ||
-        'New Inquiry — Ko Esthetique';
-
-
-      const message =
-        document
-          .getElementById('fmessage')
-          .value;
-
-
-      const body =
-`Name: ${name}
-Email: ${email}
-
-${message}`;
-
-
-      const mailtoLink =
-        `mailto:komaloswal@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-
-      window.location.href =
-        mailtoLink;
-
-
-      document
-        .getElementById(
-          'formSuccess'
-        )
-        .style
-        .display =
-        'block';
-
-
-      e.target.reset();
-
-    }
-
-
-    /* ============================
-       PAINT PARTICLES
-    ============================ */
-
-    const canvas =
-      document.getElementById(
-        'paint-canvas'
-      );
-
-
-    const ctx =
-      canvas.getContext('2d');
-
+    /* PAINT PARTICLES */
+    const canvas = document.getElementById('paint-canvas');
+    const ctx = canvas.getContext('2d');
 
     function resizePaintCanvas() {
-
-      canvas.width =
-        window.innerWidth;
-
-      canvas.height =
-        window.innerHeight;
-
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     }
-
-
     resizePaintCanvas();
-
-
-    window.addEventListener(
-      'resize',
-      resizePaintCanvas
-    );
-
+    window.addEventListener('resize', resizePaintCanvas);
 
     let particles = [];
-
     let animating = false;
 
-
     function hexToRgb(hex) {
-
       return {
-
-        r:
-          parseInt(
-            hex.slice(1, 3),
-            16
-          ),
-
-        g:
-          parseInt(
-            hex.slice(3, 5),
-            16
-          ),
-
-        b:
-          parseInt(
-            hex.slice(5, 7),
-            16
-          )
-
+        r: parseInt(hex.slice(1, 3), 16),
+        g: parseInt(hex.slice(3, 5), 16),
+        b: parseInt(hex.slice(5, 7), 16)
       };
-
     }
 
+    const burstPalette = ['#c8a97e', '#e8d9c5', '#d4c4b0', '#b8a898', '#f0e8dc', '#ddd0bf', '#e4d8c8'];
 
-    const burstPalette = [
-
-      '#c8a97e',
-      '#e8d9c5',
-      '#d4c4b0',
-      '#b8a898',
-      '#f0e8dc',
-      '#ddd0bf',
-      '#e4d8c8'
-
-    ];
-
-
-    function spawnPaintBurst(
-      x,
-      y
-    ) {
-
-
-      const count =
-        80 +
-        Math.floor(
-          Math.random() * 60
-        );
-
-
-      for (
-        let i = 0;
-        i < count;
-        i++
-      ) {
-
-
-        const angle =
-          Math.random() *
-          Math.PI *
-          2;
-
-
-        const speed =
-          4 +
-          Math.random() *
-          14;
-
-
-        const size =
-          6 +
-          Math.random() *
-          22;
-
-
-        const rgb =
-          hexToRgb(
-
-            burstPalette[
-              Math.floor(
-                Math.random() *
-                burstPalette.length
-              )
-            ]
-
-          );
-
-
+    function spawnPaintBurst(x, y) {
+      const count = 80 + Math.floor(Math.random() * 60);
+      for (let i = 0; i < count; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 4 + Math.random() * 14;
+        const size = 6 + Math.random() * 22;
+        const rgb = hexToRgb(burstPalette[Math.floor(Math.random() * burstPalette.length)]);
         particles.push({
-
-          x,
-          y,
-
-          vx:
-            Math.cos(angle) *
-            speed,
-
-          vy:
-            Math.sin(angle) *
-            speed -
-            Math.random() * 4,
-
-          size,
-
-          ...rgb,
-
-          alpha:
-            0.85 +
-            Math.random() * 0.15,
-
-          decay:
-            0.012 +
-            Math.random() * 0.018,
-
-          gravity:
-            0.18 +
-            Math.random() * 0.14,
-
-          squish:
-            0.7 +
-            Math.random() * 0.6
-
+          x, y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed - Math.random() * 4,
+          size, ...rgb,
+          alpha: 0.85 + Math.random() * 0.15,
+          decay: 0.012 + Math.random() * 0.018,
+          gravity: 0.18 + Math.random() * 0.14,
+          squish: 0.7 + Math.random() * 0.6
         });
-
       }
-
-
-      for (
-        let i = 0;
-        i < 50;
-        i++
-      ) {
-
-
-        const angle =
-          Math.random() *
-          Math.PI *
-          2;
-
-
-        const speed =
-          8 +
-          Math.random() *
-          18;
-
-
+      for (let i = 0; i < 50; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 8 + Math.random() * 18;
         particles.push({
-
-          x,
-          y,
-
-          vx:
-            Math.cos(angle) *
-            speed,
-
-          vy:
-            Math.sin(angle) *
-            speed -
-            Math.random() * 6,
-
-          size:
-            2 +
-            Math.random() * 5,
-
-          r: 255,
-          g: 220,
-          b: 150,
-
+          x, y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed - Math.random() * 6,
+          size: 2 + Math.random() * 5,
+          r: 255, g: 220, b: 150,
           alpha: 1,
-
-          decay:
-            0.02 +
-            Math.random() * 0.03,
-
-          gravity: 0.25,
-
-          squish: 1,
-
-          sparkle: true
-
+          decay: 0.02 + Math.random() * 0.03,
+          gravity: 0.25, squish: 1, sparkle: true
         });
-
       }
-
     }
-
 
     function paintLoop() {
-
-
-      if (
-        particles.length === 0
-      ) {
-
+      if (particles.length === 0) {
         animating = false;
-
-        ctx.clearRect(
-          0,
-          0,
-          canvas.width,
-          canvas.height
-        );
-
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         return;
-
       }
-
-
-      ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-      );
-
-
-      particles =
-        particles.filter(
-          p =>
-            p.alpha > 0.02
-        );
-
-
-      particles.forEach(
-        p => {
-
-
-          p.vy += p.gravity;
-
-          p.x += p.vx;
-
-          p.y += p.vy;
-
-
-          p.vx *= 0.97;
-
-          p.vy *= 0.97;
-
-
-          p.alpha -=
-            p.decay;
-
-
-          ctx.save();
-
-
-          ctx.globalAlpha =
-            Math.max(
-              0,
-              p.alpha
-            );
-
-
-          ctx.translate(
-            p.x,
-            p.y
-          );
-
-
-          ctx.fillStyle =
-            `rgb(${p.r},${p.g},${p.b})`;
-
-
-          if (p.sparkle) {
-
-
-            ctx.strokeStyle =
-              `rgb(${p.r},${p.g},${p.b})`;
-
-
-            ctx.lineWidth =
-              0.8;
-
-
-            ctx.beginPath();
-
-
-            ctx.moveTo(
-              0,
-              -p.size * 2
-            );
-
-            ctx.lineTo(
-              0,
-              p.size * 2
-            );
-
-
-            ctx.moveTo(
-              -p.size * 2,
-              0
-            );
-
-            ctx.lineTo(
-              p.size * 2,
-              0
-            );
-
-
-            ctx.stroke();
-
-
-          } else {
-
-
-            ctx.beginPath();
-
-
-            ctx.ellipse(
-
-              0,
-              0,
-
-              p.size *
-                p.squish,
-
-              p.size /
-                p.squish,
-
-              Math.atan2(
-                p.vy,
-                p.vx
-              ),
-
-              0,
-
-              Math.PI * 2
-
-            );
-
-
-            ctx.fill();
-
-          }
-
-
-          ctx.restore();
-
-
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles = particles.filter(p => p.alpha > 0.02);
+      particles.forEach(p => {
+        p.vy += p.gravity;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vx *= 0.97;
+        p.vy *= 0.97;
+        p.alpha -= p.decay;
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, p.alpha);
+        ctx.translate(p.x, p.y);
+        ctx.fillStyle = `rgb(${p.r},${p.g},${p.b})`;
+        if (p.sparkle) {
+          ctx.strokeStyle = `rgb(${p.r},${p.g},${p.b})`;
+          ctx.lineWidth = 0.8;
+          ctx.beginPath();
+          ctx.moveTo(0, -p.size * 2); ctx.lineTo(0, p.size * 2);
+          ctx.moveTo(-p.size * 2, 0); ctx.lineTo(p.size * 2, 0);
+          ctx.stroke();
+        } else {
+          ctx.beginPath();
+          ctx.ellipse(0, 0, p.size * p.squish, p.size / p.squish, Math.atan2(p.vy, p.vx), 0, Math.PI * 2);
+          ctx.fill();
         }
-      );
-
-
-      requestAnimationFrame(
-        paintLoop
-      );
-
+        ctx.restore();
+      });
+      requestAnimationFrame(paintLoop);
     }
 
 
-    /* ============================
-       GLITTER RAIN
-    ============================ */
-
-    const gc =
-      document.getElementById(
-        'glitter-canvas'
-      );
-
-
-    const gctx =
-      gc.getContext('2d');
-
+    /* GLITTER RAIN */
+    const gc = document.getElementById('glitter-canvas');
+    const gctx = gc.getContext('2d');
 
     function resizeGlitter() {
-
-
-      const nav =
-        document.getElementById(
-          'navbar'
-        );
-
-
-      gc.width =
-        window.innerWidth;
-
-
-      gc.height =
-        nav
-          ? nav.offsetHeight
-          : 150;
-
-
+      const nav = document.getElementById('navbar');
+      gc.width = window.innerWidth;
+      gc.height = nav ? nav.offsetHeight : 130;
     }
-
-
     resizeGlitter();
-
-
-    window.addEventListener(
-      'resize',
-      resizeGlitter
-    );
-
+    window.addEventListener('resize', resizeGlitter);
 
     const glitterColors = [
-
-      {
-        r: 255,
-        g: 215,
-        b: 120
-      },
-
-      {
-        r: 255,
-        g: 235,
-        b: 180
-      },
-
-      {
-        r: 255,
-        g: 190,
-        b: 160
-      },
-
-      {
-        r: 240,
-        g: 220,
-        b: 255
-      },
-
-      {
-        r: 255,
-        g: 255,
-        b: 240
-      },
-
-      {
-        r: 200,
-        g: 169,
-        b: 126
-      }
-
+      { r: 255, g: 215, b: 120 }, { r: 255, g: 235, b: 180 }, { r: 255, g: 190, b: 160 },
+      { r: 240, g: 220, b: 255 }, { r: 255, g: 255, b: 240 }, { r: 200, g: 169, b: 126 }
     ];
 
-
-    const FLAKE_COUNT =
-      55;
-
-
+    const FLAKE_COUNT = 50;
     const flakes = [];
 
-
-    function randomFlake(
-      flake
-    ) {
-
-
-      const c =
-        glitterColors[
-          Math.floor(
-            Math.random() *
-            glitterColors.length
-          )
-        ];
-
-
-      flake.x =
-        Math.random() *
-        gc.width;
-
-
-      flake.y =
-        -Math.random() *
-        gc.height;
-
-
-      flake.size =
-        0.8 +
-        Math.random() *
-        2.2;
-
-
-      flake.speed =
-        0.35 +
-        Math.random() *
-        0.7;
-
-
-      flake.drift =
-        (Math.random() - 0.5) *
-        0.25;
-
-
-      flake.r = c.r;
-      flake.g = c.g;
-      flake.b = c.b;
-
-
-      flake.phase =
-        Math.random() *
-        Math.PI *
-        2;
-
-
-      flake.phaseSpeed =
-        0.04 +
-        Math.random() *
-        0.06;
-
-
-      flake.shape =
-        Math.random() > 0.5
-          ? 'star'
-          : 'circle';
-
+    function randomFlake(flake) {
+      const c = glitterColors[Math.floor(Math.random() * glitterColors.length)];
+      flake.x = Math.random() * gc.width;
+      flake.y = -Math.random() * gc.height;
+      flake.size = 0.8 + Math.random() * 2.2;
+      flake.speed = 0.35 + Math.random() * 0.7;
+      flake.drift = (Math.random() - 0.5) * 0.25;
+      flake.r = c.r; flake.g = c.g; flake.b = c.b;
+      flake.phase = Math.random() * Math.PI * 2;
+      flake.phaseSpeed = 0.04 + Math.random() * 0.06;
+      flake.shape = Math.random() > 0.5 ? 'star' : 'circle';
     }
 
-
-    for (
-      let i = 0;
-      i < FLAKE_COUNT;
-      i++
-    ) {
-
-
+    for (let i = 0; i < FLAKE_COUNT; i++) {
       const f = {};
-
-
       randomFlake(f);
-
-
-      f.y =
-        Math.random() *
-        gc.height;
-
-
+      f.y = Math.random() * gc.height;
       flakes.push(f);
-
     }
 
-
-    function smoothstep(
-      edge0,
-      edge1,
-      x
-    ) {
-
-
-      const t =
-        Math.max(
-          0,
-          Math.min(
-            1,
-            (x - edge0) /
-            (edge1 - edge0)
-          )
-        );
-
-
-      return (
-        t *
-        t *
-        (3 - 2 * t)
-      );
-
+    function smoothstep(edge0, edge1, x) {
+      const t = Math.max(0, Math.min(1, (x - edge0) / (edge1 - edge0)));
+      return t * t * (3 - 2 * t);
     }
-
 
     function glitterLoop() {
-
-
-      gctx.clearRect(
-        0,
-        0,
-        gc.width,
-        gc.height
-      );
-
-
-      flakes.forEach(
-        f => {
-
-
-          f.phase +=
-            f.phaseSpeed;
-
-
-          const shimmer =
-            0.15 +
-            0.75 *
-            Math.abs(
-              Math.sin(
-                f.phase
-              )
-            );
-
-
-          const edgeFade =
-            Math.min(
-
-              smoothstep(
-                0,
-                0.15,
-                f.y / gc.height
-              ),
-
-              smoothstep(
-                1,
-                0.78,
-                f.y / gc.height
-              )
-
-            );
-
-
-          const alpha =
-            shimmer *
-            edgeFade;
-
-
-          gctx.save();
-
-
-          gctx.globalAlpha =
-            Math.max(
-              0,
-              alpha
-            );
-
-
-          gctx.translate(
-            f.x,
-            f.y
-          );
-
-
-          if (
-            f.shape === 'star'
-          ) {
-
-
-            gctx.strokeStyle =
-              `rgb(${f.r},${f.g},${f.b})`;
-
-
-            gctx.lineWidth =
-              0.4;
-
-
-            const s =
-              f.size;
-
-
-            gctx.beginPath();
-
-
-            gctx.moveTo(
-              0,
-              -s * 2.2
-            );
-
-            gctx.lineTo(
-              0,
-              s * 2.2
-            );
-
-
-            gctx.moveTo(
-              -s * 2.2,
-              0
-            );
-
-            gctx.lineTo(
-              s * 2.2,
-              0
-            );
-
-
-            gctx.moveTo(
-              -s * 1.2,
-              -s * 1.2
-            );
-
-            gctx.lineTo(
-              s * 1.2,
-              s * 1.2
-            );
-
-
-            gctx.moveTo(
-              s * 1.2,
-              -s * 1.2
-            );
-
-            gctx.lineTo(
-              -s * 1.2,
-              s * 1.2
-            );
-
-
-            gctx.stroke();
-
-
-          } else {
-
-
-            const grad =
-              gctx.createRadialGradient(
-
-                0,
-                0,
-                0,
-
-                0,
-                0,
-
-                f.size * 2
-
-              );
-
-
-            grad.addColorStop(
-              0,
-
-              `rgba(${f.r},${f.g},${f.b},1)`
-            );
-
-
-            grad.addColorStop(
-              0.5,
-
-              `rgba(${f.r},${f.g},${f.b},0.5)`
-            );
-
-
-            grad.addColorStop(
-              1,
-
-              `rgba(${f.r},${f.g},${f.b},0)`
-            );
-
-
-            gctx.fillStyle =
-              grad;
-
-
-            gctx.beginPath();
-
-
-            gctx.arc(
-
-              0,
-              0,
-
-              f.size * 2,
-
-              0,
-
-              Math.PI * 2
-
-            );
-
-
-            gctx.fill();
-
-          }
-
-
-          gctx.restore();
-
-
+      gctx.clearRect(0, 0, gc.width, gc.height);
+      flakes.forEach(f => {
+        f.phase += f.phaseSpeed;
+        const shimmer = 0.15 + 0.75 * Math.abs(Math.sin(f.phase));
+        const edgeFade = Math.min(
+          smoothstep(0, 0.15, f.y / gc.height),
+          smoothstep(1, 0.78, f.y / gc.height)
+        );
+        const alpha = shimmer * edgeFade;
+        gctx.save();
+        gctx.globalAlpha = Math.max(0, alpha);
+        gctx.translate(f.x, f.y);
+        if (f.shape === 'star') {
+          gctx.strokeStyle = `rgb(${f.r},${f.g},${f.b})`;
+          gctx.lineWidth = 0.4;
+          const s = f.size;
+          gctx.beginPath();
+          gctx.moveTo(0, -s * 2.2); gctx.lineTo(0, s * 2.2);
+          gctx.moveTo(-s * 2.2, 0); gctx.lineTo(s * 2.2, 0);
+          gctx.moveTo(-s * 1.2, -s * 1.2); gctx.lineTo(s * 1.2, s * 1.2);
+          gctx.moveTo(s * 1.2, -s * 1.2); gctx.lineTo(-s * 1.2, s * 1.2);
+          gctx.stroke();
+        } else {
+          const grad = gctx.createRadialGradient(0, 0, 0, 0, 0, f.size * 2);
+          grad.addColorStop(0, `rgba(${f.r},${f.g},${f.b},1)`);
+          grad.addColorStop(0.5, `rgba(${f.r},${f.g},${f.b},0.5)`);
+          grad.addColorStop(1, `rgba(${f.r},${f.g},${f.b},0)`);
+          gctx.fillStyle = grad;
+          gctx.beginPath();
+          gctx.arc(0, 0, f.size * 2, 0, Math.PI * 2);
+          gctx.fill();
         }
-      );
-
-
-      requestAnimationFrame(
-        glitterLoop
-      );
-
+        gctx.restore();
+      });
+      requestAnimationFrame(glitterLoop);
     }
-
-
     glitterLoop();
 
-
   </script>
-
 
 </body>
 </html>
