@@ -521,14 +521,18 @@
       position: absolute;
       inset: 0;
 
-      background:
-        linear-gradient(
-          135deg,
-          #d4c4b0 0%,
-          #b8a898 40%,
-          #9c8878 100%
-        );
+      background:#f9f6f1;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
     }
+
+    .hero-img img {
+  width: 72%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
 
 
     .hero-img::after {
@@ -610,9 +614,9 @@ mask-image: linear-gradient(
       width: 100%;
       height: 100%;
 
-      object-fit: cover;
+      opacity: 0.45;
 
-      opacity: 0.85;
+      pointer-events: none
     }
 
 
