@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Dressed in Art By Komal Oswal — Wearable Art, Crafted Differently</title>
+  <title>KO Esthétique by KO — Wearable Art, Crafted Differently</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -314,13 +314,6 @@
       width: 100vw; height: 100vh;
       pointer-events: none;
       z-index: 99999;
-    }
-
-    #glitter-canvas {
-      position: fixed; top: 0; left: 0;
-      width: 100%; height: 130px;
-      pointer-events: none;
-      z-index: 1001;
     }
 
 
@@ -1289,7 +1282,6 @@
 
       nav { height: 96px; padding: 0 1.5rem; }
       nav::after { bottom: -44px; height: 44px; }
-      #glitter-canvas { height: 96px; }
 
       .nav-left, .nav-right { gap: 1.3rem; width: auto; }
       .nav-left a:nth-child(3), .nav-right a:nth-child(3) { display: none; }
@@ -1342,14 +1334,24 @@
       }
       .hero-img img {
         object-fit: contain;
-        object-position: center bottom;
+        object-position: 68% bottom;
         transform: scale(1.4);
-        transform-origin: center bottom;
+        transform-origin: 68% bottom;
         -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.35) 12%, black 32%, black 100%);
         mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.35) 12%, black 32%, black 100%);
       }
       .hero-inner { padding-left: 1.5rem; padding-right: 1.5rem; max-width: 100%; }
       .hero-headline { font-size: clamp(2.2rem, 9vw, 3rem); }
+      .hero-cta-row {
+        gap: 1.1rem;
+        margin-bottom: 0.5rem;
+      }
+      .hero-cta-row .btn-dark {
+        padding: 0.75rem 1.7rem;
+        font-size: 0.56rem;
+        letter-spacing: 0.22em;
+        gap: 0.5rem;
+      }
       .hero-text-veil {
         background: linear-gradient(
           to bottom,
@@ -1380,7 +1382,6 @@
   <div class="cursor-ring" id="cursorRing"></div>
 
   <canvas id="paint-canvas"></canvas>
-  <canvas id="glitter-canvas"></canvas>
 
 
   <!-- ============================
@@ -1397,7 +1398,7 @@
 
     <div class="nav-center">
       <a href="#home" id="logoHomeLink" aria-label="Go to top" class="nav-text-logo">
-        Dressed in Art By Komal Oswal
+        KO Esthétique by KO
       </a>
     </div>
 
@@ -1414,7 +1415,7 @@
 
   <div class="mobile-menu" id="mobileMenu">
     <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">✕</button>
-    <p class="mobile-menu-logo">Dressed in Art</p>
+    <p class="mobile-menu-logo">KO Esthétique</p>
     <a href="#home">Home</a>
     <a href="#collections">Collections</a>
     <a href="#craft">The Craft</a>
@@ -2237,89 +2238,6 @@
     }
 
 
-    /* GLITTER RAIN */
-    const gc = document.getElementById('glitter-canvas');
-    const gctx = gc.getContext('2d');
-
-    function resizeGlitter() {
-      const nav = document.getElementById('navbar');
-      gc.width = window.innerWidth;
-      gc.height = nav ? nav.offsetHeight : 130;
-    }
-    resizeGlitter();
-    window.addEventListener('resize', resizeGlitter);
-
-    const glitterColors = [
-      { r: 255, g: 215, b: 120 }, { r: 255, g: 235, b: 180 }, { r: 255, g: 190, b: 160 },
-      { r: 240, g: 220, b: 255 }, { r: 255, g: 255, b: 240 }, { r: 200, g: 169, b: 126 }
-    ];
-
-    const FLAKE_COUNT = 50;
-    const flakes = [];
-
-    function randomFlake(flake) {
-      const c = glitterColors[Math.floor(Math.random() * glitterColors.length)];
-      flake.x = Math.random() * gc.width;
-      flake.y = -Math.random() * gc.height;
-      flake.size = 0.8 + Math.random() * 2.2;
-      flake.speed = 0.35 + Math.random() * 0.7;
-      flake.drift = (Math.random() - 0.5) * 0.25;
-      flake.r = c.r; flake.g = c.g; flake.b = c.b;
-      flake.phase = Math.random() * Math.PI * 2;
-      flake.phaseSpeed = 0.04 + Math.random() * 0.06;
-      flake.shape = Math.random() > 0.5 ? 'star' : 'circle';
-    }
-
-    for (let i = 0; i < FLAKE_COUNT; i++) {
-      const f = {};
-      randomFlake(f);
-      f.y = Math.random() * gc.height;
-      flakes.push(f);
-    }
-
-    function smoothstep(edge0, edge1, x) {
-      const t = Math.max(0, Math.min(1, (x - edge0) / (edge1 - edge0)));
-      return t * t * (3 - 2 * t);
-    }
-
-    function glitterLoop() {
-      gctx.clearRect(0, 0, gc.width, gc.height);
-      flakes.forEach(f => {
-        f.phase += f.phaseSpeed;
-        const shimmer = 0.15 + 0.75 * Math.abs(Math.sin(f.phase));
-        const edgeFade = Math.min(
-          smoothstep(0, 0.15, f.y / gc.height),
-          smoothstep(1, 0.78, f.y / gc.height)
-        );
-        const alpha = shimmer * edgeFade;
-        gctx.save();
-        gctx.globalAlpha = Math.max(0, alpha);
-        gctx.translate(f.x, f.y);
-        if (f.shape === 'star') {
-          gctx.strokeStyle = `rgb(${f.r},${f.g},${f.b})`;
-          gctx.lineWidth = 0.4;
-          const s = f.size;
-          gctx.beginPath();
-          gctx.moveTo(0, -s * 2.2); gctx.lineTo(0, s * 2.2);
-          gctx.moveTo(-s * 2.2, 0); gctx.lineTo(s * 2.2, 0);
-          gctx.moveTo(-s * 1.2, -s * 1.2); gctx.lineTo(s * 1.2, s * 1.2);
-          gctx.moveTo(s * 1.2, -s * 1.2); gctx.lineTo(-s * 1.2, s * 1.2);
-          gctx.stroke();
-        } else {
-          const grad = gctx.createRadialGradient(0, 0, 0, 0, 0, f.size * 2);
-          grad.addColorStop(0, `rgba(${f.r},${f.g},${f.b},1)`);
-          grad.addColorStop(0.5, `rgba(${f.r},${f.g},${f.b},0.5)`);
-          grad.addColorStop(1, `rgba(${f.r},${f.g},${f.b},0)`);
-          gctx.fillStyle = grad;
-          gctx.beginPath();
-          gctx.arc(0, 0, f.size * 2, 0, Math.PI * 2);
-          gctx.fill();
-        }
-        gctx.restore();
-      });
-      requestAnimationFrame(glitterLoop);
-    }
-    glitterLoop();
 
   </script>
 
