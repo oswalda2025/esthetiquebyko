@@ -99,7 +99,8 @@
     }
 
     body:has(a:hover) .cursor,
-    body:has(button:hover) .cursor {
+    body:has(button:hover) .cursor,
+    body:has(.collection-card:hover) .cursor {
       width: 18px;
       height: 18px;
     }
@@ -232,12 +233,12 @@
       position: fixed;
       inset: 0;
       z-index: 998;
-      background: rgba(0, 0, 0, 0.97);
+      background: var(--bg);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 2rem;
+      gap: 1.9rem;
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.4s ease, visibility 0.4s ease;
@@ -245,16 +246,63 @@
 
     .mobile-menu.open { opacity: 1; visibility: visible; }
 
+    .mobile-menu::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 15% 12%, rgba(200,169,126,0.14) 0%, transparent 45%),
+        radial-gradient(circle at 85% 88%, rgba(200,169,126,0.1) 0%, transparent 45%);
+      pointer-events: none;
+    }
+
+    .mobile-menu-logo {
+      position: relative;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+      margin-bottom: 0.8rem;
+    }
+
     .mobile-menu a {
-      font-size: 1.05rem;
-      letter-spacing: 0.26em;
+      position: relative;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.88);
-      font-weight: 300;
+      color: var(--ink);
       transition: color 0.3s;
     }
 
-    .mobile-menu a:hover { color: var(--accent); }
+    .mobile-menu a:hover,
+    .mobile-menu a:active { color: var(--accent); }
+
+    .mobile-menu-close {
+      position: absolute;
+      top: 1.6rem;
+      right: 1.5rem;
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(26,22,18,0.25);
+      background: transparent;
+      color: var(--ink);
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 2;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .mobile-menu-close:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
 
 
     /* ============================
@@ -446,7 +494,8 @@
     .hero-sub {
       font-size: 0.82rem;
       line-height: 1.9;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       color: var(--ink-light);
       font-weight: 300;
       margin-bottom: 2.2rem;
@@ -556,6 +605,164 @@
     .btn-outline:hover {
       background: var(--ink);
       color: var(--bg);
+    }
+
+    .collection-card {
+      cursor: pointer;
+    }
+
+
+    /* ============================
+       COLLECTION GALLERY LIGHTBOX
+    ============================ */
+
+    .gallery-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      background: rgba(10, 8, 6, 0.86);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    .gallery-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .gallery-box {
+      position: relative;
+      width: min(90vw, 1000px);
+      max-height: 86vh;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(24px);
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .gallery-overlay.open .gallery-box {
+      transform: translateY(0);
+    }
+
+    .gallery-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.2rem;
+    }
+
+    .gallery-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      color: var(--bg);
+    }
+
+    .gallery-close {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(249,246,241,0.35);
+      background: transparent;
+      color: var(--bg);
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s, border-color 0.3s;
+      flex-shrink: 0;
+    }
+
+    .gallery-close:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .gallery-track-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .gallery-track {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding-bottom: 0.5rem;
+    }
+
+    .gallery-track::-webkit-scrollbar { height: 6px; }
+    .gallery-track::-webkit-scrollbar-thumb {
+      background: rgba(249,246,241,0.3);
+      border-radius: 10px;
+    }
+
+    .gallery-slide {
+      flex: 0 0 auto;
+      width: min(72vw, 460px);
+      aspect-ratio: 3/4;
+      scroll-snap-align: center;
+      background: var(--bg-2);
+      overflow: hidden;
+    }
+
+    .gallery-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-arrow {
+      flex-shrink: 0;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(249,246,241,0.35);
+      background: rgba(249,246,241,0.06);
+      color: var(--bg);
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .gallery-arrow:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .gallery-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.2rem;
+    }
+
+    .gallery-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(249,246,241,0.35);
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .gallery-dot.active {
+      background: var(--accent);
+      transform: scale(1.3);
+    }
+
+    @media (max-width: 640px) {
+      .gallery-arrow { display: none; }
+      .gallery-slide { width: 84vw; }
     }
 
 
@@ -840,9 +1047,22 @@
 
     .form-group textarea { min-height: 130px; }
 
-    .phone-group { margin-bottom: 1.5rem; }
+    .field-note {
+      font-size: 0.66rem;
+      letter-spacing: 0.02em;
+      color: var(--accent);
+      font-style: italic;
+      font-weight: 300;
+      margin-top: 0.5rem;
+      line-height: 1.5;
+    }
 
-    .phone-label {
+    .phone-field-group {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .phone-field-label {
       display: block;
       font-size: 0.62rem;
       letter-spacing: 0.18em;
@@ -852,36 +1072,30 @@
       margin-bottom: 0.6rem;
     }
 
-    .phone-label .optional-tag {
-      text-transform: none;
-      letter-spacing: 0.02em;
-      color: var(--accent);
-      font-size: 0.68rem;
-      font-style: italic;
-      font-weight: 300;
-    }
-
     .phone-row {
       display: flex;
-      gap: 0.9rem;
+      gap: 1rem;
+      align-items: flex-end;
     }
 
-    .phone-code {
-      width: 92px;
+    .phone-code-field {
+      position: relative;
+      width: 64px;
       flex-shrink: 0;
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid var(--border);
-      padding: 1rem 0 0.6rem;
-      font-size: 0.82rem;
-      font-weight: 300;
-      color: var(--ink);
-      outline: none;
-      cursor: pointer;
     }
 
-    .phone-row input {
-      flex: 1;
+    .phone-plus {
+      position: absolute;
+      left: 0;
+      bottom: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--ink-light);
+      pointer-events: none;
+    }
+
+    .phone-code-input,
+    .phone-number-input {
+      width: 100%;
       background: transparent;
       border: none;
       border-bottom: 1px solid var(--border);
@@ -890,10 +1104,21 @@
       font-weight: 300;
       color: var(--ink);
       outline: none;
+      line-height: 1.2;
+      box-sizing: border-box;
+      transition: border-color 0.3s;
     }
 
-    .phone-code:focus,
-    .phone-row input:focus { border-bottom-color: var(--accent); }
+    .phone-code-input {
+      padding-left: 0.85rem;
+    }
+
+    .phone-number-input {
+      flex: 1;
+    }
+
+    .phone-code-input:focus,
+    .phone-number-input:focus { border-bottom-color: var(--accent); }
 
     .form-submit {
       display: inline-flex;
@@ -1079,7 +1304,7 @@
 
       .contact-grid { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; gap: 0; }
-      .about-photo { max-width: 420px; }
+      .about-photo { max-width: 420px; margin: 0 auto; }
 
       .footer-grid { grid-template-columns: 1fr 1fr; row-gap: 2.5rem; }
     }
@@ -1091,26 +1316,47 @@
 
     @media (max-width: 640px) {
 
+      nav {
+        padding-top: env(safe-area-inset-top, 0px);
+        height: calc(96px + env(safe-area-inset-top, 0px));
+      }
+
       nav::before { display: none; }
       .nav-left, .nav-right { display: none; }
       .nav-toggle {
         display: flex;
         position: absolute;
-        right: 1.25rem; top: 50%;
+        right: calc(1.25rem + env(safe-area-inset-right, 0px));
+        top: calc(50% + env(safe-area-inset-top, 0px) / 2);
         transform: translateY(-50%);
       }
 
+      .mobile-menu-close {
+        top: calc(1.6rem + env(safe-area-inset-top, 0px));
+        right: calc(1.5rem + env(safe-area-inset-right, 0px));
+      }
+
       .hero { height: 82svh; min-height: 560px; }
-      .hero-img img { object-position: right 85%; transform: scale(1.15); transform-origin: 100% 68%; }
+      .hero-img {
+        background: rgb(237, 232, 226);
+      }
+      .hero-img img {
+        object-fit: contain;
+        object-position: center bottom;
+        transform: scale(1.4);
+        transform-origin: center bottom;
+        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.35) 12%, black 32%, black 100%);
+        mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.35) 12%, black 32%, black 100%);
+      }
       .hero-inner { padding-left: 1.5rem; padding-right: 1.5rem; max-width: 100%; }
       .hero-headline { font-size: clamp(2.2rem, 9vw, 3rem); }
       .hero-text-veil {
         background: linear-gradient(
           to bottom,
-          rgba(249,246,241,0.92) 0%,
-          rgba(249,246,241,0.7) 40%,
-          rgba(249,246,241,0.15) 75%,
-          rgba(249,246,241,0) 100%
+          rgba(237,232,226,0.92) 0%,
+          rgba(237,232,226,0.7) 40%,
+          rgba(237,232,226,0.15) 75%,
+          rgba(237,232,226,0) 100%
         );
       }
 
@@ -1167,6 +1413,8 @@
   </nav>
 
   <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">✕</button>
+    <p class="mobile-menu-logo">Dressed in Art</p>
     <a href="#home">Home</a>
     <a href="#collections">Collections</a>
     <a href="#craft">The Craft</a>
@@ -1196,8 +1444,7 @@
         </h1>
 
         <p class="hero-sub reveal reveal-delay-1 visible">
-          Hand painting • Hand embroidery<br />
-          Bespoke craftsmanship
+          Hand-Painted · Embroidery &amp; Embellishment · Bespoke Design
         </p>
 
         <div class="hero-cta-row reveal reveal-delay-2 visible">
@@ -1234,44 +1481,44 @@
 
       <div class="collections-grid">
 
-        <div class="collection-card reveal">
+        <div class="collection-card reveal" onclick="openCollectionGallery('saree')" role="button" tabindex="0">
           <div class="collection-thumb">
             <img src="sareex.png" alt="Sarees collection" />
           </div>
           <div class="collection-name">Sarees</div>
-          <p class="collection-desc">Hand-painted sarees</p>
+          <p class="collection-desc">A canvas for hand-painted art, personalised around your theme, occasion and style.</p>
         </div>
 
-        <div class="collection-card reveal reveal-delay-1">
+        <div class="collection-card reveal reveal-delay-1" onclick="openCollectionGallery('suit')" role="button" tabindex="0">
           <div class="collection-thumb">
             <img src="suitp.png" alt="Suits collection" />
           </div>
           <div class="collection-name">Suits</div>
-          <p class="collection-desc">Artisanal suits &amp; occasionwear</p>
+          <p class="collection-desc">Hand-painted suits, thoughtfully designed and personalised with embroidery, embellishment and detail.</p>
         </div>
 
-        <div class="collection-card reveal reveal-delay-2">
+        <div class="collection-card reveal reveal-delay-2" onclick="openCollectionGallery('dress')" role="button" tabindex="0">
           <div class="collection-thumb">
             <img src="photo5.png" alt="Dresses collection" />
           </div>
           <div class="collection-name">Dresses</div>
-          <p class="collection-desc">Wearable art for contemporary occasions</p>
+          <p class="collection-desc">Contemporary silhouettes transformed with hand-painted themes and personalised details.</p>
         </div>
 
-        <div class="collection-card reveal reveal-delay-3">
+        <div class="collection-card reveal reveal-delay-3" onclick="openCollectionGallery('jacket')" role="button" tabindex="0">
           <div class="collection-thumb">
             <img src="photo4.png" alt="Jackets collection" />
           </div>
           <div class="collection-name">Jackets</div>
-          <p class="collection-desc">Statement pieces with personalised artistry</p>
+          <p class="collection-desc">Your story, your theme, your denim — painted by hand.</p>
         </div>
 
-        <div class="collection-card reveal reveal-delay-4">
+        <div class="collection-card reveal reveal-delay-4" onclick="openCollectionGallery('stole')" role="button" tabindex="0">
           <div class="collection-thumb">
             <img src="photo6.png" alt="Stoles and accessories collection" />
           </div>
           <div class="collection-name">Stoles &amp; Accessories</div>
-          <p class="collection-desc">Smaller canvases, same craftsmanship</p>
+          <p class="collection-desc">Luxurious silk stoles transformed with hand-painted art, personalised for you.</p>
         </div>
 
       </div>
@@ -1405,10 +1652,11 @@
           <p class="eyebrow reveal reveal-delay-1">About Komal</p>
           <h2 class="heading upper reveal reveal-delay-2">About the Artist</h2>
           <p class="body-text reveal reveal-delay-3">
-            Art has always been my way of seeing. From paintings on
-            canvas to art on fabric, my journey has been about
-            merging creativity with craftsmanship to create
-            wearable pieces of art.
+            I have always seen clothes a little differently.
+            A fabric isn't just fabric to me; it is a canvas waiting
+            for colour, movement and a story. What began as a love
+            for painting slowly found its way into fashion, creating
+            pieces that sit somewhere between art and what we wear.
           </p>
 
           <div class="reveal reveal-delay-4">
@@ -1493,31 +1741,37 @@
               </div>
             </div>
 
-            <div class="phone-group">
-              <label class="phone-label">
-                Phone Number <span class="optional-tag">(optional — but recommended, for quicker follow-up)</span>
-              </label>
+            <div class="phone-field-group">
+              <label class="phone-field-label">Phone Number</label>
               <div class="phone-row">
-                <select class="phone-code" id="cfCountryCode" name="phone_code" aria-label="Country code">
-                  <option value="+91" selected>+91 (IN)</option>
-                  <option value="+1">+1 (US/CA)</option>
-                  <option value="+44">+44 (UK)</option>
-                  <option value="+61">+61 (AU)</option>
-                  <option value="+971">+971 (UAE)</option>
-                  <option value="+65">+65 (SG)</option>
-                  <option value="+974">+974 (QA)</option>
-                  <option value="+966">+966 (SA)</option>
-                  <option value="+49">+49 (DE)</option>
-                  <option value="+33">+33 (FR)</option>
-                  <option value="+81">+81 (JP)</option>
-                  <option value="+86">+86 (CN)</option>
-                  <option value="+27">+27 (ZA)</option>
-                  <option value="+64">+64 (NZ)</option>
-                  <option value="+94">+94 (LK)</option>
-                  <option value="+880">+880 (BD)</option>
-                </select>
-                <input type="tel" id="cfPhone" name="phone_number" placeholder="98765 43210" />
+                <div class="phone-code-field">
+                  <span class="phone-plus">+</span>
+                  <input
+                    type="text"
+                    id="cfCountryCode"
+                    name="phone_code"
+                    class="phone-code-input"
+                    placeholder="91"
+                    value="91"
+                    inputmode="numeric"
+                    pattern="[0-9]*"
+                    maxlength="4"
+                    aria-label="Country code"
+                  />
+                </div>
+                <input
+                  type="text"
+                  id="cfPhone"
+                  name="phone_number"
+                  class="phone-number-input"
+                  placeholder="10-digit number"
+                  inputmode="numeric"
+                  pattern="[0-9]*"
+                  maxlength="10"
+                  aria-label="Phone number"
+                />
               </div>
+              <p class="field-note">Optional — but recommended for quicker follow-up.</p>
             </div>
 
             <div class="form-group">
@@ -1609,6 +1863,30 @@
 
 
   <!-- ============================
+       COLLECTION GALLERY LIGHTBOX
+  ============================ -->
+
+  <div class="gallery-overlay" id="galleryOverlay" onclick="handleOverlayClick(event)">
+    <div class="gallery-box">
+
+      <div class="gallery-header">
+        <h3 class="gallery-title" id="galleryTitle">Sarees</h3>
+        <button class="gallery-close" id="galleryClose" aria-label="Close gallery">✕</button>
+      </div>
+
+      <div class="gallery-track-wrap">
+        <button class="gallery-arrow" id="galleryPrev" aria-label="Previous image">←</button>
+        <div class="gallery-track" id="galleryTrack"></div>
+        <button class="gallery-arrow" id="galleryNext" aria-label="Next image">→</button>
+      </div>
+
+      <div class="gallery-dots" id="galleryDots"></div>
+
+    </div>
+  </div>
+
+
+  <!-- ============================
        JAVASCRIPT
   ============================ -->
 
@@ -1679,12 +1957,12 @@
       formData.append('subject', formData.get('subject') || 'New Inquiry — Dressed in Art By Komal Oswal');
       formData.append('from_name', 'Dressed in Art — Website Contact Form');
 
-      const phoneCode = formData.get('phone_code');
-      const phoneNumber = formData.get('phone_number');
+      const phoneCode = (formData.get('phone_code') || '91').trim();
+      const phoneNumber = (formData.get('phone_number') || '').trim();
       formData.delete('phone_code');
       formData.delete('phone_number');
-      if (phoneNumber && phoneNumber.trim()) {
-        formData.append('phone', `${phoneCode} ${phoneNumber.trim()}`);
+      if (phoneNumber) {
+        formData.append('phone', `+${phoneCode} ${phoneNumber}`);
       }
 
       try {
@@ -1717,19 +1995,136 @@
     }
 
 
+    /* COLLECTION GALLERY LIGHTBOX */
+    const collectionGalleries = {
+      saree:  { title: 'Sarees',              images: ['saree1.png', 'saree2.png', 'saree3.png', 'saree4.png'] },
+      suit:   { title: 'Suits',                images: ['suit1.png', 'suit2.png', 'suit3.png', 'suit4.png'] },
+      dress:  { title: 'Dresses',              images: ['dress1.png', 'dress2.png', 'dress3.png', 'dress4.png'] },
+      jacket: { title: 'Jackets',              images: ['jacket1.png', 'jacket2.png', 'jacket3.png', 'jacket4.png'] },
+      stole:  { title: 'Stoles & Accessories', images: ['stole1.png', 'stole2.png', 'stole3.png', 'stole4.png'] }
+    };
+
+    const galleryOverlay = document.getElementById('galleryOverlay');
+    const galleryTitle = document.getElementById('galleryTitle');
+    const galleryTrack = document.getElementById('galleryTrack');
+    const galleryDots = document.getElementById('galleryDots');
+    const galleryClose = document.getElementById('galleryClose');
+    const galleryPrev = document.getElementById('galleryPrev');
+    const galleryNext = document.getElementById('galleryNext');
+
+    function openCollectionGallery(key) {
+      const data = collectionGalleries[key];
+      if (!data) return;
+
+      galleryTitle.textContent = data.title;
+      galleryTrack.innerHTML = '';
+      galleryDots.innerHTML = '';
+
+      data.images.forEach((src, i) => {
+        const slide = document.createElement('div');
+        slide.className = 'gallery-slide';
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = `${data.title} ${i + 1}`;
+        slide.appendChild(img);
+        galleryTrack.appendChild(slide);
+
+        const dot = document.createElement('div');
+        dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+        galleryDots.appendChild(dot);
+      });
+
+      galleryOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      galleryTrack.scrollTo({ left: 0 });
+      updateActiveDot();
+    }
+
+    function closeCollectionGallery() {
+      galleryOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function handleOverlayClick(e) {
+      if (e.target === galleryOverlay) closeCollectionGallery();
+    }
+
+    function scrollGallery(dir) {
+      const slide = galleryTrack.querySelector('.gallery-slide');
+      if (!slide) return;
+      const gap = 16;
+      galleryTrack.scrollBy({ left: dir * (slide.offsetWidth + gap), behavior: 'smooth' });
+    }
+
+    function updateActiveDot() {
+      const slides = galleryTrack.querySelectorAll('.gallery-slide');
+      const dots = galleryDots.querySelectorAll('.gallery-dot');
+      let closestIndex = 0;
+      let closestDist = Infinity;
+      slides.forEach((slide, i) => {
+        const dist = Math.abs(slide.offsetLeft - galleryTrack.scrollLeft);
+        if (dist < closestDist) { closestDist = dist; closestIndex = i; }
+      });
+      dots.forEach((d, i) => d.classList.toggle('active', i === closestIndex));
+    }
+
+    galleryClose.addEventListener('click', closeCollectionGallery);
+    galleryPrev.addEventListener('click', () => scrollGallery(-1));
+    galleryNext.addEventListener('click', () => scrollGallery(1));
+    galleryTrack.addEventListener('scroll', () => {
+      window.requestAnimationFrame(updateActiveDot);
+    });
+
+    document.addEventListener('keydown', e => {
+      if (!galleryOverlay.classList.contains('open')) return;
+      if (e.key === 'Escape') closeCollectionGallery();
+      if (e.key === 'ArrowRight') scrollGallery(1);
+      if (e.key === 'ArrowLeft') scrollGallery(-1);
+    });
+
+    document.querySelectorAll('.collection-card').forEach(card => {
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          card.click();
+        }
+      });
+    });
+
+
+    /* PHONE FIELDS -> DIGITS ONLY, LIVE */
+    const cfCountryCode = document.getElementById('cfCountryCode');
+    const cfPhone = document.getElementById('cfPhone');
+
+    function digitsOnly(e) {
+      e.target.value = e.target.value.replace(/\D/g, '');
+    }
+
+    if (cfCountryCode) cfCountryCode.addEventListener('input', digitsOnly);
+    if (cfPhone) cfPhone.addEventListener('input', digitsOnly);
+
+
     /* MOBILE MENU */
     const navToggle = document.getElementById('navToggle');
     const mobileMenu = document.getElementById('mobileMenu');
+    const mobileMenuClose = document.getElementById('mobileMenuClose');
+    const navToggleIcon = navToggle.querySelector('span');
 
     function closeMobileMenu() {
       mobileMenu.classList.remove('open');
       navToggle.setAttribute('aria-expanded', 'false');
+      if (navToggleIcon) navToggleIcon.textContent = '⋮';
     }
 
     navToggle.addEventListener('click', () => {
       const isOpen = mobileMenu.classList.toggle('open');
       navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      if (navToggleIcon) navToggleIcon.textContent = isOpen ? '✕' : '⋮';
     });
+
+    if (mobileMenuClose) {
+      mobileMenuClose.addEventListener('click', closeMobileMenu);
+    }
 
     mobileMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', closeMobileMenu);
