@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>KO Esthétique by KO — Wearable Art, Crafted Differently</title>
+  <title>Esthétique by KO — Wearable Art, Crafted Differently</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -680,6 +680,12 @@
       scroll-snap-align: center;
       background: var(--bg-2);
       overflow: hidden;
+    }
+
+    .gallery-slide.is-contain {
+      background: radial-gradient(ellipse at center, var(--bg-2) 0%, var(--bg-3) 100%);
+      padding: 7%;
+      box-sizing: border-box;
     }
 
     .gallery-slide img {
@@ -1372,7 +1378,7 @@
 
     <div class="nav-center">
       <a href="#home" id="logoHomeLink" aria-label="Go to top" class="nav-text-logo">
-        KO Esthétique by KO
+        Esthétique by KO
       </a>
     </div>
 
@@ -1389,7 +1395,7 @@
 
   <div class="mobile-menu" id="mobileMenu">
     <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">✕</button>
-    <p class="mobile-menu-logo">KO Esthétique</p>
+    <p class="mobile-menu-logo">Esthétique by KO</p>
     <a href="#home">Home</a>
     <a href="#collections">Collections</a>
     <a href="#craft">The Craft</a>
@@ -1631,7 +1637,7 @@
 
           <div class="reveal reveal-delay-4">
             <div class="about-name">Komal Oswal</div>
-            <div class="about-role">Founder &amp; Artist, Dressed in Art By Komal Oswal</div>
+            <div class="about-role">Founder &amp; Artist, Esthétique by KO</div>
           </div>
 
           <a href="#contact" class="link-arrow reveal reveal-delay-5">
@@ -1666,11 +1672,11 @@
 
           <div class="contact-links reveal reveal-delay-3">
 
-            <a href="mailto:dressedinartko@gmail.com" class="contact-link">
+            <a href="mailto:thekoesthetique@gmail.com" class="contact-link">
               <div class="contact-link-icon">✉</div>
               <div>
                 <div class="contact-link-label">Email</div>
-                <div class="contact-link-val">dressedinartko@gmail.com</div>
+                <div class="contact-link-val">thekoesthetique@gmail.com</div>
               </div>
             </a>
 
@@ -1766,7 +1772,7 @@
 
             <p class="form-success" id="formError" style="color:#a33;">
               Something went wrong sending your message. Please try again, or email
-              us directly at dressedinartko@gmail.com.
+              us directly at thekoesthetique@gmail.com.
             </p>
 
           </form>
@@ -1789,12 +1795,12 @@
       <div class="footer-grid">
 
         <div>
-          <div class="footer-logo">Dressed in Art By Komal Oswal</div>
+          <div class="footer-logo">Esthétique by KO</div>
           <p class="footer-tag">Wearable Art • Crafted by Hand</p>
           <div class="footer-social">
             <a href="https://instagram.com/ko_esthetique" target="_blank" rel="noopener" aria-label="Instagram">◈</a>
             <a href="https://wa.me/919872856625" target="_blank" rel="noopener" aria-label="WhatsApp">☏</a>
-            <a href="mailto:dressedinartko@gmail.com" aria-label="Email">✉</a>
+            <a href="mailto:thekoesthetique@gmail.com" aria-label="Email">✉</a>
           </div>
         </div>
 
@@ -1824,7 +1830,7 @@
       </div>
 
       <div class="footer-bottom">
-        <span>© 2026 Dressed in Art By Komal Oswal. All rights reserved.</span>
+        <span>© 2026 Esthétique by KO. All rights reserved.</span>
         <span>Ludhiana, India</span>
       </div>
 
@@ -1903,7 +1909,7 @@
     /* CONTACT FORM -> WEB3FORMS (silent AJAX send, 250 free/month, no login needed) */
     /* Get your free access key at https://web3forms.com — enter your email,
        it instantly emails you a key. Paste it below. No account/signup required. */
-    const WEB3FORMS_ACCESS_KEY = 'a87bbf60-4573-4db7-9c45-df83e85cc405';
+    const WEB3FORMS_ACCESS_KEY = '6fd9dd36-626a-4e22-ab42-be89368c356f';
 
     async function handleContactSubmit(e) {
       e.preventDefault();
@@ -1924,8 +1930,8 @@
 
       const formData = new FormData(form);
       formData.append('access_key', WEB3FORMS_ACCESS_KEY);
-      formData.append('subject', formData.get('subject') || 'New Inquiry — Dressed in Art By Komal Oswal');
-      formData.append('from_name', 'Dressed in Art — Website Contact Form');
+      formData.append('subject', formData.get('subject') || 'New Inquiry — Esthétique by KO');
+      formData.append('from_name', 'Esthétique by KO — Website Contact Form');
 
       const phoneCode = (formData.get('phone_code') || '91').trim();
       const phoneNumber = (formData.get('phone_number') || '').trim();
@@ -1950,12 +1956,12 @@
         } else {
           const reason = result.message || (result.body && result.body.message);
           errorEl.textContent = reason
-            ? `We couldn't send your message right now (${reason}). Please email us directly at dressedinartko@gmail.com instead.`
-            : "Something went wrong sending your message. Please try again, or email us directly at dressedinartko@gmail.com.";
+            ? `We couldn't send your message right now (${reason}). Please email us directly at thekoesthetique@gmail.com instead.`
+            : "Something went wrong sending your message. Please try again, or email us directly at thekoesthetique@gmail.com.";
           errorEl.classList.add('show');
         }
       } catch (err) {
-        errorEl.textContent = "Something went wrong sending your message. Please try again, or email us directly at dressedinartko@gmail.com.";
+        errorEl.textContent = "Something went wrong sending your message. Please try again, or email us directly at thekoesthetique@gmail.com.";
         errorEl.classList.add('show');
       } finally {
         label.textContent = originalLabel;
@@ -1967,9 +1973,9 @@
 
     /* COLLECTION GALLERY LIGHTBOX */
     const collectionGalleries = {
-      saree:  { title: 'Sarees',              images: ['saree1.png', 'saree2.png', 'saree3.png', 'saree4.png'] },
-      suit:   { title: 'Suits',                images: ['suit1.png', 'suit2.png', 'suit3.png', 'suit4.png'] },
-      dress:  { title: 'Dresses',              images: ['dress1.png', 'dress2.png', 'dress3.png', 'dress4.png'] },
+      saree:  { title: 'Sarees',              images: ['saree1.png', { src: 'saree4.png', fit: 'contain' }, 'saree3.png', { src: 'saree2.png', fit: 'contain' }] },
+      suit:   { title: 'Suits',                images: ['suit1.png', 'suit2.png', { src: 'suit3.png', fit: 'contain' }, 'suit4.png', 'suit5.png', { src: 'suit6.png', fit: 'contain' }, 'suit8.png'] },
+      dress:  { title: 'Dresses',              images: ['dress1.png', 'dress2.png', 'dress3.png', { src: 'dress4.png', fit: 'contain' }] },
       jacket: { title: 'Jackets',              images: ['jacket1.png', 'jacket2.png', 'jacket3.png', 'jacket4.png'] },
       stole:  { title: 'Stoles & Accessories', images: ['stole1.png', 'stole2.png', 'stole3.png', 'stole4.png'] }
     };
@@ -1990,12 +1996,17 @@
       galleryTrack.innerHTML = '';
       galleryDots.innerHTML = '';
 
-      data.images.forEach((src, i) => {
+      data.images.forEach((item, i) => {
+        const isObj = typeof item === 'object';
+        const src = isObj ? item.src : item;
+        const fit = isObj && item.fit ? item.fit : 'cover';
+
         const slide = document.createElement('div');
-        slide.className = 'gallery-slide';
+        slide.className = 'gallery-slide' + (fit === 'contain' ? ' is-contain' : '');
         const img = document.createElement('img');
         img.src = src;
         img.alt = `${data.title} ${i + 1}`;
+        img.style.objectFit = fit;
         slide.appendChild(img);
         galleryTrack.appendChild(slide);
 
